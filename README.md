@@ -1,2 +1,2 @@
 # Gallery
-+Gallery is my graduation project
++ Gallery is my graduation project
