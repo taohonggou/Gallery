@@ -41,6 +41,20 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataTrsfer\DataTrsfer.csproj">
+      <Project>{b16b3317-4716-4dea-aa74-8184e44db8a1}</Project>
+      <Name>DataTrsfer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EF\EF.csproj">
+      <Project>{6773f0b1-000e-4492-b7e0-cc10c70e44d4}</Project>
+      <Name>EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tool\Tool.csproj">
+      <Project>{117ee92b-c9fd-479c-8e98-4a11f3ddd40a}</Project>
+      <Name>Tool</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
