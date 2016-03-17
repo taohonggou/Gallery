@@ -39,7 +39,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommentDt.cs" />
+    <Compile Include="LikeDt.cs" />
+    <Compile Include="LocationDt.cs" />
+    <Compile Include="MenuDt.cs" />
+    <Compile Include="PhotoCategoryDt.cs" />
+    <Compile Include="PhotoDt.cs" />
+    <Compile Include="PhotoGalleryDt.cs" />
+    <Compile Include="PrivilegeDt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleDt.cs" />
+    <Compile Include="ScanOrSupportDt.cs" />
+    <Compile Include="UserInfoDt.cs" />
+    <Compile Include="UserRoleDt.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
