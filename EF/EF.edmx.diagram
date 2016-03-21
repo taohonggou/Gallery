@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="96cada6b0ec64c76b89b5c7a881fda42" Name="Diagram1">
+        <EntityTypeShape EntityType="GalleryModel.Comment" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryModel.Like" Width="1.5" PointX="6" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryModel.Location" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryModel.Menu" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryModel.Photo" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryModel.PhotoCategory" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryModel.PhotoGallery" Width="1.5" PointX="3" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryModel.Privilege" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryModel.Role" Width="1.5" PointX="3.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryModel.ScanOrSupport" Width="1.5" PointX="7.5" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryModel.UserRole" Width="1.5" PointX="6" PointY="5.625" IsExpanded="true" />
+        <AssociationConnector Association="GalleryModel.FK_COMMENT_REFERENCE_PHOTO" ManuallyRouted="false" />
+        <AssociationConnector Association="GalleryModel.FK_LIKE_REFERENCE_PHOTO" ManuallyRouted="false" />
+        <AssociationConnector Association="GalleryModel.FK_PHOTO_REFERENCE_LOCATION" ManuallyRouted="false" />
+        <AssociationConnector Association="GalleryModel.FK_PHOTO_REFERENCE_PHOTOCAT" ManuallyRouted="false" />
+        <AssociationConnector Association="GalleryModel.FK_PHOTO_REFERENCE_PHOTOGAL" ManuallyRouted="false" />
+        <AssociationConnector Association="GalleryModel.FK_SCANORSU_REFERENCE_PHOTO" ManuallyRouted="false" />
+        <AssociationConnector Association="GalleryModel.FK_USERROLE_REFERENCE_ROLE" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GalleryModel.UserInfo" Width="1.5" PointX="0.75" PointY="12" />
+        <AssociationConnector Association="GalleryModel.FK_COMMENT_REFERENCE_USERINFO" />
+        <AssociationConnector Association="GalleryModel.FK_LIKE_REFERENCE_USERINFO" />
+        <AssociationConnector Association="GalleryModel.FK_PHOTO_REFERENCE_USERINFO" />
+        <AssociationConnector Association="GalleryModel.FK_PHOTOGAL_REFERENCE_USERINFO" />
+        <AssociationConnector Association="GalleryModel.FK_SCANORSU_REFERENCE_USERINFO" />
+        <AssociationConnector Association="GalleryModel.FK_USERROLE_REFERENCE_USERINFO" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

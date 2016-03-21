@@ -1,0 +1,880 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GalleryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PhotoId" Type="int" Nullable="false" />
+          <Property Name="UpId" Type="int" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Like">
+          <Key>
+            <PropertyRef Name="LikeId" />
+          </Key>
+          <Property Name="LikeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PhotoId" Type="int" />
+          <Property Name="UserId" Type="varchar" MaxLength="100" />
+          <Property Name="DateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Province" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="District" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="MenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Url" Type="varchar" MaxLength="400" />
+          <Property Name="PId" Type="int" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="PhotoId" />
+          </Key>
+          <Property Name="PhotoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationId" Type="int" Nullable="false" />
+          <Property Name="PhotoCategoryId" Type="int" Nullable="false" />
+          <Property Name="PhotoGalleryId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ImgUrl" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Status" Type="smallint" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhotoCategory">
+          <Key>
+            <PropertyRef Name="PhotoCategoryId" />
+          </Key>
+          <Property Name="PhotoCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhotoGallery">
+          <Key>
+            <PropertyRef Name="PhotoGalleryId" />
+          </Key>
+          <Property Name="PhotoGalleryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Privilege">
+          <Key>
+            <PropertyRef Name="PrivilegeId" />
+          </Key>
+          <Property Name="PrivilegeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PrivilegeMaster" Type="smallint" Nullable="false" />
+          <Property Name="PrivilegeMasterValue" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PrivilegeAccess" Type="smallint" Nullable="false" />
+          <Property Name="PrivilegeAccessValue" Type="int" Nullable="false" />
+          <Property Name="PrivilegeOperation" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Desc" Type="nvarchar" MaxLength="200" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScanOrSupport">
+          <Key>
+            <PropertyRef Name="ScanOrSupportId" />
+          </Key>
+          <Property Name="ScanOrSupportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PhotoId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Type" Type="smallint" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Pwd" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="HeadUrl" Type="varchar" MaxLength="100" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+          </Key>
+          <Property Name="UserRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="100" />
+          <Property Name="RoleId" Type="varchar" MaxLength="20" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_COMMENT_REFERENCE_PHOTO">
+          <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PhotoId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMMENT_REFERENCE_USERINFO">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LIKE_REFERENCE_PHOTO">
+          <End Role="Photo" Type="Self.Photo" Multiplicity="0..1" />
+          <End Role="Like" Type="Self.Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PhotoId" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LIKE_REFERENCE_USERINFO">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="Like" Type="Self.Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHOTO_REFERENCE_LOCATION">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHOTO_REFERENCE_PHOTOCAT">
+          <End Role="PhotoCategory" Type="Self.PhotoCategory" Multiplicity="1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoCategory">
+              <PropertyRef Name="PhotoCategoryId" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="PhotoCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHOTO_REFERENCE_PHOTOGAL">
+          <End Role="PhotoGallery" Type="Self.PhotoGallery" Multiplicity="1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoGallery">
+              <PropertyRef Name="PhotoGalleryId" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="PhotoGalleryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHOTO_REFERENCE_USERINFO">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHOTOGAL_REFERENCE_USERINFO">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="PhotoGallery" Type="Self.PhotoGallery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PhotoGallery">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCANORSU_REFERENCE_PHOTO">
+          <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+          <End Role="ScanOrSupport" Type="Self.ScanOrSupport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PhotoId" />
+            </Principal>
+            <Dependent Role="ScanOrSupport">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCANORSU_REFERENCE_USERINFO">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="ScanOrSupport" Type="Self.ScanOrSupport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ScanOrSupport">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERROLE_REFERENCE_ROLE">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERROLE_REFERENCE_USERINFO">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GalleryModelStoreContainer">
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Like" EntityType="Self.Like" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhotoCategory" EntityType="Self.PhotoCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhotoGallery" EntityType="Self.PhotoGallery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Privilege" EntityType="Self.Privilege" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScanOrSupport" EntityType="Self.ScanOrSupport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_COMMENT_REFERENCE_PHOTO" Association="Self.FK_COMMENT_REFERENCE_PHOTO">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMMENT_REFERENCE_USERINFO" Association="Self.FK_COMMENT_REFERENCE_USERINFO">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LIKE_REFERENCE_PHOTO" Association="Self.FK_LIKE_REFERENCE_PHOTO">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Like" EntitySet="Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LIKE_REFERENCE_USERINFO" Association="Self.FK_LIKE_REFERENCE_USERINFO">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Like" EntitySet="Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHOTO_REFERENCE_LOCATION" Association="Self.FK_PHOTO_REFERENCE_LOCATION">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHOTO_REFERENCE_PHOTOCAT" Association="Self.FK_PHOTO_REFERENCE_PHOTOCAT">
+            <End Role="PhotoCategory" EntitySet="PhotoCategory" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHOTO_REFERENCE_PHOTOGAL" Association="Self.FK_PHOTO_REFERENCE_PHOTOGAL">
+            <End Role="PhotoGallery" EntitySet="PhotoGallery" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHOTO_REFERENCE_USERINFO" Association="Self.FK_PHOTO_REFERENCE_USERINFO">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHOTOGAL_REFERENCE_USERINFO" Association="Self.FK_PHOTOGAL_REFERENCE_USERINFO">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="PhotoGallery" EntitySet="PhotoGallery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCANORSU_REFERENCE_PHOTO" Association="Self.FK_SCANORSU_REFERENCE_PHOTO">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="ScanOrSupport" EntitySet="ScanOrSupport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCANORSU_REFERENCE_USERINFO" Association="Self.FK_SCANORSU_REFERENCE_USERINFO">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="ScanOrSupport" EntitySet="ScanOrSupport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERROLE_REFERENCE_ROLE" Association="Self.FK_USERROLE_REFERENCE_ROLE">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERROLE_REFERENCE_USERINFO" Association="Self.FK_USERROLE_REFERENCE_USERINFO">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GalleryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhotoId" Type="Int32" Nullable="false" />
+          <Property Name="UpId" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Photo" Relationship="Self.FK_COMMENT_REFERENCE_PHOTO" FromRole="Comment" ToRole="Photo" />
+          <NavigationProperty Name="UserInfo" Relationship="GalleryModel.FK_COMMENT_REFERENCE_USERINFO" FromRole="Comment" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="Like">
+          <Key>
+            <PropertyRef Name="LikeId" />
+          </Key>
+          <Property Name="LikeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhotoId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Photo" Relationship="Self.FK_LIKE_REFERENCE_PHOTO" FromRole="Like" ToRole="Photo" />
+          <NavigationProperty Name="UserInfo" Relationship="GalleryModel.FK_LIKE_REFERENCE_USERINFO" FromRole="Like" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Province" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="District" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Photo" Relationship="Self.FK_PHOTO_REFERENCE_LOCATION" FromRole="Location" ToRole="Photo" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="MenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="PId" Type="Int32" Nullable="false" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="PhotoId" />
+          </Key>
+          <Property Name="PhotoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <Property Name="PhotoCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="PhotoGalleryId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImgUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Int16" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK_COMMENT_REFERENCE_PHOTO" FromRole="Photo" ToRole="Comment" />
+          <NavigationProperty Name="Like" Relationship="Self.FK_LIKE_REFERENCE_PHOTO" FromRole="Photo" ToRole="Like" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_PHOTO_REFERENCE_LOCATION" FromRole="Photo" ToRole="Location" />
+          <NavigationProperty Name="PhotoCategory" Relationship="Self.FK_PHOTO_REFERENCE_PHOTOCAT" FromRole="Photo" ToRole="PhotoCategory" />
+          <NavigationProperty Name="PhotoGallery" Relationship="Self.FK_PHOTO_REFERENCE_PHOTOGAL" FromRole="Photo" ToRole="PhotoGallery" />
+          <NavigationProperty Name="ScanOrSupport" Relationship="Self.FK_SCANORSU_REFERENCE_PHOTO" FromRole="Photo" ToRole="ScanOrSupport" />
+          <NavigationProperty Name="UserInfo" Relationship="GalleryModel.FK_PHOTO_REFERENCE_USERINFO" FromRole="Photo" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="PhotoCategory">
+          <Key>
+            <PropertyRef Name="PhotoCategoryId" />
+          </Key>
+          <Property Name="PhotoCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Photo" Relationship="Self.FK_PHOTO_REFERENCE_PHOTOCAT" FromRole="PhotoCategory" ToRole="Photo" />
+        </EntityType>
+        <EntityType Name="PhotoGallery">
+          <Key>
+            <PropertyRef Name="PhotoGalleryId" />
+          </Key>
+          <Property Name="PhotoGalleryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Photo" Relationship="Self.FK_PHOTO_REFERENCE_PHOTOGAL" FromRole="PhotoGallery" ToRole="Photo" />
+          <NavigationProperty Name="UserInfo" Relationship="GalleryModel.FK_PHOTOGAL_REFERENCE_USERINFO" FromRole="PhotoGallery" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="Privilege">
+          <Key>
+            <PropertyRef Name="PrivilegeId" />
+          </Key>
+          <Property Name="PrivilegeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PrivilegeMaster" Type="Int16" Nullable="false" />
+          <Property Name="PrivilegeMasterValue" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrivilegeAccess" Type="Int16" Nullable="false" />
+          <Property Name="PrivilegeAccessValue" Type="Int32" Nullable="false" />
+          <Property Name="PrivilegeOperation" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Desc" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK_USERROLE_REFERENCE_ROLE" FromRole="Role" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="ScanOrSupport">
+          <Key>
+            <PropertyRef Name="ScanOrSupportId" />
+          </Key>
+          <Property Name="ScanOrSupportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhotoId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="Int16" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Photo" Relationship="Self.FK_SCANORSU_REFERENCE_PHOTO" FromRole="ScanOrSupport" ToRole="Photo" />
+          <NavigationProperty Name="UserInfo" Relationship="GalleryModel.FK_SCANORSU_REFERENCE_USERINFO" FromRole="ScanOrSupport" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+          </Key>
+          <Property Name="UserRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RoleId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_USERROLE_REFERENCE_ROLE" FromRole="UserRole" ToRole="Role" />
+          <NavigationProperty Name="UserInfo" Relationship="GalleryModel.FK_USERROLE_REFERENCE_USERINFO" FromRole="UserRole" ToRole="UserInfo" />
+        </EntityType>
+        <Association Name="FK_COMMENT_REFERENCE_PHOTO">
+          <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PhotoId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LIKE_REFERENCE_PHOTO">
+          <End Role="Photo" Type="Self.Photo" Multiplicity="0..1" />
+          <End Role="Like" Type="Self.Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PhotoId" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHOTO_REFERENCE_LOCATION">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHOTO_REFERENCE_PHOTOCAT">
+          <End Role="PhotoCategory" Type="Self.PhotoCategory" Multiplicity="1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoCategory">
+              <PropertyRef Name="PhotoCategoryId" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="PhotoCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHOTO_REFERENCE_PHOTOGAL">
+          <End Role="PhotoGallery" Type="Self.PhotoGallery" Multiplicity="1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoGallery">
+              <PropertyRef Name="PhotoGalleryId" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="PhotoGalleryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCANORSU_REFERENCE_PHOTO">
+          <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+          <End Role="ScanOrSupport" Type="Self.ScanOrSupport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PhotoId" />
+            </Principal>
+            <Dependent Role="ScanOrSupport">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERROLE_REFERENCE_ROLE">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GalleryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comment" EntityType="Self.Comment" />
+          <EntitySet Name="Like" EntityType="Self.Like" />
+          <EntitySet Name="Location" EntityType="Self.Location" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" />
+          <EntitySet Name="Photo" EntityType="Self.Photo" />
+          <EntitySet Name="PhotoCategory" EntityType="Self.PhotoCategory" />
+          <EntitySet Name="PhotoGallery" EntityType="Self.PhotoGallery" />
+          <EntitySet Name="Privilege" EntityType="Self.Privilege" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="ScanOrSupport" EntityType="Self.ScanOrSupport" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" />
+          <AssociationSet Name="FK_COMMENT_REFERENCE_PHOTO" Association="Self.FK_COMMENT_REFERENCE_PHOTO">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LIKE_REFERENCE_PHOTO" Association="Self.FK_LIKE_REFERENCE_PHOTO">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Like" EntitySet="Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHOTO_REFERENCE_LOCATION" Association="Self.FK_PHOTO_REFERENCE_LOCATION">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHOTO_REFERENCE_PHOTOCAT" Association="Self.FK_PHOTO_REFERENCE_PHOTOCAT">
+            <End Role="PhotoCategory" EntitySet="PhotoCategory" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHOTO_REFERENCE_PHOTOGAL" Association="Self.FK_PHOTO_REFERENCE_PHOTOGAL">
+            <End Role="PhotoGallery" EntitySet="PhotoGallery" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCANORSU_REFERENCE_PHOTO" Association="Self.FK_SCANORSU_REFERENCE_PHOTO">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="ScanOrSupport" EntitySet="ScanOrSupport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERROLE_REFERENCE_ROLE" Association="Self.FK_USERROLE_REFERENCE_ROLE">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <EntitySet Name="UserInfo" EntityType="GalleryModel.UserInfo" />
+          <AssociationSet Name="FK_COMMENT_REFERENCE_USERINFO" Association="GalleryModel.FK_COMMENT_REFERENCE_USERINFO">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LIKE_REFERENCE_USERINFO" Association="GalleryModel.FK_LIKE_REFERENCE_USERINFO">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Like" EntitySet="Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHOTO_REFERENCE_USERINFO" Association="GalleryModel.FK_PHOTO_REFERENCE_USERINFO">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHOTOGAL_REFERENCE_USERINFO" Association="GalleryModel.FK_PHOTOGAL_REFERENCE_USERINFO">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="PhotoGallery" EntitySet="PhotoGallery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCANORSU_REFERENCE_USERINFO" Association="GalleryModel.FK_SCANORSU_REFERENCE_USERINFO">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="ScanOrSupport" EntitySet="ScanOrSupport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERROLE_REFERENCE_USERINFO" Association="GalleryModel.FK_USERROLE_REFERENCE_USERINFO">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Pwd" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="HeadUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Comment" Relationship="GalleryModel.FK_COMMENT_REFERENCE_USERINFO" FromRole="UserInfo" ToRole="Comment" />
+          <NavigationProperty Name="Like" Relationship="GalleryModel.FK_LIKE_REFERENCE_USERINFO" FromRole="UserInfo" ToRole="Like" />
+          <NavigationProperty Name="Photo" Relationship="GalleryModel.FK_PHOTO_REFERENCE_USERINFO" FromRole="UserInfo" ToRole="Photo" />
+          <NavigationProperty Name="PhotoGallery" Relationship="GalleryModel.FK_PHOTOGAL_REFERENCE_USERINFO" FromRole="UserInfo" ToRole="PhotoGallery" />
+          <NavigationProperty Name="ScanOrSupport" Relationship="GalleryModel.FK_SCANORSU_REFERENCE_USERINFO" FromRole="UserInfo" ToRole="ScanOrSupport" />
+          <NavigationProperty Name="UserRole" Relationship="GalleryModel.FK_USERROLE_REFERENCE_USERINFO" FromRole="UserInfo" ToRole="UserRole" />
+        </EntityType>
+        <Association Name="FK_COMMENT_REFERENCE_USERINFO">
+          <End Type="GalleryModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+          <End Type="GalleryModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LIKE_REFERENCE_USERINFO">
+          <End Type="GalleryModel.UserInfo" Role="UserInfo" Multiplicity="0..1" />
+          <End Type="GalleryModel.Like" Role="Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHOTO_REFERENCE_USERINFO">
+          <End Type="GalleryModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+          <End Type="GalleryModel.Photo" Role="Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHOTOGAL_REFERENCE_USERINFO">
+          <End Type="GalleryModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+          <End Type="GalleryModel.PhotoGallery" Role="PhotoGallery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PhotoGallery">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCANORSU_REFERENCE_USERINFO">
+          <End Type="GalleryModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+          <End Type="GalleryModel.ScanOrSupport" Role="ScanOrSupport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ScanOrSupport">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERROLE_REFERENCE_USERINFO">
+          <End Type="GalleryModel.UserInfo" Role="UserInfo" Multiplicity="0..1" />
+          <End Type="GalleryModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GalleryModelStoreContainer" CdmEntityContainer="GalleryEntities">
+          <EntitySetMapping Name="Comment">
+            <EntityTypeMapping TypeName="GalleryModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+                <ScalarProperty Name="UpId" ColumnName="UpId" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Like">
+            <EntityTypeMapping TypeName="GalleryModel.Like">
+              <MappingFragment StoreEntitySet="Like">
+                <ScalarProperty Name="LikeId" ColumnName="LikeId" />
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Location">
+            <EntityTypeMapping TypeName="GalleryModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="District" ColumnName="District" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="GalleryModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="PId" ColumnName="PId" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photo">
+            <EntityTypeMapping TypeName="GalleryModel.Photo">
+              <MappingFragment StoreEntitySet="Photo">
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="PhotoCategoryId" ColumnName="PhotoCategoryId" />
+                <ScalarProperty Name="PhotoGalleryId" ColumnName="PhotoGalleryId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ImgUrl" ColumnName="ImgUrl" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotoCategory">
+            <EntityTypeMapping TypeName="GalleryModel.PhotoCategory">
+              <MappingFragment StoreEntitySet="PhotoCategory">
+                <ScalarProperty Name="PhotoCategoryId" ColumnName="PhotoCategoryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotoGallery">
+            <EntityTypeMapping TypeName="GalleryModel.PhotoGallery">
+              <MappingFragment StoreEntitySet="PhotoGallery">
+                <ScalarProperty Name="PhotoGalleryId" ColumnName="PhotoGalleryId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Privilege">
+            <EntityTypeMapping TypeName="GalleryModel.Privilege">
+              <MappingFragment StoreEntitySet="Privilege">
+                <ScalarProperty Name="PrivilegeId" ColumnName="PrivilegeId" />
+                <ScalarProperty Name="PrivilegeMaster" ColumnName="PrivilegeMaster" />
+                <ScalarProperty Name="PrivilegeMasterValue" ColumnName="PrivilegeMasterValue" />
+                <ScalarProperty Name="PrivilegeAccess" ColumnName="PrivilegeAccess" />
+                <ScalarProperty Name="PrivilegeAccessValue" ColumnName="PrivilegeAccessValue" />
+                <ScalarProperty Name="PrivilegeOperation" ColumnName="PrivilegeOperation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="GalleryModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScanOrSupport">
+            <EntityTypeMapping TypeName="GalleryModel.ScanOrSupport">
+              <MappingFragment StoreEntitySet="ScanOrSupport">
+                <ScalarProperty Name="ScanOrSupportId" ColumnName="ScanOrSupportId" />
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRole">
+            <EntityTypeMapping TypeName="GalleryModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfo">
+            <EntityTypeMapping TypeName="GalleryModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="HeadUrl" ColumnName="HeadUrl" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
