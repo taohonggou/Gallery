@@ -66,6 +66,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EF.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EFDataAccess.cs" />
     <Compile Include="Like.cs">
       <DependentUpon>EF.tt</DependentUpon>
     </Compile>
