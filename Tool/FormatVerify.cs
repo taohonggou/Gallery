@@ -80,5 +80,20 @@ namespace Tool
         {
             return ImgExtension.Contains(imgExtension.ToLower());
         }
+
+        /// <summary>
+        /// 检查传入的字符串数据是否有空或null
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public static bool IsNullOrEmpty(params string[] param)
+        {
+            foreach (string item in param)
+            {
+                if (string.IsNullOrEmpty(item))
+                    return true;
+            }
+            return false;
+        }
     }
 }

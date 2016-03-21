@@ -49,6 +49,7 @@
     <Compile Include="EnumHelper.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="MD5Helper.cs" />
+    <Compile Include="ObjectContainer.cs" />
     <Compile Include="OutputHelper.cs" />
     <Compile Include="OutputModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

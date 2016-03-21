@@ -16,5 +16,16 @@ namespace Tool
             timeConverter.DateTimeFormat = "yyyy'-'MM'-'dd' 'HH':'mm':'ss";
             return  JsonConvert.SerializeObject(data, Formatting.Indented, timeConverter);
         }
+
+        /// <summary>
+        /// 反序列化
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static T DeserializeStr<T>(string value)
+        {
+            return  JsonConvert.DeserializeObject<T>(value);
+        }
     }
 }

@@ -36,7 +36,7 @@ namespace EF
         public virtual Location Location { get; set; }
         public virtual PhotoCategory PhotoCategory { get; set; }
         public virtual PhotoGallery PhotoGallery { get; set; }
-        public virtual UserInfo UserInfo { get; set; }
         public virtual ICollection<ScanOrSupport> ScanOrSupport { get; set; }
+        public virtual UserInfo UserInfo { get; set; }
     }
 }

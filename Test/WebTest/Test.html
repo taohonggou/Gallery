@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="jquery-1.10.2.min.js"></script>
+    <script src="Test.js"></script>
+    <script src="md5.js"></script>
+</head>
+<body>
+    <form  action="http://localhost:10682/UserInfo/Register" method="post">
+        <b>注册</b><br />
+        emial:<input type="text" name="email" id="userId" value="1084727879@qq.com" /> 
+        pwd:<input type="password" name="md5Pwd" id="md5Pwd" value="123456"/>
+        <input type="button" onclick="register()" value="注册" />
+    </form>
+
+    <form action="http://localhost:10682/UserInfo/Login" method="post">
+        <b>登录</b><br />
+        emial:<input type="text" name="email" id="email" value="1084727879@qq.com" />
+        pwd:<input type="password" name="md5Pwd" id="pwd" value="123456" />
+        <input type="button" onclick="login()" value="登录" />
+    </form>
+</body>
+</html>
