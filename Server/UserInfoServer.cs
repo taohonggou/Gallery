@@ -20,5 +20,6 @@ namespace Server
         {
             return TransferObject.ConvertObjectByEntity<UserInfo,UserInfoDt>( Select(o => o.UserId == userId).FirstOrDefault());
         }
+
     }
 }
