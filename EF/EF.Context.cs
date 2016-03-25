@@ -37,5 +37,6 @@ namespace EF
         public virtual DbSet<ScanOrSupport> ScanOrSupport { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
+        public virtual DbSet<VerifyRegister> VerifyRegister { get; set; }
     }
 }

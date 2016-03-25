@@ -29,9 +29,15 @@ namespace Manager
                               Status=0,
                               UserId=email
                               };
-            if (userServer.Add(user))
+            VerifyRegisterDt verifyDt = new VerifyRegisterDt {
+            GUID =Guid.NewGuid().ToString().Replace("-",""),
+            IsUsed=false,
+            OutDate=DateTime.Now.AddDays(7.0),
+            UserId=email
+            };
+            if (userServer.Add(user,verifyDt))
             {
-                EmailHelper.SendEmail("[Gallery]感谢注册Gallery,请验证邮箱" + email, "cl889521：您好，感谢您注册Gallery，请点击下面的链接验证您的邮箱：<a href='http://www.baidu.com?token=o1e2d70h9wu1tcg6ojpcxx3380pqt9x1'>http://www.baidu.com?token=o1e2d70h9wu1tcg6ojpcxx3380pqt9x1</a>该链接7天后失效。", email);
+                EmailHelper.SendEmail("[Gallery]感谢注册Gallery,请验证邮箱" + email, "cl889521：您好，感谢您注册Gallery，请点击下面的链接验证您的邮箱：<a href='http://121.42.58.78/UserInfo/VerifyEmail?guid=" + verifyDt.GUID + "'>http://121.42.58.78/UserInfo/VerifyEmail?guid=" + verifyDt.GUID + "</a>该链接7天后失效。", email);
                 //设置登录状态
                 System.Web.HttpContext.Current.Session["user"] = user;
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
@@ -56,5 +62,7 @@ namespace Manager
             HttpContext.Current.Session["user"] = user;
             return OutputHelper.GetOutputResponse(ResultCode.OK);
         }
+
+        
     }
 }

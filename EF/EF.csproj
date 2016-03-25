@@ -101,6 +101,9 @@
     <Compile Include="UserRole.cs">
       <DependentUpon>EF.tt</DependentUpon>
     </Compile>
+    <Compile Include="VerifyRegister.cs">
+      <DependentUpon>EF.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="EF.edmx">

@@ -30,6 +30,8 @@
         <AssociationConnector Association="GalleryModel.FK_PHOTOGAL_REFERENCE_USERINFO" />
         <AssociationConnector Association="GalleryModel.FK_SCANORSU_REFERENCE_USERINFO" />
         <AssociationConnector Association="GalleryModel.FK_USERROLE_REFERENCE_USERINFO" />
+        <EntityTypeShape EntityType="GalleryModel.VerifyRegister" Width="1.5" PointX="3" PointY="22.75" />
+        <AssociationConnector Association="GalleryModel.FK_VERIFYRE_REFERENCE_USERINFO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

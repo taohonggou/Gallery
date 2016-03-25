@@ -22,6 +22,7 @@ namespace EF
             this.PhotoGallery = new HashSet<PhotoGallery>();
             this.ScanOrSupport = new HashSet<ScanOrSupport>();
             this.UserRole = new HashSet<UserRole>();
+            this.VerifyRegister = new HashSet<VerifyRegister>();
         }
     
         public string UserId { get; set; }
@@ -37,5 +38,6 @@ namespace EF
         public virtual ICollection<PhotoGallery> PhotoGallery { get; set; }
         public virtual ICollection<ScanOrSupport> ScanOrSupport { get; set; }
         public virtual ICollection<UserRole> UserRole { get; set; }
+        public virtual ICollection<VerifyRegister> VerifyRegister { get; set; }
     }
 }
