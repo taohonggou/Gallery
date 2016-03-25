@@ -25,5 +25,14 @@ namespace GalleryUI.Controllers
         {
             return Content(new UserInfoManager().Add(email, md5Pwd));
         }
+
+        public ActionResult VerifyEmail(string guid)
+        {
+            VerifyRegisterManager verifyManager = new VerifyRegisterManager();
+            if (verifyManager.VerifyEmail(guid))
+                return RedirectToAction("Index", "Home");
+            else
+                return View();
+        }
 	}
 }
