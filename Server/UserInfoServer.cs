@@ -28,6 +28,10 @@ namespace Server
             base.Update(TransferObject.ConvertObjectByEntity<UserInfoDt, UserInfo>(userDt));
             return Save() > 0;
         }
-
+        public bool Delete(int id)
+        {
+            base.Delete(id);
+            return Save() > 0;
+        }
     }
 }
