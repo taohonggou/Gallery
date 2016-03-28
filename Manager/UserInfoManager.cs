@@ -63,7 +63,28 @@ namespace Manager
             return OutputHelper.GetOutputResponse(ResultCode.OK);
         }
 
+         /// <summary>
+        /// 修改个人信息
+        /// </summary>
+        /// <param name="userInfo"></param>
+        /// <returns></returns>
+        public bool Update(UserInfoDt userInfo)
+        {
+            return userServer.Update(userInfo);
+        }
         
+
+        /// <summary>
+        /// 根据邮箱获取用户对象
+        /// </summary>
+        /// <param name="loginId"></param>
+        /// <returns></returns>
+        public OutputModel Get(string loginId)
+        {
+            UserInfoDt u = userServer.GetUserInfo(loginId);
+            if (u == null)
+                return OutputHelper.GetOutputResponse(ResultCode.NoData);
+            return OutputHelper.GetOutputResponse(ResultCode.OK, u);
+        }
     }
 }
-
