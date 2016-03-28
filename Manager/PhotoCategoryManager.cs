@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Manager
 {
-    class PhotoCategoryManager
+    public class PhotoCategoryManager
     {
     }
 }

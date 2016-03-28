@@ -8,7 +8,7 @@ using DataTrsfer;
 using Server;
 namespace Manager
 {
-    class ScanOrSupportManager
+    public class ScanOrSupportManager
     {
         private ScanOrSupportServer Server = ObjectContainer.GetInstance<ScanOrSupportServer>();
         public OutputModel Add(ScanOrSupportDt scanorsupport)
@@ -62,7 +62,7 @@ namespace Manager
                 return OutputHelper.GetOutputResponse(ResultCode.OK, s);
             return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
-          /// <summary>
+        /// <summary>
         /// 获取某用户的点赞记录
         /// </summary>
         /// <param name="userid"></param>
@@ -74,7 +74,7 @@ namespace Manager
                 return OutputHelper.GetOutputResponse(ResultCode.OK, list);
             return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
-         /// <summary>
+        /// <summary>
         /// 获取某照片的点赞记录
         /// </summary>
         /// <param name="photoid"></param>
