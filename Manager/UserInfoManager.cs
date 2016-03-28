@@ -63,7 +63,7 @@ namespace Manager
             return OutputHelper.GetOutputResponse(ResultCode.OK);
         }
 
-        /// <summary>
+         /// <summary>
         /// 修改个人信息
         /// </summary>
         /// <param name="userInfo"></param>
@@ -72,10 +72,7 @@ namespace Manager
         {
             return userServer.Update(userInfo);
         }
-        //public bool Delete(UserInfoDt userInfo)
-        //{
-        //    return userServer.Delete(userInfo.UserId);
-        //}
+        
 
         /// <summary>
         /// 根据邮箱获取用户对象
@@ -91,4 +88,3 @@ namespace Manager
         }
     }
 }
-

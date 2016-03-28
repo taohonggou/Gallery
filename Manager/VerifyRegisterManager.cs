@@ -24,8 +24,11 @@ namespace Manager
           UserInfoDt userDt = userServer.GetUserInfo(verifyDt.UserId);
           if (userDt == null)
               return false;
+
           userDt.Status = 1;
-          if (!userServer.Update(userDt))
+          verifyDt.IsUsed = true;
+
+          if (!userServer.Update(userDt, verifyDt))
               return false;
           System.Web.HttpContext.Current.Session["user"] = userDt;
           return true;

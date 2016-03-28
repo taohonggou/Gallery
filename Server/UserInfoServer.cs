@@ -28,10 +28,21 @@ namespace Server
             base.Update(TransferObject.ConvertObjectByEntity<UserInfoDt, UserInfo>(userDt));
             return Save() > 0;
         }
+
+
+        public bool Update(UserInfoDt userDt, VerifyRegisterDt verifyDt)
+        {
+            base.Update(TransferObject.ConvertObjectByEntity<UserInfoDt, UserInfo>(userDt));
+            base.Update<VerifyRegister>(TransferObject.ConvertObjectByEntity<VerifyRegisterDt, VerifyRegister>(verifyDt));
+            return Save() > 0;
+        }
+
+
         public bool Delete(int id)
         {
             base.Delete(id);
             return Save() > 0;
         }
+
     }
 }
