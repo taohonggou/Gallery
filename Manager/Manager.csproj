@@ -40,8 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LikeManager.cs" />
+    <Compile Include="LocationManager.cs" />
+    <Compile Include="MenuManager.cs" />
+    <Compile Include="PhotoCategoryManager.cs" />
+    <Compile Include="PhotoGalleryManager.cs" />
+    <Compile Include="PhotoManager.cs" />
+    <Compile Include="PrivilegeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleManager.cs" />
+    <Compile Include="ScanOrSupportManager.cs" />
     <Compile Include="UserInfoManager.cs" />
+    <Compile Include="UserRoleManager.cs" />
     <Compile Include="VerifyRegisterManager.cs" />
   </ItemGroup>
   <ItemGroup>
