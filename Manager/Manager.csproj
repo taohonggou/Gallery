@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommentManager.cs" />
     <Compile Include="LikeManager.cs" />
     <Compile Include="LocationManager.cs" />
     <Compile Include="MenuManager.cs" />
