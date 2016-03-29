@@ -9,7 +9,7 @@ using EF;
 
 namespace Server
 {
-    public class PhotoCategoryServer : BaseService<PhotoCategoryServer>
+    public class PhotoCategoryServer : BaseService<PhotoCategory>
     {
         public bool Add(PhotoCategoryDt photocategory)
         {
@@ -26,9 +26,17 @@ namespace Server
             base.Delete(id);
             return Save() > 0;
         }
-        //public PhotoCategoryDt Get(int id)
-        //{
-        //    return TransferObject.ConvertObjectByEntity<PhotoCategory, PhotoCategoryDt>(base.Select(id));
-        //}
+        public PhotoCategoryDt Get(int id)
+        {
+            return TransferObject.ConvertObjectByEntity<PhotoCategory, PhotoCategoryDt>(base.Select(id));
+        }
+        public PhotoCategoryDt Get(string name)
+        {
+            return TransferObject.ConvertObjectByEntity<PhotoCategory, PhotoCategoryDt>(base.Select(o => o.Name == name).FirstOrDefault());
+        }
+        public List<PhotoCategoryDt> GetList()
+        {
+            return TransferObject.ConvertObjectByEntity<PhotoCategory, PhotoCategoryDt>(base.Select(o => true).ToList());
+        }
     }
 }
