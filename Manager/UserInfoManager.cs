@@ -21,7 +21,7 @@ namespace Manager
                 return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
             UserInfoDt user = userServer.GetUserInfo(email);
             if (user != null)
-                return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied, "此邮箱已经注册");
+                return OutputHelper.GetOutputResponse(ResultCode.DataExisted, "此邮箱已经注册");
             user = new UserInfoDt { 
                               DateTime=DateTime.Now,
                               Name=email,

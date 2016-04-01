@@ -1,14 +1,16 @@
-﻿@{
+﻿
+@{
     Layout = null;
 }
+
+
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Login-美图网</title>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register-美图网</title>
     <link rel="stylesheet" href="/content/login/normalize.css">
     <link rel="stylesheet" href="/content/login/style.css" media="screen" type="text/css" />
-    @*<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>*@
     <script src="~/Scripts/formatVerify.js"></script>
     <script src="~/Scripts/md5.js"></script>
     <script src="~/Scripts/jquery-1.10.2.js"></script>
@@ -27,7 +29,7 @@
     </script>
 </head>
 <body>
-
+    
     <section class="login-form-wrap">
         <h1>美图网</h1>
         <form class="login-form">
@@ -37,9 +39,9 @@
             <label>
                 <input type="password" id="pwd" required placeholder="Password">
             </label>
-            <input type="submit" value="Login" onclick="login()">
+            <input type="submit" value="Register" onclick="register()">
         </form>
-        <h5><a href="/UserInfo/LostPwd">Forgot password</a>&nbsp;|&nbsp;<a href="/UserInfo/Register" style="color:#ff5600;font-size:large">Register</a></h5>
+        <h5><a href="/UserInfo/Login" style="color:#ff5600;font-size:large">Login</a></h5>
     </section>
 
 </body>

@@ -33,6 +33,19 @@ html, body{
 	text-align: center;
 	padding: 5px 0px 0px 0px;
 }
+.header_top_right{
+	float:right;
+}
+.header_top_right ul li{
+	display: inline-block;
+}
+.header_top_right ul li a{
+	font-size:13px;
+	color:#000;
+}
+.header_top_right ul li a:hover{
+	color:#99261F;
+}
 .top-nav {
 	display: inline-block;
 }

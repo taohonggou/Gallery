@@ -173,9 +173,14 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fancybox_loading%402x.gif" />
+    <Content Include="Content\fancybox_loading.gif" />
     <Content Include="Content\home\swipebox.css" />
+    <Content Include="Content\jquery.fancybox.css" />
     <Content Include="Content\layout\popup-box.css" />
     <Content Include="Content\layout\style.css" />
+    <Content Include="Content\login\normalize.css" />
+    <Content Include="Content\login\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -231,19 +236,33 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\Gallery.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\FormatVerify.js" />
     <Content Include="Scripts\home\jquery.swipebox.min.js" />
     <Content Include="Scripts\home\responsiveslides.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.fancybox.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\layer9.1\extend\layer.ext.js" />
+    <Content Include="Scripts\layer9.1\layer.js" />
+    <Content Include="Scripts\layer9.1\skin\default\icon_ext.png" />
+    <Content Include="Scripts\layer9.1\skin\default\textbg.png" />
+    <Content Include="Scripts\layer9.1\skin\default\xubox_ico0.png" />
+    <Content Include="Scripts\layer9.1\skin\default\xubox_loading0.gif" />
+    <Content Include="Scripts\layer9.1\skin\default\xubox_loading1.gif" />
+    <Content Include="Scripts\layer9.1\skin\default\xubox_loading2.gif" />
+    <Content Include="Scripts\layer9.1\skin\layer.css" />
+    <Content Include="Scripts\layer9.1\skin\layer.ext.css" />
     <Content Include="Scripts\layout\easing.js" />
     <Content Include="Scripts\layout\jquery.magnific-popup.js" />
     <Content Include="Scripts\layout\modernizr.custom.53451.js" />
     <Content Include="Scripts\layout\move-top.js" />
+    <Content Include="Scripts\loginRegister.js" />
+    <Content Include="Scripts\md5.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -275,6 +294,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\UserInfo\Login.cshtml" />
     <Content Include="Views\UserInfo\VerifyEmail.cshtml" />
+    <Content Include="Views\UserInfo\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -289,6 +309,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataTrsfer\DataTrsfer.csproj">
+      <Project>{b16b3317-4716-4dea-aa74-8184e44db8a1}</Project>
+      <Name>DataTrsfer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Manager\Manager.csproj">
       <Project>{6063c158-b2e0-410d-870e-4fa72c543a98}</Project>
       <Name>Manager</Name>
