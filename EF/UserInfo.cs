@@ -41,7 +41,3 @@ namespace EF
         public virtual ICollection<VerifyRegister> VerifyRegister { get; set; }
     }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> dev
