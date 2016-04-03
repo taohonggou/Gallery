@@ -7,7 +7,7 @@
     var pwd = $('#pwd').val();
     if (!pwd)
         return layer.alert('密码不能为空', { icon: 3, skin: 'layer-ext-moon' });
-    pwd = hex_md5(pwd);
+    pwd = hex_md5(pwd).toUpperCase();
     $.ajax({
         type: 'post',
         url: '/UserInfo/Login',
@@ -32,7 +32,7 @@ function register() {
     var pwd = $('#pwd').val();
     if (!pwd)
         return layer.alert('密码不能为空', { icon: 3, skin: 'layer-ext-moon' });
-    pwd = hex_md5(pwd);
+    pwd = hex_md5(pwd).toUpperCase();
     $.ajax({
         type: 'post',
         url: '/UserInfo/Register',
@@ -40,7 +40,6 @@ function register() {
         dataType: 'json',
         async: true,
         success: function (data) {
-            alert(data);
             if (data.StatusCode != '1') {
                 return layer.alert(data.Message, { icon: 3, skin: 'layer-ext-moon' });
             }

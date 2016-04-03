@@ -55,12 +55,12 @@ body {
 }
 .login-form-wrap > h5 > a {
   font-size: 14px;
-  color: #fff;
-  text-decoration: none;
+  color: #0094ff;
   font-weight: 400;
+    font-size:large
 }
 
-.login-form input[type="email"], .login-form input[type="password"] {
+.login-form input[type="text"], .login-form input[type="password"] {
   width: 100%;
   border: 1px solid #314d89;
   outline: none;
@@ -68,9 +68,8 @@ body {
   color: #afafaf;
   font-weight: 400;
   font-family: 'Lato', sans-serif;
-  cursor: pointer;
 }
-.login-form input[type="email"] {
+.login-form input[type="text"] {
   border-bottom: none;
   border-radius: 4px 4px 0 0;
   padding-bottom: 13px;
@@ -81,7 +80,7 @@ body {
   border-radius: 0 0 4px 4px;
   box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.23) inset, 0 1px 2px rgba(255, 255, 255, 0.1);
 }
-.login-form input[type="submit"] {
+.login-form input[type="button"] {
   font-family: 'Lato', sans-serif;
   font-weight: 400;
   background: #e0e0e0;
@@ -104,10 +103,10 @@ body {
   font-weight: 700;
   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.17), 0 1px 0 rgba(255, 255, 255, 0.36) inset;
 }
-.login-form input[type="submit"]:hover {
+.login-form input[type="button"]:hover {
   background: #DDD;
 }
-.login-form input[type="submit"]:active {
+.login-form input[type="button"]:active {
   padding-top: 9px;
   padding-bottom: 7px;
   background: #C9C9C9;
