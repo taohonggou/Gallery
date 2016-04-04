@@ -13,6 +13,7 @@ namespace Manager
     public class UserInfoManager
     {
         private UserInfoServer userServer = ObjectContainer.GetInstance<UserInfoServer>();
+        private VerifyRegisterServer vServer = ObjectContainer.GetInstance<VerifyRegisterServer>();
         public OutputModel Add(string email, string md5Pwd)
         {
             if (FormatVerify.IsNullOrEmpty(email, md5Pwd))
@@ -22,22 +23,24 @@ namespace Manager
             UserInfoDt user = userServer.GetUserInfo(email);
             if (user != null)
                 return OutputHelper.GetOutputResponse(ResultCode.DataExisted, "此邮箱已经注册");
-            user = new UserInfoDt { 
-                              DateTime=DateTime.Now,
-                              Name=email,
-                              Pwd=MD5Helper.GeneratePwd(md5Pwd),
-                              Status=0,
-                              UserId=email
-                              };
-            VerifyRegisterDt verifyDt = new VerifyRegisterDt {
-            GUID =Guid.NewGuid().ToString().Replace("-",""),
-            IsUsed=false,
-            OutDate=DateTime.Now.AddDays(7.0),
-            UserId=email
-            };
-            if (userServer.Add(user,verifyDt))
+            user = new UserInfoDt
             {
-                EmailHelper.SendEmail("[Gallery]感谢注册Gallery,请验证邮箱" + email, email.Substring(0,email.IndexOf('@'))+"：您好，感谢您注册Gallery，请点击下面的链接验证您的邮箱：<a href='http://121.42.58.78/UserInfo/VerifyEmail?guid=" + verifyDt.GUID + "'>http://121.42.58.78/UserInfo/VerifyEmail?guid=" + verifyDt.GUID + "</a>该链接7天后失效。", email);
+                DateTime = DateTime.Now,
+                Name = email,
+                Pwd = MD5Helper.GeneratePwd(md5Pwd),
+                Status = 0,
+                UserId = email
+            };
+            VerifyRegisterDt verifyDt = new VerifyRegisterDt
+            {
+                GUID = Guid.NewGuid().ToString().Replace("-", ""),
+                IsUsed = false,
+                OutDate = DateTime.Now.AddDays(7.0),
+                UserId = email
+            };
+            if (userServer.Add(user, verifyDt))
+            {
+                EmailHelper.SendEmail("[Gallery]感谢注册Gallery,请验证邮箱" + email, email.Substring(0, email.IndexOf('@')) + "：您好，感谢您注册Gallery，请点击下面的链接验证您的邮箱：<a href='http://121.42.58.78/UserInfo/VerifyEmail?guid=" + verifyDt.GUID + "'>http://121.42.58.78/UserInfo/VerifyEmail?guid=" + verifyDt.GUID + "</a>该链接7天后失效。", email);
                 //设置登录状态
                 System.Web.HttpContext.Current.Session["user"] = user;
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
@@ -54,25 +57,62 @@ namespace Manager
             if (!FormatVerify.VerifyEmail(email))
                 return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
             UserInfoDt user = userServer.GetUserInfo(email);
-            if(user==null)
+            if (user == null)
                 return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied, "邮箱或密码错误");
-            string pwd=MD5Helper.GeneratePwd(md5Pwd);
+            string pwd = MD5Helper.GeneratePwd(md5Pwd);
             if (!user.Pwd.Equals(pwd, StringComparison.OrdinalIgnoreCase))
                 return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied, "邮箱或密码错误");
             HttpContext.Current.Session["user"] = user;
             return OutputHelper.GetOutputResponse(ResultCode.OK);
         }
 
-         /// <summary>
+        public OutputModel LostPwd(string email)
+        {
+            if (FormatVerify.IsNullOrEmpty(email))
+                return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
+            if (!FormatVerify.VerifyEmail(email))
+                return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
+            UserInfoDt user = userServer.GetUserInfo(email);
+            if (user == null)
+                return OutputHelper.GetOutputResponse(ResultCode.DataExisted, "此邮箱未注册");
+            if (new VerifyRegisterServer().IsSend(email))
+                return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied, "您的邮箱已经发送,不用重复点击");
+            VerifyRegisterDt verifyDt = new VerifyRegisterDt
+            {
+                GUID = Guid.NewGuid().ToString().Replace("-", ""),
+                IsUsed = false,
+                OutDate = DateTime.Now.AddDays(7.0),
+                UserId = email
+            };
+            if (vServer.Add(verifyDt))
+            {
+                EmailHelper.SendEmail("[Gallery]欢迎来到Gallery,点击重置密码" + email, email.Substring(0, email.IndexOf('@')) + "：您好，请点击下面的链接验证您的邮箱：<a href='http://121.42.58.78/UserInfo/LostPwdVerifyEmail?guid=" + verifyDt.GUID + "'>http://121.42.58.78/UserInfo/LostPwdVerifyEmail?guid=" + verifyDt.GUID + "</a>该链接7天后失效。", email);
+                return OutputHelper.GetOutputResponse(ResultCode.OK);
+            }
+            else
+                return OutputHelper.GetOutputResponse(ResultCode.Error);
+
+        }
+
+
+        /// <summary>
         /// 修改个人信息
         /// </summary>
         /// <param name="userInfo"></param>
         /// <returns></returns>
-        public bool Update(UserInfoDt userInfo)
+        public OutputModel Update(UserInfoDt userInfo)
         {
-            return userServer.Update(userInfo);
+            if (userInfo == null)
+                return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
+            userInfo.Pwd = MD5Helper.GeneratePwd(userInfo.Pwd);
+            if (userServer.Update(userInfo))
+            {
+                HttpContext.Current.Session["user"] = userInfo;
+                return OutputHelper.GetOutputResponse(ResultCode.OK);
+            }
+            return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
-        
+
 
         /// <summary>
         /// 根据邮箱获取用户对象
