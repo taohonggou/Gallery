@@ -1609,3 +1609,14 @@ span.port-lady {
 }
 }
 /*--friends end here--*/
+
+/*upload*/
+/*.upload{
+    background: url(https://s.yimg.com/uy/build/images/sprites/icons-36c2f8d6.png) -99px -429px no-repeat;
+    width: 30px;
+    height: 20px;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+}*/
