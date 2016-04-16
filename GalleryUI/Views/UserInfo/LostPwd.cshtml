@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>登录-美图网</title>
+    <title>验证邮箱-美图网</title>
     <link rel="stylesheet" href="/content/login/normalize.css">
     <link rel="stylesheet" href="/content/login/style.css" media="screen" type="text/css" />
     <script src="~/Scripts/formatVerify.js"></script>
@@ -33,12 +33,9 @@
             <label>
                 <input type="text" id="email" required placeholder="邮箱">
             </label>
-            <label>
-                <input type="password" id="pwd" required placeholder="密码">
-            </label>
-            <input type="button" value="登录" onclick="login()">
+            <input type="button" value="验证邮箱" onclick="lostPwd()">
         </form>
-        <h5><a href="/UserInfo/LostPwd" >忘记密码?</a>&nbsp;|&nbsp;<a href="/UserInfo/Register" >注册</a></h5>
+        <h5><a href="/UserInfo/Login">登录</a></h5>
     </section>
 
 </body>

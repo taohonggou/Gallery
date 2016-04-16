@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>登录-美图网</title>
+    <title>重置密码-美图网</title>
     <link rel="stylesheet" href="/content/login/normalize.css">
     <link rel="stylesheet" href="/content/login/style.css" media="screen" type="text/css" />
     <script src="~/Scripts/formatVerify.js"></script>
@@ -30,15 +30,13 @@
     <section class="login-form-wrap">
         <h1>美图网</h1>
         <form class="login-form">
-            <label>
-                <input type="text" id="email" required placeholder="邮箱">
-            </label>
+                <input type="hidden" id="email" value="@ViewBag.Email">
             <label>
                 <input type="password" id="pwd" required placeholder="密码">
             </label>
-            <input type="button" value="登录" onclick="login()">
+            <input type="button" value="重置密码" onclick="resetPwd()">
         </form>
-        <h5><a href="/UserInfo/LostPwd" >忘记密码?</a>&nbsp;|&nbsp;<a href="/UserInfo/Register" >注册</a></h5>
+        <h5><a href="/UserInfo/Login">登录</a></h5>
     </section>
 
 </body>

@@ -9,10 +9,9 @@
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <link href="~/Content/layout/style.css" rel="stylesheet" />
     <script type="application/x-javascript">
-        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }>
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
     </script>
-    <link href='http://fonts.useso.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
+    
     <!-- start-smoth-scrolling -->
     <script src="~/Scripts/layout/move-top.js"></script>
     <script src="~/Scripts/layout/easing.js"></script>
@@ -39,22 +38,45 @@
             <div class="header-main">
                 <div class="header-left">
                     <div class="logo">
-                        <a href="index.html"><h1>Trip Way</h1></a>
+                        <a href="index.html"><h1>美图网</h1></a>
                     </div>
                     <div class="top-nav">
                         <ul class="res">
-                            <li><a href="services.html">Services</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="/home/Index">首页</a></li>
+                            <li><a href="services.html">最热</a></li>
+                            <li><a href="about.html">最新</a></li>
+                            <li><a href="contact.html">分类</a></li>
+                            <li><a href="contact.html">关于</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="header-right">
                     <div class="search">
                         <form>
-                            <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" />
+                            <input type="text" value="搜索" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" />
                             <input type="submit" value="" />
                         </form>
+                    </div>
+                    <div class="header_top_right">
+                        <ul>
+                            <li><a href="/Upload/Upload"  class="upload">上传</a></li>
+                            <li> |</li>
+                            @if (ViewBag.IsLogin)
+                            {
+                                
+                                <li><a href="/UserInfo/UserCenter">@ViewBag.User.Name</a> </li>
+                                <li> |</li>
+                                <li><a href="/UserInfo/LogOut">退出</a></li>
+                            }
+                            else
+                            {
+                                
+                                <li><a href="/UserInfo/Login">登录</a></li>
+                                <li> |</li>
+                                <li><a href="/UserInfo/Register">注册</a></li>
+                            }
+
+                        </ul>
                     </div>
                 </div>
                 <div class="clearfix"> </div>
