@@ -8,6 +8,11 @@ var uploader = new plupload.Uploader({
         mime_types: [ //只允许上传图片文件
             { title: "图片文件", extensions: "jpg,gif,png" }
         ]
+    },
+
+    multipart_params: {
+        photoGalleryId: $('#gallery').val(),
+        PhotoCategoryId: $('#category').val()
     }
 });
 

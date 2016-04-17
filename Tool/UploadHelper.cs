@@ -10,8 +10,9 @@ namespace Tool
 {
 public static     class UploadHelper
     {
-    public static OutputModel UploadImg(HttpPostedFileBase img, string savePath = "~/Upload/Images/")
+    public static OutputModel UploadImg(HttpPostedFileBase img,out  string newPath, string savePath = "~/Upload/Images/")
     {
+        newPath = "";
         if (img == null || img.ContentLength == 0)
             return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
         string extension = Path.GetExtension(img.FileName);
@@ -20,6 +21,7 @@ public static     class UploadHelper
         string newImgName = Guid.NewGuid().ToString().Replace("-", "") + extension;
         string path = System.Web.HttpContext.Current.Server.MapPath(savePath);
         img.SaveAs(path + newImgName);
+        newPath = path + newImgName;
         return OutputHelper.GetOutputResponse(ResultCode.OK);
     }
     }

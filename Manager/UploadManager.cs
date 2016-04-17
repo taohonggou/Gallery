@@ -12,13 +12,17 @@ namespace Manager
 {
     public class UploadManager
     {
-        public OutputModel UploadImg(HttpPostedFileBase img)
+        public OutputModel UploadImg(HttpPostedFileBase img,string userId)
         {
-            OutputModel model=  UploadHelper.UploadImg(img);
+            string newPath;
+            OutputModel model=  UploadHelper.UploadImg(img,out newPath);
             if (model.StatusCode != 1)
             {
                 return model;
             }
+            //向数据库中插入
+
+
             return new OutputModel();
         }
     }

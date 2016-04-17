@@ -36,9 +36,9 @@ namespace Server
         /// <param name="name"></param>
         /// <param name="userid"></param>
         /// <returns></returns>
-        public PhotoGalleryDt Get(string name,string userid)
+        public bool Get(string name,string userid)
         {
-            return TransferObject.ConvertObjectByEntity<PhotoGallery, PhotoGalleryDt>(base.Select(o => o.Name == name&&o.UserId==userid).FirstOrDefault());
+            return base.Select(o => o.Name == name&&o.UserId==userid).Any();
         }
         /// <summary>
         /// 获取某用户的相册
@@ -47,7 +47,7 @@ namespace Server
         /// <returns></returns>
         public List<PhotoGalleryDt> GetList(string userid)
         {
-            return TransferObject.ConvertObjectByEntity<PhotoGallery, PhotoGalleryDt>(base.Select(o => o.UserId == userid).ToList());
+            return TransferObject.ConvertObjectByEntity<PhotoGallery, PhotoGalleryDt>(base.Select(o => o.UserId == userid).OrderByDescending(o=>o.DateTime).ToList());
         }
         public List<PhotoGalleryDt> GetList()
         {

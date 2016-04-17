@@ -22,9 +22,9 @@ namespace EF
         }
     
         public int PhotoId { get; set; }
-        public int LocationId { get; set; }
+        public Nullable<int> LocationId { get; set; }
         public int PhotoCategoryId { get; set; }
-        public int PhotoGalleryId { get; set; }
+        public Nullable<int> PhotoGalleryId { get; set; }
         public string UserId { get; set; }
         public string ImgUrl { get; set; }
         public string Name { get; set; }
@@ -34,9 +34,9 @@ namespace EF
         public virtual ICollection<Comment> Comment { get; set; }
         public virtual ICollection<Like> Like { get; set; }
         public virtual Location Location { get; set; }
-        public virtual PhotoCategory PhotoCategory { get; set; }
         public virtual PhotoGallery PhotoGallery { get; set; }
-        public virtual ICollection<ScanOrSupport> ScanOrSupport { get; set; }
         public virtual UserInfo UserInfo { get; set; }
+        public virtual ICollection<ScanOrSupport> ScanOrSupport { get; set; }
+        public virtual PhotoCategory PhotoCategory { get; set; }
     }
 }

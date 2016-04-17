@@ -12,17 +12,12 @@ namespace EF
     using System;
     using System.Collections.Generic;
     
-    public partial class PhotoCategory
+    public partial class sysdiagrams
     {
-        public PhotoCategory()
-        {
-            this.Photo = new HashSet<Photo>();
-        }
-    
-        public int PhotoCategoryId { get; set; }
-        public string Name { get; set; }
-        public int Priority { get; set; }
-    
-        public virtual ICollection<Photo> Photo { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

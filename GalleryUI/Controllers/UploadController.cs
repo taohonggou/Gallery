@@ -14,17 +14,21 @@ namespace GalleryUI.Controllers
         [HttpGet]
         public ActionResult Upload()
         {
-            if (user == null)
-                return Redirect("/");
+            //if (user == null)
+            //    return Redirect("/");
             return View();
         }
 
         [HttpPost]
         public void PostUpload()
         {
+            //if (user == null)
+            //    return;
+            string photoGalleryId= Request.Form["photoGalleryId"];
+            string PhotoCategoryId = Request.Form["PhotoCategoryId"];
             HttpFileCollectionBase file= Request.Files;
             UploadManager manager = new UploadManager();
-            manager.UploadImg(file["file"]);
+            //manager.UploadImg(file["file"],user.UserId);
         }
 	}
 }
