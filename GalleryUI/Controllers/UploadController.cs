@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataTrsfer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,21 +15,25 @@ namespace GalleryUI.Controllers
         [HttpGet]
         public ActionResult Upload()
         {
-            //if (user == null)
-            //    return Redirect("/");
+            if (!IsLogin())
+                return Redirect("/");
+            //获取个人的相册
+            PhotoGalleryManager galleryManager = new PhotoGalleryManager();
+            List<PhotoGalleryDt> list = galleryManager.GetList(user.UserId);
+            ViewBag.Gallery = list;
             return View();
         }
 
         [HttpPost]
         public void PostUpload()
         {
-            //if (user == null)
-            //    return;
-            string photoGalleryId= Request.Form["photoGalleryId"];
+            if (!IsLogin())
+                return ;
+            string photoGalleryId = Request.Form["photoGalleryId"];
             string PhotoCategoryId = Request.Form["PhotoCategoryId"];
-            HttpFileCollectionBase file= Request.Files;
+            HttpFileCollectionBase file = Request.Files;
             UploadManager manager = new UploadManager();
-            //manager.UploadImg(file["file"],user.UserId);
+            manager.UploadImg(file["file"], user.UserId, photoGalleryId, PhotoCategoryId);
         }
-	}
+    }
 }

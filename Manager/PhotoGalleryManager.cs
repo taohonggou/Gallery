@@ -62,12 +62,12 @@ namespace Manager
         /// </summary>
         /// <param name="userid"></param>
         /// <returns></returns>
-        public OutputModel GetList(string userid)
+        public List<PhotoGalleryDt> GetList(string userid)
         {
-            List<PhotoGalleryDt> list = Server.GetList(userid);
-            if (list == null)
-                return OutputHelper.GetOutputResponse(ResultCode.NoData);
-            return OutputHelper.GetOutputResponse(ResultCode.OK, list);
+            return  Server.GetList(userid);
+            //if (list == null)
+            //    return OutputHelper.GetOutputResponse(ResultCode.NoData);
+            //return OutputHelper.GetOutputResponse(ResultCode.OK, list);
         }
         public OutputModel GetList()
         {

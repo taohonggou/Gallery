@@ -7,12 +7,13 @@ using Server;
 using Tool;
 using DataTrsfer;
 using System.Web;
+using System.IO;
 
 namespace Manager
 {
     public class UploadManager
     {
-        public OutputModel UploadImg(HttpPostedFileBase img,string userId)
+        public OutputModel UploadImg(HttpPostedFileBase img,string userId,string galleryId,string categoryId)
         {
             string newPath;
             OutputModel model=  UploadHelper.UploadImg(img,out newPath);
@@ -20,10 +21,28 @@ namespace Manager
             {
                 return model;
             }
+
             //向数据库中插入
-
-
-            return new OutputModel();
+            int iGallery, iCateGory;
+            if(!int.TryParse(galleryId,out iGallery)||!int.TryParse(categoryId,out iCateGory))
+            {
+                return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
+            }
+            PhotoDt photo = new PhotoDt {
+            DateTime=DateTime.Now,
+            ImgUrl=newPath,
+            Name=Path.GetFileName(newPath),
+            PhotoCategoryId=iCateGory,
+            PhotoGalleryId=iGallery,
+            Status=1,
+            UserId=userId,
+            LocationId=-1
+            };
+            PhotoServer photoServer = new PhotoServer();
+            if (photoServer.Add(photo))
+                return OutputHelper.GetOutputResponse(ResultCode.OK);
+            else
+                return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
     }
 }

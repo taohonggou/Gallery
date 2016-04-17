@@ -1,4 +1,5 @@
-﻿
+﻿@using  DataTrsfer
+
 @{
     ViewBag.Title = "上传图片";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,12 +10,29 @@
 <div>
     <h2>Upload</h2>
     <p>
-        <select id="gallery">
-            <option value="company">公司</option>
-            <option value="home">home</option>
+        <select id="gallery" onchange="change()">
+            @{
+                List<PhotoGalleryDt> list = ViewBag.Gallery;
+                if (list==null||list.Count == 0)
+                {
+                     <option value="-1">默认</option>
+                }
+                else
+                {
+                    foreach (PhotoGalleryDt gallery in list)
+                    {
+                        <option value="@gallery.PhotoGalleryId">@gallery.Name</option>
+                    }
+                }
+            }
+            
         </select>
         <select id="category">
+            <option value="4">默认</option>
             <option value="1">风景</option>
+            <option value="2">人物</option>
+            <option value="3">搞笑</option>
+            
         </select>
         <button id="browse">选择文件</button>
         <button id="upload-btn">开始上传</button>

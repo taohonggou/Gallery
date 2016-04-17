@@ -19,6 +19,8 @@ var uploader = new plupload.Uploader({
 //在实例对象上调用init()方法进行初始化
 uploader.init();
 
+
+
 //绑定文件添加进队列事件
 uploader.bind('FilesAdded', function (uploader, files) {
     for (var i = 0, len = files.length; i < len; i++) {
@@ -32,6 +34,12 @@ uploader.bind('FilesAdded', function (uploader, files) {
             })
         }(i);
     }
+});
+
+
+//异常事件
+uploader.bind('Error', function (uploader, errObject) {
+    console.log(errObject);
 });
 
 //plupload中为我们提供了mOxie对象
@@ -77,5 +85,13 @@ uploader.bind("UploadComplete", function (uploader, file) {
 });
 
 function exit() {
-    window.parent.location.href = window.parent.location.href;
+    //window.parent.location.href = window.parent.location.href;
+    window.parent.location.href = "/UserCenter/UserCenter";
+}
+
+function change() {
+    uploader.settings.multipart_params = {
+        photoGalleryId: $('#gallery').val(),
+        PhotoCategoryId: $('#category').val()
+    }
 }
