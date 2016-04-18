@@ -26,11 +26,11 @@ uploader.bind('FilesAdded', function (uploader, files) {
     for (var i = 0, len = files.length; i < len; i++) {
         var file_name = files[i].name; //文件名
         //构造html来更新UI
-        var html = '<li id="file-' + files[i].id + '" class="list-group-item" style="float:left;width:33.3%;height:300px;"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
+        var html = '<li id="file-' + files[i].id + '" class="list-group-item" style="float:left;width:33%;height:300px;"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
         $(html).appendTo('#file-list');
         !function (i) {
             previewImage(files[i], function (imgsrc) {
-                $('#file-' + files[i].id).append('<img src="' + imgsrc + '" />');
+                $('#file-' + files[i].id).append('<img style="max-width:100%;max-height:76%;" src="' + imgsrc + '" />');
             })
         }(i);
     }

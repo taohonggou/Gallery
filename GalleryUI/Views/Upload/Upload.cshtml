@@ -1,4 +1,4 @@
-﻿@using  DataTrsfer
+﻿@using DataTrsfer
 
 @{
     ViewBag.Title = "上传图片";
@@ -6,9 +6,23 @@
 }
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/plupload/plupload.full.min.js"></script>
+<style>
+    .list-group-item:first-child {
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+    }
 
+    .list-group-item {
+        margin:0px 1px 2px 1px;
+    }
+
+        .list-group-item:last-child {
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+        }
+</style>
 <div class="container" style="min-height:633px;">
-    <h2>Upload</h2>
+    <h2>上传图片</h2>
     <p>
         <select id="gallery" onchange="change()" class="btn btn-default dropdown-toggle">
             @{
@@ -32,7 +46,6 @@
             <option value="1">风景</option>
             <option value="2">人物</option>
             <option value="3">搞笑</option>
-
         </select>
         <button id="browse" class="btn btn-default">选择文件</button>
         <button id="upload-btn" class="btn btn-default">开始上传</button>
