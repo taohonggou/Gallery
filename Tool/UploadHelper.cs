@@ -21,7 +21,7 @@ public static     class UploadHelper
         string newImgName = Guid.NewGuid().ToString().Replace("-", "") + extension;
         string path = System.Web.HttpContext.Current.Server.MapPath(savePath);
         img.SaveAs(path + newImgName);
-        newPath = savePath + newImgName;
+        newPath = path + newImgName;
         return OutputHelper.GetOutputResponse(ResultCode.OK);
     }
     }
