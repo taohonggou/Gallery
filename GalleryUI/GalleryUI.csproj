@@ -183,6 +183,7 @@
     <Content Include="Content\layout\style.css" />
     <Content Include="Content\login\normalize.css" />
     <Content Include="Content\login\style.css" />
+    <Content Include="Content\usercenter.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -208,6 +209,7 @@
     <Content Include="images\f16.jpg" />
     <Content Include="images\f17.jpg" />
     <Content Include="images\f6.jpg" />
+    <Content Include="images\header.jpg" />
     <Content Include="images\heart.png" />
     <Content Include="images\hover-img.png" />
     <Content Include="images\icons.svg" />
