@@ -44,30 +44,30 @@ namespace Manager
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
             return OutputHelper.GetOutputResponse(ResultCode.OK,p);
         }
-         /// <summary>
-        /// 获取某用户下名为name的相册,防止一个用户拥有相同名称的相册
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="userid"></param>
-        /// <returns></returns>
-        public OutputModel Get(string name,string userid)
-        {
-            PhotoGalleryDt p = Server.Get(name, userid);
-            if (p == null)
-                return OutputHelper.GetOutputResponse(ResultCode.NoData);
-            return OutputHelper.GetOutputResponse(ResultCode.OK,p);
-        }
+        // /// <summary>
+        ///// 获取某用户下名为name的相册,防止一个用户拥有相同名称的相册
+        ///// </summary>
+        ///// <param name="name"></param>
+        ///// <param name="userid"></param>
+        ///// <returns></returns>
+        //public OutputModel Get(string name,string userid)
+        //{
+        //    PhotoGalleryDt p = Server.Get(name, userid);
+        //    if (p == null)
+        //        return OutputHelper.GetOutputResponse(ResultCode.NoData);
+        //    return OutputHelper.GetOutputResponse(ResultCode.OK,p);
+        //}
         /// <summary>
         /// 获取某用户的相册
         /// </summary>
         /// <param name="userid"></param>
         /// <returns></returns>
-        public OutputModel GetList(string userid)
+        public List<PhotoGalleryDt> GetList(string userid)
         {
-            List<PhotoGalleryDt> list = Server.GetList(userid);
-            if (list == null)
-                return OutputHelper.GetOutputResponse(ResultCode.NoData);
-            return OutputHelper.GetOutputResponse(ResultCode.OK, list);
+            return  Server.GetList(userid);
+            //if (list == null)
+            //    return OutputHelper.GetOutputResponse(ResultCode.NoData);
+            //return OutputHelper.GetOutputResponse(ResultCode.OK, list);
         }
         public OutputModel GetList()
         {

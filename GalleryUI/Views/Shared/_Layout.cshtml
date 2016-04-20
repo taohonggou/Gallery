@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - 美图网</title>
@@ -11,7 +11,7 @@
     <script type="application/x-javascript">
         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
     </script>
-    
+
     <!-- start-smoth-scrolling -->
     <script src="~/Scripts/layout/move-top.js"></script>
     <script src="~/Scripts/layout/easing.js"></script>
@@ -59,18 +59,17 @@
                     </div>
                     <div class="header_top_right">
                         <ul>
-                            <li><a href="/Upload/Upload"  class="upload">上传</a></li>
-                            <li> |</li>
                             @if (ViewBag.IsLogin)
                             {
-                                
+                                <li><a href="/Upload/Upload" class="upload">上传</a></li>
+                                <li> |</li>
                                 <li><a href="/UserInfo/UserCenter">@ViewBag.User.Name</a> </li>
                                 <li> |</li>
                                 <li><a href="/UserInfo/LogOut">退出</a></li>
                             }
                             else
                             {
-                                
+
                                 <li><a href="/UserInfo/Login">登录</a></li>
                                 <li> |</li>
                                 <li><a href="/UserInfo/Register">注册</a></li>
@@ -84,7 +83,7 @@
         </div>
     </div>
     <!--header end here-->
-        @RenderBody()
+    @RenderBody()
     <!--footer start here-->
     <div class="footer">
         <div class="container">

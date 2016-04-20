@@ -1,0 +1,87 @@
+﻿@using DataTrsfer
+@{
+    ViewBag.Title = "用户中心";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/usercenter.css" rel="stylesheet" />
+<style>
+    .list-group-item:first-child {
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+    }
+
+    .list-group-item:last-child {
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+
+    .list-group-item {
+        margin: 0px 1px 2px 1px;
+    }
+
+
+
+    div.polaroid {
+        position: relative;
+        width: 17.8%;
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin: 0px 12.5px 25px 12.5px;
+        float: left;
+    }
+
+    div.pcenter {
+        text-align: center;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+    .img1 {
+        display: inline-block;
+        width: 180px;
+        height: 180px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="container" style="min-height:633px;">
+    <h2>用户中心</h2>
+    <div>
+        @*<ul class="list-group ulcolor">*@
+            @{
+                List<PhotoDt> list = ViewBag.Photos;
+                if (list == null || list.Count == 0)
+                {
+                    <li>
+                        没有图片
+                    </li>
+                }
+                else
+                {
+                    foreach (PhotoDt phtot in list)
+                    {
+
+                        <div class="polaroid">
+                            <a href="#">
+                                <img src="@phtot.ImgUrl" alt="Norway" style="width:100%;" class="img1" />
+                            </a>
+                            <div class="pcenter">
+                                <p style="overflow: hidden; text-overflow: ellipsis; " title="@phtot.Name">@phtot.Name</p>
+                            </div>
+                        </div>
+
+                        @*<li class="list-group-item" style="float:left;width:24.5%;height:250px;">
+                            <div>
+                                <img src="@phtot.ImgUrl" style="max-width:100%;max-height:76%;" />
+                            </div>
+                            <p style="width: 90%; word-wrap: break-word;position:absolute;bottom:2px;">@phtot.Name</p>
+                        </li>*@
+                    }
+
+                }
+
+            }
+        @*</ul>*@
+    </div>
+</div>
+

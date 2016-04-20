@@ -29,6 +29,9 @@ namespace GalleryUI.Controllers
             user = System.Web.HttpContext.Current.Session["user"] as UserInfoDt;
             ViewBag.User = user;
             return ViewBag.IsLogin = (user != null);
+            
         }
+
+
 	}
 }

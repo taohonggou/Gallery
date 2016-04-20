@@ -1,0 +1,24 @@
+﻿body {
+}
+
+.middle {
+    width: 920px;
+    min-height: 1000px;
+    margin: 0 auto;
+    padding: 16px 0 0 0;
+}
+
+.headerUC {
+    position:absolute;
+    height: 300px;
+    width: 100%;
+    background-image: url(/images/header.jpg);
+}
+
+.infoheader {
+    position: absolute;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    z-index: 2;
+}

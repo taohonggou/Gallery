@@ -28,7 +28,7 @@ namespace Server
         }
         public PhotoCategoryDt Get(int id)
         {
-            return TransferObject.ConvertObjectByEntity<PhotoCategory, PhotoCategoryDt>(base.Select(id));
+            return TransferObject.ConvertObjectByEntity<PhotoCategory, PhotoCategoryDt>(base.Select(o=>o.PhotoCategoryId==id).FirstOrDefault());
         }
         public PhotoCategoryDt Get(string name)
         {
@@ -36,7 +36,7 @@ namespace Server
         }
         public List<PhotoCategoryDt> GetList()
         {
-            return TransferObject.ConvertObjectByEntity<PhotoCategory, PhotoCategoryDt>(base.Select(o => true).ToList());
+            return TransferObject.ConvertObjectByEntity<PhotoCategory, PhotoCategoryDt>(base.Select(o => true).OrderByDescending(o=>o.Priority).ToList());
         }
     }
 }
