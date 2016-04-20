@@ -239,6 +239,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\Gallery.pubxml" />
+    <None Include="Properties\PublishProfiles\姐姐电脑.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\FormatVerify.js" />
     <Content Include="Scripts\home\jquery.swipebox.min.js" />
