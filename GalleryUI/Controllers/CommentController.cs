@@ -10,13 +10,14 @@ namespace GalleryUI.Controllers
 {
     public class CommentController : BaseController
     {
-        public ActionResult AddComment(string content, string photoId)
+        [HttpPost]
+        public ActionResult AddComment(string content, string photoId,string upId)
         {
             try
             {
                 if (!IsLogin())
                     return Content( OutputHelper.GetOutputResponse(ResultCode.NoLogin));
-                return Content(new CommentManager().Add(content,photoId));
+                return Content(new CommentManager().Add(content,photoId,user.UserId,upId));
             }
             catch 
             {
