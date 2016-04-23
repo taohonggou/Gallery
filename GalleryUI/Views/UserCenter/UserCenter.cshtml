@@ -3,7 +3,6 @@
     ViewBag.Title = "用户中心";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <link href="~/Content/usercenter.css" rel="stylesheet" />
 <style>
     .list-group-item:first-child {
@@ -43,9 +42,67 @@
         cursor: pointer;
     }
 </style>
+<script type="text/javascript">
+    function loadPhotos(galleryId) {
+        $.ajax({
+            url: '/usercenter/PhotoGallery',
+            type: 'post',
+            data: { galleryId: galleryId },
+            success: function (data) {
+                if (data.StatusCode == 1) {
+                    initPhotos(data.Data)
+                }
+                else
+                    layer.msg(data.Message);
+            }
+        });
+    }
 
+    function initPhotos(json) {
+        console.log(json);
+        var str = '';
+        $.each(json, function () {
+            str += '<div class="polaroid" onclick="getPhotoDetails(' + this.PhotoId + ')"><a href="javascript:;"><img src="' + this.ImgUrl + '" alt="Norway" style="width:100%;" class="img1" /></a><div class="pcenter"><p style="overflow: hidden; text-overflow: ellipsis; " title="' + this.Name + '">'+this.Name+'</p></div></div>';
+        });
+        $('#h2Name').text('图片列表');
+        $('#divContainer').html(str);
+    }
+
+    function getPhotoDetails(photoId) {
+        window.location.href = "/Photo/Details?photoId="+photoId;
+    }
+
+    function getAllPhotos() {
+        $.ajax({
+            url: '/usercenter/GetAllPhotos',
+            type: 'post',
+            success: function (data) {
+                if (data.StatusCode == 1) {
+                    initPhotos(data.Data)
+                }
+                else
+                    layer.msg(data.Message);
+            }
+        });
+    }
+
+    function getLikePhotos() {
+        $.ajax({
+            url: '/usercenter/GetLikePhotos',
+            type: 'post',
+            success: function (data) {
+                if (data.StatusCode == 1) {
+                    initPhotos(data.Data)
+                }
+                else
+                    layer.msg(data.Message);
+            }
+        });
+    }
+
+</script>
 <div class="container" style="min-height:633px;">
-    <h2>用户中心</h2>
+    <h2 id="h2Name">相册列表</h2>
     <div class="panel-group pull-left" id="accordion" style="position:absolute;width:10%;min-width:50px;">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -73,14 +130,14 @@
             </div>
             <div id="collapseTwo" class="panel-collapse collapse">
                 <div>
-                    <a href="#" class="list-group-item">我的相册</a>
-                    <a href="#" class="list-group-item">我的相片</a>
-                    <a href="#" class="list-group-item">喜欢</a>
+                    <a href="/usercenter/usercenter" class="list-group-item">我的相册</a>
+                    <a href="javascript:;" onclick="getAllPhotos()" class="list-group-item">我的相片</a>
+                    <a href="javascript:;" onclick="getLikePhotos()" class="list-group-item">喜欢</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="pull-right" style="width:82%;">
+    <div id="divContainer" class="pull-right" style="width:82%;">
         
             @{
                 List<PhotoGalleryDt> list = ViewBag.ListGallery;
@@ -93,11 +150,11 @@
                     foreach (PhotoGalleryDt phtot in list)
                     {
 
-                        <div class="polaroid">
-                            <a href="#">
+                        <div class="polaroid" onclick="loadPhotos('@phtot.PhotoGalleryId')">
+                            <a href="javascript:;">
                                 @if (phtot.CoverImg == null)
                                 {
-                                    phtot.CoverImg = "/images/cover.png"; 
+                                    phtot.CoverImg = "/images/cover.png";
                                 }
                                 <img src="@phtot.CoverImg" alt="Norway" style="width:100%;" class="img1" />
                             </a>

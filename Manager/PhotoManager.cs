@@ -12,12 +12,16 @@ namespace Manager
     public class PhotoManager
     {
         private PhotoServer server = new PhotoServer();
-        public List<PhotoDt> GetAllPhotoByUserId(string userId)
+
+        public OutputModel GetAllPhotoByUserId(string userId)
         {
             if (string.IsNullOrEmpty(userId))
-                return new List<PhotoDt>();
-           
-            return server.GetList(userId);
+                return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
+
+            List<PhotoDt> list= server.GetList(userId);
+            if(list.Count==0)
+                return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
+            return  OutputHelper.GetOutputResponse(ResultCode.OK,list);
         }
 
         public OutputModel GetDetails(string photoId)

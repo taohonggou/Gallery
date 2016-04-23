@@ -35,7 +35,6 @@ namespace EF
         public virtual DbSet<Privilege> Privilege { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<ScanOrSupport> ScanOrSupport { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<VerifyRegister> VerifyRegister { get; set; }

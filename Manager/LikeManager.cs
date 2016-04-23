@@ -39,5 +39,21 @@ namespace Manager
             else
                 return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
+
+        /// <summary>
+        /// 获取某人喜欢的图片
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public OutputModel GetLikePhotos(string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+                return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
+
+            List<PhotoDt> listPhotos = server.GetList(userId);
+            if(listPhotos.Count==0)
+                return OutputHelper.GetOutputResponse(ResultCode.NoData);
+            return OutputHelper.GetOutputResponse(ResultCode.OK,listPhotos);
+        }
     }
 }

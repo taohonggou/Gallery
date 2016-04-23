@@ -23,6 +23,12 @@ namespace Server
             return TransferObject.ConvertObjectByEntity<Photo,PhotoDt>(list);
         }
 
+        public List<PhotoDt> GetList(string userId,IQueryable<Like> queryLike)
+        {
+            IQueryable<int> photoIds = queryLike.Select(o => o.PhotoId);
+            return TransferObject.ConvertObjectByEntity<Photo,PhotoDt>( Select(o => photoIds.Contains(o.PhotoId)).ToList());
+        }
+
         /// <summary>
         /// 获取某人最近的count张图片
         /// </summary>
@@ -50,5 +56,7 @@ namespace Server
         {
             return Select(o => o.PhotoId == photoId).Any();
         }
+
+
     }
 }

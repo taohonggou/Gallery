@@ -32,5 +32,19 @@ namespace GalleryUI.Controllers
                 return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
             return Content(new PhotoManager().GetListByGallery(user.UserId,galleryId));
         }
+
+        public ActionResult GetAllPhotos()
+        {
+            if (!IsLogin())
+                return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
+            return Content(new PhotoManager().GetAllPhotoByUserId(user.UserId));
+        }
+
+        public ActionResult GetLikePhotos()
+        {
+            if (!IsLogin())
+                return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
+            return Content(new LikeManager().GetLikePhotos(user.UserId));
+        }
 	}
 }

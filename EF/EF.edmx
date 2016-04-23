@@ -106,16 +106,6 @@
           <Property Name="Type" Type="smallint" Nullable="false" />
           <Property Name="DateTime" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="UserInfo">
           <Key>
             <PropertyRef Name="UserId" />
@@ -282,7 +272,6 @@
           <EntitySet Name="Privilege" EntityType="Self.Privilege" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScanOrSupport" EntityType="Self.ScanOrSupport" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VerifyRegister" EntityType="Self.VerifyRegister" Schema="dbo" store:Type="Tables" />
@@ -338,7 +327,6 @@
           <EntitySet Name="Privilege" EntityType="GalleryModel.Privilege" />
           <EntitySet Name="Role" EntityType="GalleryModel.Role" />
           <EntitySet Name="ScanOrSupport" EntityType="GalleryModel.ScanOrSupport" />
-          <EntitySet Name="sysdiagrams" EntityType="GalleryModel.sysdiagrams" />
           <EntitySet Name="UserInfo" EntityType="GalleryModel.UserInfo" />
           <EntitySet Name="UserRole" EntityType="GalleryModel.UserRole" />
           <EntitySet Name="VerifyRegister" EntityType="GalleryModel.VerifyRegister" />
@@ -488,16 +476,6 @@
           <Property Name="Type" Type="Int16" Nullable="false" />
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="UserInfo" Relationship="GalleryModel.FK_SCANORSU_REFERENCE_USERINFO" FromRole="ScanOrSupport" ToRole="UserInfo" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="UserInfo">
           <Key>
@@ -777,17 +755,6 @@
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
                 <ScalarProperty Name="ScanOrSupportId" ColumnName="ScanOrSupportId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="GalleryModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
