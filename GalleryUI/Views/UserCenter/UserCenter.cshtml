@@ -49,21 +49,23 @@
     <div>
         
             @{
-                List<PhotoDt> list = ViewBag.Photos;
+                List<PhotoGalleryDt> list = ViewBag.ListGallery;
                 if (list == null || list.Count == 0)
                 {
-                    <li>
-                        没有图片
-                    </li>
+                    <label>没有图片</label>
                 }
                 else
                 {
-                    foreach (PhotoDt phtot in list)
+                    foreach (PhotoGalleryDt phtot in list)
                     {
 
                         <div class="polaroid">
                             <a href="#">
-                                <img src="@phtot.ImgUrl" alt="Norway" style="width:100%;" class="img1" />
+                                @if (phtot.CoverImg == null)
+                                {
+                                    phtot.CoverImg = "/images/cover.png"; 
+                                }
+                                <img src="@phtot.CoverImg" alt="Norway" style="width:100%;" class="img1" />
                             </a>
                             <div class="pcenter">
                                 <p style="overflow: hidden; text-overflow: ellipsis; " title="@phtot.Name">@phtot.Name</p>

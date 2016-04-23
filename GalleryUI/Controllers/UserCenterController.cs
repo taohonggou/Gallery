@@ -17,9 +17,10 @@ namespace GalleryUI.Controllers
             if (!IsLogin())
                 return Redirect("/");
             //获取此人所有的图片
-            PhotoManager manager = new PhotoManager();
-            List<PhotoDt> list= manager.GetAllPhotoByUserId(user.UserId);
-            ViewBag.Photos = list;
+            //PhotoManager manager = new PhotoManager();
+            //List<PhotoDt> list= manager.GetAllPhotoByUserId(user.UserId);
+            //ViewBag.Photos = list;
+            ViewBag.ListGallery = new PhotoGalleryManager().GetList(user.UserId);
             return View();
         }
 	}
