@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Manager;
 using DataTrsfer;
+using Tool;
 
 namespace GalleryUI.Controllers
 {
@@ -22,6 +23,14 @@ namespace GalleryUI.Controllers
             //ViewBag.Photos = list;
             ViewBag.ListGallery = new PhotoGalleryManager().GetList(user.UserId);
             return View();
+        }
+
+
+        public ActionResult PhotoGallery(string galleryId)
+        {
+            if (!IsLogin())
+                return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
+            return Content(new PhotoManager().GetListByGallery(user.UserId,galleryId));
         }
 	}
 }

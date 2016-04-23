@@ -39,5 +39,17 @@ namespace Manager
             photo.ListComment=new CommentManager().GetListComment(iPhotoId);
             return OutputHelper.GetOutputResponse(ResultCode.OK, photo);
         }
+
+        public OutputModel GetListByGallery(string userId,string galleryId)
+        {
+            int iGalleryId;
+
+            if (!int.TryParse(galleryId,out iGalleryId))
+                return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
+            List<PhotoDt> list = server.GetListByGallery(userId, iGalleryId);
+            if(list.Count==0)
+                return OutputHelper.GetOutputResponse(ResultCode.NoData);
+            return OutputHelper.GetOutputResponse(ResultCode.OK,list);
+        }
     }
 }

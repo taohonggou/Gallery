@@ -31,7 +31,6 @@ namespace GalleryUI.Controllers
             }
             catch 
             {
-
                 return Content(OutputHelper.GetOutputResponse(ResultCode.Error));
             }
             

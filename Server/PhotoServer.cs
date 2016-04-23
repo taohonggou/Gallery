@@ -35,6 +35,12 @@ namespace Server
             return TransferObject.ConvertObjectByEntity<Photo, LastPhotosDt>(list);
         }
 
+        public List<PhotoDt>  GetListByGallery(string userId,int galleryId)
+        {
+            List<Photo> list = Select(o => o.UserId == userId && o.PhotoGalleryId == galleryId).ToList();
+            return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(list);
+        }
+
         public PhotoDt Get(int photoId)
         {
             return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(Select( o => o.PhotoId == photoId).FirstOrDefault());
