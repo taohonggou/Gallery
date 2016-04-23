@@ -5,34 +5,26 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="96cada6b0ec64c76b89b5c7a881fda42" Name="Diagram1">
-        <EntityTypeShape EntityType="GalleryModel.Comment" Width="1.5" PointX="6" PointY="10" />
-        <EntityTypeShape EntityType="GalleryModel.Like" Width="1.5" PointX="7.5" PointY="14" />
-        <EntityTypeShape EntityType="GalleryModel.Location" Width="1.5" PointX="3" PointY="16.5" />
-        <EntityTypeShape EntityType="GalleryModel.Menu" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="GalleryModel.Photo" Width="1.5" PointX="5.25" PointY="16.625" />
-        <EntityTypeShape EntityType="GalleryModel.PhotoGallery" Width="1.5" PointX="3" PointY="25.375" />
-        <EntityTypeShape EntityType="GalleryModel.Privilege" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="GalleryModel.Role" Width="1.5" PointX="0.75" PointY="6.25" />
-        <EntityTypeShape EntityType="GalleryModel.ScanOrSupport" Width="1.5" PointX="7.5" PointY="16.875" />
-        <EntityTypeShape EntityType="GalleryModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="GalleryModel.UserInfo" Width="1.5" PointX="0.75" PointY="9.5" />
-        <EntityTypeShape EntityType="GalleryModel.UserRole" Width="1.5" PointX="3" PointY="8.25" />
-        <EntityTypeShape EntityType="GalleryModel.VerifyRegister" Width="1.5" PointX="3" PointY="11.625" />
-        <AssociationConnector Association="GalleryModel.FK_COMMENT_REFERENCE_PHOTO" />
+        <EntityTypeShape EntityType="GalleryModel.Comment" Width="1.5" PointX="3" PointY="13.75" />
+        <EntityTypeShape EntityType="GalleryModel.Like" Width="1.5" PointX="5.75" PointY="2" />
+        <EntityTypeShape EntityType="GalleryModel.Location" Width="1.5" PointX="5.75" PointY="5" />
+        <EntityTypeShape EntityType="GalleryModel.Menu" Width="1.5" PointX="7.75" PointY="2" />
+        <EntityTypeShape EntityType="GalleryModel.Photo" Width="1.5" PointX="3" PointY="4.5" />
+        <EntityTypeShape EntityType="GalleryModel.PhotoCategory" Width="1.5" PointX="0.75" PointY="2" />
+        <EntityTypeShape EntityType="GalleryModel.PhotoGallery" Width="1.5" PointX="3" PointY="19.75" />
+        <EntityTypeShape EntityType="GalleryModel.Privilege" Width="1.5" PointX="7.75" PointY="5" />
+        <EntityTypeShape EntityType="GalleryModel.Role" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GalleryModel.ScanOrSupport" Width="1.5" PointX="3" PointY="16.875" />
+        <EntityTypeShape EntityType="GalleryModel.UserInfo" Width="1.5" PointX="0.75" PointY="10.125" />
+        <EntityTypeShape EntityType="GalleryModel.UserRole" Width="1.5" PointX="6" PointY="10.625" />
+        <EntityTypeShape EntityType="GalleryModel.VerifyRegister" Width="1.5" PointX="3" PointY="8.125" />
         <AssociationConnector Association="GalleryModel.FK_COMMENT_REFERENCE_USERINFO" />
-        <AssociationConnector Association="GalleryModel.FK_LIKE_REFERENCE_PHOTO" />
-        <AssociationConnector Association="GalleryModel.FK_LIKE_REFERENCE_USERINFO" />
-        <AssociationConnector Association="GalleryModel.FK_PHOTO_REFERENCE_LOCATION" />
-        <AssociationConnector Association="GalleryModel.FK_PHOTO_REFERENCE_PHOTOGAL" />
         <AssociationConnector Association="GalleryModel.FK_PHOTO_REFERENCE_USERINFO" />
-        <AssociationConnector Association="GalleryModel.FK_SCANORSU_REFERENCE_PHOTO" />
         <AssociationConnector Association="GalleryModel.FK_PHOTOGAL_REFERENCE_USERINFO" />
         <AssociationConnector Association="GalleryModel.FK_USERROLE_REFERENCE_ROLE" />
         <AssociationConnector Association="GalleryModel.FK_SCANORSU_REFERENCE_USERINFO" />
         <AssociationConnector Association="GalleryModel.FK_USERROLE_REFERENCE_USERINFO" />
         <AssociationConnector Association="GalleryModel.FK_VERIFYRE_REFERENCE_USERINFO" />
-        <EntityTypeShape EntityType="GalleryModel.PhotoCategory" Width="1.5" PointX="5.375" PointY="0.875" />
-        <AssociationConnector Association="GalleryModel.FK_PHOTO_REFERENCE_PHOTOCAT" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

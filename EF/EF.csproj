@@ -95,9 +95,6 @@
     <Compile Include="ScanOrSupport.cs">
       <DependentUpon>EF.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>EF.tt</DependentUpon>
-    </Compile>
     <Compile Include="UserInfo.cs">
       <DependentUpon>EF.tt</DependentUpon>
     </Compile>

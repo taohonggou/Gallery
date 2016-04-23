@@ -30,14 +30,13 @@ namespace EF
         public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<Photo> Photo { get; set; }
+        public virtual DbSet<PhotoCategory> PhotoCategory { get; set; }
         public virtual DbSet<PhotoGallery> PhotoGallery { get; set; }
         public virtual DbSet<Privilege> Privilege { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<ScanOrSupport> ScanOrSupport { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<VerifyRegister> VerifyRegister { get; set; }
-        public virtual DbSet<PhotoCategory> PhotoCategory { get; set; }
     }
 }
