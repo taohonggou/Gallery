@@ -22,5 +22,10 @@ namespace GalleryUI.Controllers
                 return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
             return Content(new PhotoGalleryManager().Add(name,user.UserId));
         }
+
+        public ActionResult GetAllGallery()
+       {
+
+       }
 	}
 }
