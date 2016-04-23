@@ -17,7 +17,9 @@ namespace GalleryUI.Controllers
         protected UserInfoDt user { get; set; }
         public BaseController()
         {
-            IsLogin();
+            user = System.Web.HttpContext.Current.Session["user"] as UserInfoDt;
+            ViewBag.User = user;
+            ViewBag.IsLogin = (user != null);
         }
         /// <summary>
         /// 判断此用户是否登录
@@ -26,12 +28,12 @@ namespace GalleryUI.Controllers
         /// <returns></returns>
         protected bool IsLogin()
         {
-            user = System.Web.HttpContext.Current.Session["user"] as UserInfoDt;
-            ViewBag.User = user;
-            return ViewBag.IsLogin = (user != null);
-            
+            return user != null;
         }
 
-
-	}
+        protected ActionResult RedirectHome()
+        {
+            return Redirect("/");
+        }
+    }
 }

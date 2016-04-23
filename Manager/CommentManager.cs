@@ -13,12 +13,12 @@ namespace Manager
     {
         private CommentServer server =new CommentServer();
         
-        public OutputModel Add(CommentDt comment)
+        public OutputModel Add(string content,string photoId)
         {
-            if (comment == null)
-                return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
-            if (server.Add(comment))
-                return OutputHelper.GetOutputResponse(ResultCode.OK);
+            //if (comment == null)
+            //    return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
+            //if (server.Add(comment))
+            //    return OutputHelper.GetOutputResponse(ResultCode.OK);
             return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
        
