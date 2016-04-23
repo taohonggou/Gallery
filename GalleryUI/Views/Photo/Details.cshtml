@@ -29,7 +29,7 @@
         //alert(json.Name);
         $('#photoName').text(json.Name);
         $('#imgRul').attr('src', json.ImgUrl);
-        setSupCount(json.LikeCount);
+        setSupCount(json.SuppostCount);
         $('#userName').text(json.User.Name);
         initLastImg(json.ListLastPhotos);
         initComment(json.ListComment)
@@ -82,15 +82,33 @@
         });
     }
 
-    function support() {
+    function addLike() {
         $.ajax({
             url: '/like/AddLike',
             type: 'post',
             data: { photoId: photoId },
             success: function (data) {
+                layer.msg(data.Message);
+                //if(data.StatusCode==1)
+                //{
+                //    setSupCount(data.Data.Count);
+                //}else
+                //{
+                //    layer.msg(data.Message);
+                //}
+            }
+        });
+    }
+
+    function support() {
+        $.ajax({
+            url: '/ScanOrSupport/AddSupport',
+            type: 'post',
+            data: { photoId: photoId },
+            success: function (data) {
                 if(data.StatusCode==1)
                 {
-                    setSupCount(data.Data.Count);
+                    setSupCount(data.Data.SupportCount);
                 }else
                 {
                     layer.msg(data.Message);
@@ -98,7 +116,6 @@
             }
         });
     }
-
 
 </script>
 <style>
@@ -142,6 +159,7 @@
         <div class="detial">
             <img src="" id="imgRul" class="img-thumbnail" style="margin:auto;" />
             <div class="mainborder" style="margin-top:1em;">
+                <a style="cursor:pointer;margin-left:50%;" onclick="addLike()">喜欢</a>
                 <a style="cursor:pointer;margin-left:50%;" onclick="support()">赞<label id="supCount">0</label></a>
             </div>
         </div>

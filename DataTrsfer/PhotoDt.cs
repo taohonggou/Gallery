@@ -27,9 +27,9 @@ namespace DataTrsfer
         public UserInfoDt User { get; set; }
 
         /// <summary>
-        /// 喜欢此照片的人数
+        /// 点赞数量
         /// </summary>
-        public int LikeCount { get; set; }
+        public int SuppostCount { get; set; }
 
         private List<CommentDt> listComment = new List<CommentDt>();
 

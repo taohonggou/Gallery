@@ -34,7 +34,7 @@ namespace Server
 
         public List<PhotoDt> GetList(string userId)
         {
-            IQueryable<Like> queryLike= Select(o => o.UserId == userId);
+            IQueryable<Like> queryLike = Select(o => o.UserId == userId);
             return new PhotoServer().GetList(userId, queryLike);
         }
     }

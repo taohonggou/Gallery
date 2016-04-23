@@ -33,8 +33,8 @@ namespace Manager
             PhotoDt photo = server.Get(iPhotoId);
             if(photo==null)
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
-            //喜欢数量
-            photo.LikeCount = new LikeServer().GetCount(iPhotoId);
+            //喜欢点赞数量
+            photo.SuppostCount = new ScanOrSupportServer().GetCount(2,iPhotoId);
             //用户信息
             photo.User = new UserInfoServer().GetUserInfo(photo.UserId);
             //显示最近的6照图片

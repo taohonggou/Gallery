@@ -24,7 +24,7 @@ namespace Manager
                 return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied);
 
             if(server.IsExist(userId,iPhotoId))
-                return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied,"您已经赞过此照片");
+                return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied,"您已经收藏过此照片");
 
             LikeDt like = new LikeDt { 
             DateTime=DateTime.Now,
@@ -33,8 +33,8 @@ namespace Manager
             };
             if(server.Add(like))
             {
-                int count = server.GetCount(iPhotoId);
-                return OutputHelper.GetOutputResponse(ResultCode.OK, new { Count=count});
+                //int count = server.GetCount(iPhotoId);
+                return OutputHelper.GetOutputResponse(ResultCode.OK);
             }
             else
                 return OutputHelper.GetOutputResponse(ResultCode.Error);
@@ -51,9 +51,9 @@ namespace Manager
                 return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
 
             List<PhotoDt> listPhotos = server.GetList(userId);
-            if(listPhotos.Count==0)
+            if (listPhotos.Count == 0)
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
-            return OutputHelper.GetOutputResponse(ResultCode.OK,listPhotos);
+            return OutputHelper.GetOutputResponse(ResultCode.OK, listPhotos);
         }
     }
 }
