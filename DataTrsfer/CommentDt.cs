@@ -18,6 +18,6 @@ namespace DataTrsfer
        /// <summary>
        /// 评论人的信息
        /// </summary>
-        public UserInfoDt UserInfo { get; set; }
+        public UserInfoDt User { get; set; }
     }
 }

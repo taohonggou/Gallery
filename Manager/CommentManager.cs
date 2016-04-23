@@ -58,7 +58,7 @@ namespace Manager
             UserInfoServer userServer=new UserInfoServer();
             foreach (CommentDt comment in list)
             {
-                comment.UserInfo = userServer.GetUserInfo(comment.UserId);
+                comment.User = userServer.GetUserInfo(comment.UserId);
             }
             return list;
         }
