@@ -19,7 +19,27 @@ namespace Server
 
         public List<PhotoDt> GetList(string userId)
         {
-            return TransferObject.ConvertObjectByEntity<Photo,PhotoDt>(Select(o=>o.UserId==userId).OrderByDescending(o=>o.DateTime).ToList());
+            List<Photo> list = Select(o => o.UserId == userId).OrderByDescending(o => o.DateTime).ToList();
+            return TransferObject.ConvertObjectByEntity<Photo,PhotoDt>(list);
         }
+
+        /// <summary>
+        /// 获取某人最近的count张图片
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public List<LastPhotosDt> GetList(string userId,int count)
+        {
+            List<Photo> list= Select(o => o.UserId == userId).OrderByDescending(o => o.DateTime).Take(count).ToList();
+            return TransferObject.ConvertObjectByEntity<Photo, LastPhotosDt>(list);
+        }
+
+        public PhotoDt Get(int photoId)
+        {
+            return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(Select( o => o.PhotoId == photoId).FirstOrDefault());
+        }
+
+
     }
 }

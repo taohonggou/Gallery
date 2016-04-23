@@ -14,5 +14,10 @@ namespace DataTrsfer
         public int UpId { get; set; }
         public string Content { get; set; }
         public System.DateTime DateTime { get; set; }
+
+       /// <summary>
+       /// 评论人的信息
+       /// </summary>
+        public UserInfoDt User { get; set; }
     }
 }

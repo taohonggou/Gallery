@@ -13,10 +13,10 @@ namespace Manager
 {
     public class UploadManager
     {
-        public OutputModel UploadImg(HttpPostedFileBase img,string userId,string galleryId,string categoryId)
+        public OutputModel UploadImg(HttpPostedFileBase img, string userId, string galleryId, string categoryId)
         {
             string newPath;
-            OutputModel model=  UploadHelper.UploadImg(img,out newPath);
+            OutputModel model = UploadHelper.UploadImg(img, out newPath);
             if (model.StatusCode != 1)
             {
                 return model;
@@ -24,19 +24,20 @@ namespace Manager
 
             //向数据库中插入
             int iGallery, iCateGory;
-            if(!int.TryParse(galleryId,out iGallery)||!int.TryParse(categoryId,out iCateGory))
+            if (!int.TryParse(galleryId, out iGallery) || !int.TryParse(categoryId, out iCateGory))
             {
                 return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
             }
-            PhotoDt photo = new PhotoDt {
-            DateTime=DateTime.Now,
-            ImgUrl=newPath,
-            Name=Path.GetFileName(newPath),
-            PhotoCategoryId=iCateGory,
-            PhotoGalleryId=iGallery,
-            Status=1,
-            UserId=userId,
-            LocationId=-1
+            PhotoDt photo = new PhotoDt
+            {
+                DateTime = DateTime.Now,
+                ImgUrl = newPath,
+                Name = img.FileName,
+                PhotoCategoryId = iCateGory,
+                PhotoGalleryId = (iGallery == -1? (int?)null:iGallery),
+                Status = 1,
+                UserId = userId,
+                LocationId = null
             };
             PhotoServer photoServer = new PhotoServer();
             if (photoServer.Add(photo))

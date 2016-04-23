@@ -11,7 +11,8 @@ namespace Manager
 {
     public class CommentManager
     {
-        private CommentServer server = ObjectContainer.GetInstance<CommentServer>();
+        private CommentServer server =new CommentServer();
+        
         public OutputModel Add(CommentDt comment)
         {
             if (comment == null)
@@ -20,6 +21,7 @@ namespace Manager
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
             return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
+       
         public OutputModel Delete(int id)
         {
             bool b = false;
@@ -38,12 +40,27 @@ namespace Manager
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
             return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
+        
         public OutputModel GetByPhotoId(int photoId)
         {
             List<CommentDt> list =server.GetByPhotoId(photoId);
             if (list.Count<=0)
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
             return OutputHelper.GetOutputResponse(ResultCode.OK, list);
+        }
+
+        public List<CommentDt> GetListComment(int photoId)
+        {
+            List<CommentDt> list = server.GetByPhotoId(photoId);
+            if (list.Count <= 0)
+                return list;
+            //获取评论人信息
+            UserInfoServer userServer=new UserInfoServer();
+            foreach (CommentDt comment in list)
+            {
+                comment.User = userServer.GetUserInfo(comment.UserId);
+            }
+            return list;
         }
     }
 }
