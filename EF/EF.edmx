@@ -21,9 +21,9 @@
             <PropertyRef Name="LikeId" />
           </Key>
           <Property Name="LikeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PhotoId" Type="int" />
-          <Property Name="UserId" Type="varchar" MaxLength="100" />
-          <Property Name="DateTime" Type="datetime" />
+          <Property Name="PhotoId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -106,6 +106,16 @@
           <Property Name="Type" Type="smallint" Nullable="false" />
           <Property Name="DateTime" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="UserInfo">
           <Key>
             <PropertyRef Name="UserId" />
@@ -146,6 +156,34 @@
             </Principal>
             <Dependent Role="Comment">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_PhotoCategory">
+          <End Role="PhotoCategory" Type="Self.PhotoCategory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoCategory">
+              <PropertyRef Name="PhotoCategoryId" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="PhotoCategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -244,12 +282,21 @@
           <EntitySet Name="Privilege" EntityType="Self.Privilege" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScanOrSupport" EntityType="Self.ScanOrSupport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VerifyRegister" EntityType="Self.VerifyRegister" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_COMMENT_REFERENCE_USERINFO" Association="Self.FK_COMMENT_REFERENCE_USERINFO">
             <End Role="UserInfo" EntitySet="UserInfo" />
             <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_Location" Association="Self.FK_Photo_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_PhotoCategory" Association="Self.FK_Photo_PhotoCategory">
+            <End Role="PhotoCategory" EntitySet="PhotoCategory" />
+            <End Role="Photo" EntitySet="Photo" />
           </AssociationSet>
           <AssociationSet Name="FK_PHOTO_REFERENCE_USERINFO" Association="Self.FK_PHOTO_REFERENCE_USERINFO">
             <End Role="UserInfo" EntitySet="UserInfo" />
@@ -291,12 +338,21 @@
           <EntitySet Name="Privilege" EntityType="GalleryModel.Privilege" />
           <EntitySet Name="Role" EntityType="GalleryModel.Role" />
           <EntitySet Name="ScanOrSupport" EntityType="GalleryModel.ScanOrSupport" />
+          <EntitySet Name="sysdiagrams" EntityType="GalleryModel.sysdiagrams" />
           <EntitySet Name="UserInfo" EntityType="GalleryModel.UserInfo" />
           <EntitySet Name="UserRole" EntityType="GalleryModel.UserRole" />
           <EntitySet Name="VerifyRegister" EntityType="GalleryModel.VerifyRegister" />
           <AssociationSet Name="FK_COMMENT_REFERENCE_USERINFO" Association="GalleryModel.FK_COMMENT_REFERENCE_USERINFO">
             <End Role="UserInfo" EntitySet="UserInfo" />
             <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_Location" Association="GalleryModel.FK_Photo_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_PhotoCategory" Association="GalleryModel.FK_Photo_PhotoCategory">
+            <End Role="PhotoCategory" EntitySet="PhotoCategory" />
+            <End Role="Photo" EntitySet="Photo" />
           </AssociationSet>
           <AssociationSet Name="FK_PHOTO_REFERENCE_USERINFO" Association="GalleryModel.FK_PHOTO_REFERENCE_USERINFO">
             <End Role="UserInfo" EntitySet="UserInfo" />
@@ -340,9 +396,9 @@
             <PropertyRef Name="LikeId" />
           </Key>
           <Property Name="LikeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PhotoId" Type="Int32" />
-          <Property Name="UserId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DateTime" Type="DateTime" Precision="3" />
+          <Property Name="PhotoId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -352,6 +408,7 @@
           <Property Name="Province" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="City" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="District" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Photo" Relationship="GalleryModel.FK_Photo_Location" FromRole="Location" ToRole="Photo" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -376,6 +433,8 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int16" Nullable="false" />
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Location" Relationship="GalleryModel.FK_Photo_Location" FromRole="Photo" ToRole="Location" />
+          <NavigationProperty Name="PhotoCategory" Relationship="GalleryModel.FK_Photo_PhotoCategory" FromRole="Photo" ToRole="PhotoCategory" />
           <NavigationProperty Name="UserInfo" Relationship="GalleryModel.FK_PHOTO_REFERENCE_USERINFO" FromRole="Photo" ToRole="UserInfo" />
         </EntityType>
         <EntityType Name="PhotoCategory">
@@ -385,6 +444,7 @@
           <Property Name="PhotoCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Priority" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Photo" Relationship="GalleryModel.FK_Photo_PhotoCategory" FromRole="PhotoCategory" ToRole="Photo" />
         </EntityType>
         <EntityType Name="PhotoGallery">
           <Key>
@@ -428,6 +488,16 @@
           <Property Name="Type" Type="Int16" Nullable="false" />
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="UserInfo" Relationship="GalleryModel.FK_SCANORSU_REFERENCE_USERINFO" FromRole="ScanOrSupport" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="UserInfo">
           <Key>
@@ -478,6 +548,34 @@
             </Principal>
             <Dependent Role="Comment">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_Location">
+          <End Type="GalleryModel.Location" Role="Location" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GalleryModel.Photo" Role="Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_PhotoCategory">
+          <End Type="GalleryModel.PhotoCategory" Role="PhotoCategory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GalleryModel.Photo" Role="Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoCategory">
+              <PropertyRef Name="PhotoCategoryId" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="PhotoCategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -679,6 +777,17 @@
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
                 <ScalarProperty Name="ScanOrSupportId" ColumnName="ScanOrSupportId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GalleryModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

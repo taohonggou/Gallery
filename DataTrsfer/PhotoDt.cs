@@ -11,7 +11,7 @@ namespace DataTrsfer
         public int PhotoId { get; set; }
         public int? LocationId { get; set; }
         public int PhotoCategoryId { get; set; }
-        public int PhotoGalleryId { get; set; }
+        public int? PhotoGalleryId { get; set; }
         public string UserId { get; set; }
         public string ImgUrl { get; set; }
         public string Name { get; set; }
@@ -20,5 +20,35 @@ namespace DataTrsfer
         /// </summary>
         public short Status { get; set; }
         public System.DateTime DateTime { get; set; }
+
+        /// <summary>
+        /// 用户信息
+        /// </summary>
+        public UserInfoDt User { get; set; }
+
+        /// <summary>
+        /// 喜欢此照片的人数
+        /// </summary>
+        public int LikeCount { get; set; }
+
+        private List<CommentDt> listComment = new List<CommentDt>();
+
+        /// <summary>
+        /// 评论集合
+        /// </summary>
+        public List<CommentDt> ListComment { get { return listComment; } set {this.listComment=value ;} }
+
+        private List<LastPhotosDt> listLastPhotos = new List<LastPhotosDt>();
+        /// <summary>
+        /// 最近的图片集合
+        /// </summary>
+        public List<LastPhotosDt> ListLastPhotos { get { return listLastPhotos; } set { this.listLastPhotos = value; } }
     }
+
+    public class LastPhotosDt
+    {
+        public int PhotoId { get; set; }
+        public string ImgUrl { get; set; }
+    }
+    
 }

@@ -24,6 +24,8 @@ namespace EF
         public short Status { get; set; }
         public System.DateTime DateTime { get; set; }
     
+        public virtual Location Location { get; set; }
+        public virtual PhotoCategory PhotoCategory { get; set; }
         public virtual UserInfo UserInfo { get; set; }
     }
 }

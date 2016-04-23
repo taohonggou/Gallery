@@ -15,8 +15,8 @@ namespace EF
     public partial class Like
     {
         public int LikeId { get; set; }
-        public Nullable<int> PhotoId { get; set; }
+        public int PhotoId { get; set; }
         public string UserId { get; set; }
-        public Nullable<System.DateTime> DateTime { get; set; }
+        public System.DateTime DateTime { get; set; }
     }
 }

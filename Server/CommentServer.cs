@@ -42,7 +42,7 @@ namespace Server
         }
         public List<CommentDt> GetByPhotoId(int photoId)
         {
-            return TransferObject.ConvertObjectByEntity<Comment, CommentDt>(base.Select(o => o.PhotoId == photoId).ToList());
+            return TransferObject.ConvertObjectByEntity<Comment, CommentDt>(base.Select(o => o.PhotoId == photoId).OrderBy(o=>o.PhotoId).ToList());
         }
     }
 }
