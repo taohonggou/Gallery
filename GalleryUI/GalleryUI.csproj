@@ -165,6 +165,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LikeController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
+    <Compile Include="Controllers\PhotoGalleryController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UserCenterController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
@@ -325,6 +326,7 @@
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\Like\" />
+    <Folder Include="Views\PhotoGallery\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

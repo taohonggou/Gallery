@@ -36,7 +36,7 @@ namespace Server
         /// <param name="name"></param>
         /// <param name="userid"></param>
         /// <returns></returns>
-        public bool Get(string name,string userid)
+        public bool IsExist(string name,string userid)
         {
             return base.Select(o => o.Name == name&&o.UserId==userid).Any();
         }
