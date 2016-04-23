@@ -6,20 +6,21 @@ using System.Threading.Tasks;
 using DataTrsfer;
 using Tool;
 using EF;
+using System.Data.SqlClient;
 namespace Server
 {
     public class UserInfoServer : BaseService<UserInfo>
     {
-        public bool Add(UserInfoDt userDt,VerifyRegisterDt verifyDt)
+        public bool Add(UserInfoDt userDt, VerifyRegisterDt verifyDt)
         {
             base.Add<VerifyRegister>(TransferObject.ConvertObjectByEntity<VerifyRegisterDt, VerifyRegister>(verifyDt));
-            base.Add(TransferObject.ConvertObjectByEntity<UserInfoDt,UserInfo>(userDt));
+            base.Add(TransferObject.ConvertObjectByEntity<UserInfoDt, UserInfo>(userDt));
             return Save() > 0;
         }
 
         public UserInfoDt GetUserInfo(string userId)
         {
-            return TransferObject.ConvertObjectByEntity<UserInfo,UserInfoDt>( Select(o => o.UserId == userId).FirstOrDefault());
+            return TransferObject.ConvertObjectByEntity<UserInfo, UserInfoDt>(Select(o => o.UserId == userId).FirstOrDefault());
         }
 
 
@@ -38,11 +39,14 @@ namespace Server
         }
 
 
-        public bool Delete(int id)
+        public bool Delete(string id)
         {
-            base.Delete(id);
-            return Save() > 0;
+            return  ExecuteCUD("delete from UserInfo where userId=@userId", new SqlParameter("@userId", id))>0;
         }
 
+        public List<UserInfoDt> GetList()
+        {
+            return TransferObject.ConvertObjectByEntity<UserInfo, UserInfoDt>(base.Select(o => true).ToList());
+        }
     }
 }

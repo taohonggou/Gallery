@@ -126,5 +126,17 @@ namespace Manager
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
             return OutputHelper.GetOutputResponse(ResultCode.OK, u);
         }
+
+        public List<UserInfoDt> GetList()
+        {
+            return userServer.GetList();
+        }
+
+        public OutputModel Delete(string id)
+        {
+            if (userServer.Delete(id))
+                return OutputHelper.GetOutputResponse(ResultCode.OK);
+            return OutputHelper.GetOutputResponse(ResultCode.Error);
+        }
     }
 }

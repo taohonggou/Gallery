@@ -1,0 +1,78 @@
+﻿@model IEnumerable<DataTrsfer.UserInfoDt>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<script type="text/javascript">
+    function deleteUser(id) {
+        $.ajax({
+            type: "post",
+            url: "/AdminUserInfo/Delete",
+            data: { id: id },
+            success: function (o) {
+                if (o.StatusCode == 1) {
+                    layer.msg("成功");
+                    setTimeout(function () { location.reload(); }, 1000);
+
+                } else {
+                    layer.alert("失败");
+                }
+            }
+        })
+    }
+</script>
+
+<div class="page-header">
+    <h1>
+        用户管理
+        @*<a href="#" style="text-decoration:none;cursor:pointer;"><small>新建相册</small></a>*@
+    </h1>
+</div>
+<div style="width:100%;">
+    <table class=" table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeadUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTime)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HeadUrl)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </td>
+                <td>
+                    <a href="javascript:;" onclick="deleteUser('@item.UserId')">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
