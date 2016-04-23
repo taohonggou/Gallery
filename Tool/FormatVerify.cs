@@ -95,5 +95,17 @@ namespace Tool
             }
             return false;
         }
+
+        
+        public static bool IsNullOrWhiteSpace(params string[] param)
+        {
+            foreach (string item in param)
+            {
+                if (string.IsNullOrWhiteSpace(item))
+                    return true;
+            }
+            return false;
+        }
+
     }
 }

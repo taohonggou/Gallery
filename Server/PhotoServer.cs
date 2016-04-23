@@ -40,6 +40,9 @@ namespace Server
             return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(Select( o => o.PhotoId == photoId).FirstOrDefault());
         }
 
-
+        public bool IsExist(int photoId)
+        {
+            return Select(o => o.PhotoId == photoId).Any();
+        }
     }
 }

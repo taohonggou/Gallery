@@ -21,5 +21,15 @@ namespace Server
             return  Select(o => o.PhotoId == photoId).Count();
         }
 
+        public bool Add(LikeDt like)
+        {
+            Add(TransferObject.ConvertObjectByEntity<LikeDt, Like>(like));
+            return Save() > 0;
+        }
+
+        public bool IsExist(string userId,int photoId)
+        {
+            return Select(o => o.UserId == userId && o.PhotoId == photoId).Any();
+        }
     }
 }

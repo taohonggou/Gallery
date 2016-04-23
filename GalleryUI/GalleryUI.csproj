@@ -163,8 +163,11 @@
     <Compile Include="Controllers\Admin\AdminHomeController.cs" />
     <Compile Include="Controllers\Admin\AdminUserInfoController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LikeController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
+    <Compile Include="Controllers\PhotoGalleryController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UserCenterController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
@@ -326,6 +329,9 @@
     <Folder Include="Upload\Images\" />
     <Folder Include="Views\AdminBase\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Comment\" />
+    <Folder Include="Views\Like\" />
+    <Folder Include="Views\PhotoGallery\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

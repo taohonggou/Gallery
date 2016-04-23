@@ -44,5 +44,10 @@ namespace Server
         {
             return TransferObject.ConvertObjectByEntity<Comment, CommentDt>(base.Select(o => o.PhotoId == photoId).OrderBy(o=>o.PhotoId).ToList());
         }
+
+        public bool IsExist(int commentId)
+        {
+            return Select(o => o.CommentId == commentId).Any();
+        }
     }
 }

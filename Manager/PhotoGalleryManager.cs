@@ -11,14 +11,25 @@ namespace Manager
 {
     public class PhotoGalleryManager
     {
-        private PhotoGalleryServer Server = ObjectContainer.GetInstance<PhotoGalleryServer>();
-        public OutputModel Add(PhotoGalleryDt photoGallery)
+        private PhotoGalleryServer server = new  PhotoGalleryServer();
+        public OutputModel Add(string  name,string userId)
         {
-            if (photoGallery == null)
+            //if (photoGallery == null)
+            //    return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
+            //if (Server.Get(photoGallery.Name, photoGallery.UserId) != null)
+            //    return OutputHelper.GetOutputResponse(ResultCode.DataExisted);
+            //if (Server.Add(photoGallery))
+            //    return OutputHelper.GetOutputResponse(ResultCode.OK);
+            if (FormatVerify.IsNullOrWhiteSpace(name, userId))
                 return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
-            if (Server.Get(photoGallery.Name, photoGallery.UserId) != null)
-                return OutputHelper.GetOutputResponse(ResultCode.DataExisted);
-            if (Server.Add(photoGallery))
+            if( server.IsExist(name, userId))
+                return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied,"已经有同名相册");
+            PhotoGalleryDt gallery = new PhotoGalleryDt {
+            DateTime=DateTime.Now,
+            Name=name,
+            UserId=userId
+            };
+            if (server.Add(gallery))
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
             return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
@@ -26,20 +37,20 @@ namespace Manager
         {
             if (photoGallery == null)
                 return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
-            if(Server.Update(photoGallery))
+            if(server.Update(photoGallery))
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
             return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
         public OutputModel Delete(int id)
         {
-            if(Server.Delete(id))
+            if(server.Delete(id))
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
             return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
 
         public OutputModel Get(int id)
         {
-            PhotoGalleryDt p = Server.Get(id);
+            PhotoGalleryDt p = server.Get(id);
             if(p==null)
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
             return OutputHelper.GetOutputResponse(ResultCode.OK,p);
@@ -64,14 +75,14 @@ namespace Manager
         /// <returns></returns>
         public List<PhotoGalleryDt> GetList(string userid)
         {
-            return  Server.GetList(userid);
+            return  server.GetList(userid);
             //if (list == null)
             //    return OutputHelper.GetOutputResponse(ResultCode.NoData);
             //return OutputHelper.GetOutputResponse(ResultCode.OK, list);
         }
         public OutputModel GetList()
         {
-            List<PhotoGalleryDt> list = Server.GetList();
+            List<PhotoGalleryDt> list = server.GetList();
             if (list.Count == 0)
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
             return OutputHelper.GetOutputResponse(ResultCode.OK, list);
