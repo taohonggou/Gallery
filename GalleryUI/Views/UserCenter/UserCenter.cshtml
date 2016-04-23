@@ -24,7 +24,7 @@
 
     div.polaroid {
         position: relative;
-        width: 17.8%;
+        width: 21.8%;
         background-color: white;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         margin: 0px 12.5px 25px 12.5px;
@@ -46,7 +46,41 @@
 
 <div class="container" style="min-height:633px;">
     <h2>用户中心</h2>
-    <div>
+    <div class="panel-group pull-left" id="accordion" style="position:absolute;width:10%;min-width:50px;">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseOne">
+                        用户中心
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div>
+                    <a href="#" class="list-group-item">个人资料</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseTwo">
+                        照片中心
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div>
+                    <a href="#" class="list-group-item">我的相册</a>
+                    <a href="#" class="list-group-item">我的相片</a>
+                    <a href="#" class="list-group-item">喜欢</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pull-right" style="width:82%;">
         
             @{
                 List<PhotoGalleryDt> list = ViewBag.ListGallery;
@@ -85,5 +119,6 @@
             }
         @*</ul>*@
     </div>
+    <div class="clear"></div>
 </div>
 
