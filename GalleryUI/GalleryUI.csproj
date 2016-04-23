@@ -238,6 +238,7 @@
     <Content Include="images\t2.jpg" />
     <Content Include="images\t3.jpg" />
     <Content Include="images\t4.jpg" />
+    <Content Include="images\touxiang.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\Gallery.pubxml" />
