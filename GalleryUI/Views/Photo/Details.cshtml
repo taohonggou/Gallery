@@ -2,6 +2,119 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script>
+    function image() {
+        var height = $(".imagess").height;
+        var width = $(".imagess").width;
+        if (height >= width) {
+            $(".imagess").attr("height", "100%");
+        }
+        if (height < width) {
+            $(".imagess").attr("width", "100%");
+        }
+    }
+</script>
+<style>
+    .main {
+        width: 60%;
+        margin: auto;
+    }
 
-<h2>Details</h2>
+    .detial {
+        margin:auto;
+        width: 99%;
+    }
+    
+
+    .imgs img {
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .imgs div {
+        width: 48%;
+        height: 7em;
+        display: inline-block;
+        margin-bottom: 2px;
+        overflow: hidden;
+    }
+    .mainborder {
+        padding: 4px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-top: 1em;
+    }
+    .imgs {
+        position: relative;
+    }
+</style>
+
+<div class="main">
+    <h2>图片名称</h2>
+    <div class="col-lg-9">
+        <div class="detial">
+            <img src="/Upload/Images/2758874a528a4578a805b084ddac9407.jpg" class="img-thumbnail" style="margin:auto;" />
+            <div class="mainborder" style="margin-top:1em;">
+                <a style="cursor:pointer;margin-left:50%;">赞</a>(1)
+            </div>
+        </div>
+        <div class="detial mainborder">
+            <div class="media mainborder">
+                <a class="pull-left" href="#">
+                    <img class="media-object" src="~/images/touxiang.png" style="width:50px;height:50px;" alt="作者">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">作者姓名<a style="position: relative; float: right; font-size: 10px; cursor: pointer;">回复</a></h4>
+                    这张图很有逼格。这张图很有逼格。
+                    <div class="media mainborder">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src="~/images/touxiang.png" style="width:50px;height:50px;"
+                                 alt="作者">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">作者姓名<a style="position: relative; float: right; font-size: 10px; cursor: pointer;">回复</a></h4>
+                            这张图很有逼格。这张图很有逼格。
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="media mainborder">
+                <a class="pull-left" href="#">
+                    <img class="media-object" src="~/images/touxiang.png" style="width:50px;height:50px;"
+                         alt="作者">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">作者姓名<a style="position: relative; float: right; font-size: 10px; cursor: pointer;">回复</a></h4>
+                    这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。这张图很有逼格。
+                </div>
+            </div>
+            <div class="media mainborder">
+                <a class="pull-left" href="#">
+                    <img class="media-object" src="~/images/touxiang.png" style="width:50px;height:50px;"
+                         alt="作者">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">作者姓名<a style="position: relative; float: right; font-size: 10px; cursor: pointer;">回复</a></h4>
+                    这张图很有逼格。这张图很有逼格。
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3" style="padding: 4px; border: 1px solid #ddd; border-radius: 4px;">
+        <div style="margin-bottom:1em;margin-top:1em;"><span>姓名姓名姓名</span></div>
+        <div class="imgs">
+            <a href="#"><div><img src="~/Upload/Images/2237ea4761354b1587b98788396b1c72.PNG" /></div></a>
+            <div><img src="~/Upload/Images/2758874a528a4578a805b084ddac9407.jpg"/></div>
+            <div><img src="~/Upload/Images/55e8befe2add4e09bddf15e42f4ace09.jpg"/></div>
+            <div><img src="~/Upload/Images/1688fc640d9e4705a23df5bdb6c7c3de.jpg" /></div>
+            <div><img src="~/Upload/Images/55e8befe2add4e09bddf15e42f4ace09.jpg" /></div>
+            <div><img src="~/Upload/Images/2237ea4761354b1587b98788396b1c72.PNG" /></div>
+            <div><img src="~/Upload/Images/2758874a528a4578a805b084ddac9407.jpg"/></div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+    <div class="clear"></div>
+</div>
+
 
