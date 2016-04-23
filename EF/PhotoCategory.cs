@@ -14,15 +14,8 @@ namespace EF
     
     public partial class PhotoCategory
     {
-        public PhotoCategory()
-        {
-            this.Photo = new HashSet<Photo>();
-        }
-    
         public int PhotoCategoryId { get; set; }
         public string Name { get; set; }
         public int Priority { get; set; }
-    
-        public virtual ICollection<Photo> Photo { get; set; }
     }
 }

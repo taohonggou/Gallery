@@ -14,16 +14,9 @@ namespace EF
     
     public partial class Location
     {
-        public Location()
-        {
-            this.Photo = new HashSet<Photo>();
-        }
-    
         public int LocationId { get; set; }
         public string Province { get; set; }
         public string City { get; set; }
         public string District { get; set; }
-    
-        public virtual ICollection<Photo> Photo { get; set; }
     }
 }

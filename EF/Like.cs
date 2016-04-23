@@ -18,8 +18,5 @@ namespace EF
         public Nullable<int> PhotoId { get; set; }
         public string UserId { get; set; }
         public Nullable<System.DateTime> DateTime { get; set; }
-    
-        public virtual Photo Photo { get; set; }
-        public virtual UserInfo UserInfo { get; set; }
     }
 }

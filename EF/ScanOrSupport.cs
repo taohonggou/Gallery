@@ -20,7 +20,6 @@ namespace EF
         public short Type { get; set; }
         public System.DateTime DateTime { get; set; }
     
-        public virtual Photo Photo { get; set; }
         public virtual UserInfo UserInfo { get; set; }
     }
 }

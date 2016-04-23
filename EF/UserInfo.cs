@@ -17,7 +17,6 @@ namespace EF
         public UserInfo()
         {
             this.Comment = new HashSet<Comment>();
-            this.Like = new HashSet<Like>();
             this.Photo = new HashSet<Photo>();
             this.PhotoGallery = new HashSet<PhotoGallery>();
             this.ScanOrSupport = new HashSet<ScanOrSupport>();
@@ -33,7 +32,6 @@ namespace EF
         public System.DateTime DateTime { get; set; }
     
         public virtual ICollection<Comment> Comment { get; set; }
-        public virtual ICollection<Like> Like { get; set; }
         public virtual ICollection<Photo> Photo { get; set; }
         public virtual ICollection<PhotoGallery> PhotoGallery { get; set; }
         public virtual ICollection<ScanOrSupport> ScanOrSupport { get; set; }
