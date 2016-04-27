@@ -4,7 +4,7 @@
 }
 <script src="~/Scripts/Tool.js"></script>
 <script>
-    var photoId = getParamValue('photoId');
+    var photoId = getParamValue('photoId');    
     $(function () {
         load();
     });
@@ -49,7 +49,7 @@
     function initLastImg(json) {
         var lastImg = '';
         $.each(json, function () {
-            lastImg += '<a href="/photo/details?photoId=' + this.PhotoId + '"><div><img src="' + this.ImgUrl + '" /></div></a>';
+            lastImg += '<a href="/photo/details?photoId=' + this.PhotoId + '"><div><img style="width:99%;height:99%;margin:1%;" src="' + this.ImgUrl + '" /></div></a>';
         });
         $('#lastPhotos a').remove();
         $('#lastPhotos').prepend(lastImg);
@@ -128,10 +128,9 @@
 
     .imgs div {
         width: 48%;
-        height: 7em;
+        height:8em;
         display: inline-block;
-        margin-bottom: 2px;
-        overflow: hidden;
+        margin:1%;
     }
     .mainborder {
         padding: 4px;
@@ -187,9 +186,9 @@
     </div>
     <div class="col-lg-3" style="padding: 4px; border: 1px solid #ddd; border-radius: 4px;">
         <div style="margin-bottom:1em;margin-top:1em;"><span id="userName"></span></div>
-        <div class="imgs" id="lastPhotos">
+        <div class="imgs polaroid" id="lastPhotos">
+
            
-            <div class="clear"></div>
         </div>
 
     </div>
