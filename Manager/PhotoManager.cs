@@ -41,6 +41,8 @@ namespace Manager
             photo.ListLastPhotos = server.GetList(photo.UserId, 6);
             //获取评论列表
             photo.ListComment=new CommentManager().GetListComment(iPhotoId);
+            //是否收藏  是否赞过
+
             return OutputHelper.GetOutputResponse(ResultCode.OK, photo);
         }
 

@@ -17,8 +17,10 @@ namespace GalleryUI.Controllers
             return View();
         }
 
-        public ActionResult Details()
+        public ActionResult Details(string photoId)
         {
+            if (string.IsNullOrEmpty(photoId))
+                return RedirectHome();
             return  View();
         }
 

@@ -5,8 +5,6 @@
 <script src="~/Scripts/Tool.js"></script>
 <script>
     var photoId = getParamValue('photoId');
-    if (!photoId)
-        window.location.href = "/";
     $(function () {
         load();
     });
@@ -19,7 +17,7 @@
                 if (data.StatusCode === 1) {
                     init(data.Data);
                 } else {
-                    return layer.alert(data.Message, { icon: 3, skin: 'layer-ext-moon' });
+                    layer.msg(data.Message, { time:2000 });
                 }
             }
         });
@@ -89,13 +87,6 @@
             data: { photoId: photoId },
             success: function (data) {
                 layer.msg(data.Message);
-                //if(data.StatusCode==1)
-                //{
-                //    setSupCount(data.Data.Count);
-                //}else
-                //{
-                //    layer.msg(data.Message);
-                //}
             }
         });
     }
@@ -160,7 +151,10 @@
             <img src="" id="imgRul" class="img-thumbnail" style="margin:auto;" />
             <div class="mainborder" style="margin-top:1em;">
                 <a style="cursor:pointer;margin-left:50%;" onclick="addLike()">喜欢</a>
-                <a style="cursor:pointer;margin-left:50%;" onclick="support()">赞<label id="supCount">0</label></a>
+                <a style="cursor:pointer;margin-left:50%;" onclick="support()">
+                
+                赞
+                <label id="supCount">0</label></a>
             </div>
         </div>
         <div class="detial mainborder" id="comment">
