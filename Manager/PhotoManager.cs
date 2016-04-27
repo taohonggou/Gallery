@@ -7,6 +7,7 @@ using Server;
 using DataTrsfer;
 using Tool;
 
+
 namespace Manager
 {
     public class PhotoManager
@@ -42,7 +43,12 @@ namespace Manager
             //获取评论列表
             photo.ListComment=new CommentManager().GetListComment(iPhotoId);
             //是否收藏  是否赞过
-
+            UserInfoDt user= System.Web.HttpContext.Current.Session["user"] as UserInfoDt;
+            if(user!=null)
+            {
+                photo.IsCollection=new LikeServer().IsExist(user.UserId,iPhotoId);
+                photo.IsSupport = new ScanOrSupportServer().IsExist(user.UserId, iPhotoId,2);
+            }
             return OutputHelper.GetOutputResponse(ResultCode.OK, photo);
         }
 

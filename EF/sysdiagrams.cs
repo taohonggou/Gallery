@@ -12,16 +12,12 @@ namespace EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Comment
+    public partial class sysdiagrams
     {
-        public int CommentId { get; set; }
-        public string UserId { get; set; }
-        public int PhotoId { get; set; }
-        public int UpId { get; set; }
-        public int RootId { get; set; }
-        public string Content { get; set; }
-        public System.DateTime DateTime { get; set; }
-    
-        public virtual UserInfo UserInfo { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

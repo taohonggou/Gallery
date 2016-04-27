@@ -12,6 +12,7 @@ namespace DataTrsfer
         public string UserId { get; set; }
         public int PhotoId { get; set; }
         public int UpId { get; set; }
+        public int RootId { get; set; }
         public string Content { get; set; }
         public System.DateTime DateTime { get; set; }
 
@@ -19,5 +20,6 @@ namespace DataTrsfer
        /// 评论人的信息
        /// </summary>
         public UserInfoDt User { get; set; }
+
     }
 }

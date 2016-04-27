@@ -43,6 +43,16 @@ namespace DataTrsfer
         /// 最近的图片集合
         /// </summary>
         public List<LastPhotosDt> ListLastPhotos { get { return listLastPhotos; } set { this.listLastPhotos = value; } }
+
+        /// <summary>
+        /// 是否收藏
+        /// </summary>
+        public bool IsCollection { get; set; }
+
+        /// <summary>
+        /// 是否点赞
+        /// </summary>
+        public bool IsSupport { get; set; }
     }
 
     public class LastPhotosDt

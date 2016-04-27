@@ -8,6 +8,9 @@ using Tool;
 
 namespace GalleryUI.Controllers
 {
+    /// <summary>
+    /// 收藏控制器
+    /// </summary>
     public class LikeController : BaseController
     {
         [HttpPost]
