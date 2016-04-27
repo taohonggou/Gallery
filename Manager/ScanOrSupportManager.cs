@@ -20,12 +20,9 @@ namespace Manager
             if(!new PhotoServer().IsExist(iPhotoId))
                 return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied);
 
-<<<<<<< HEAD
+
             if(Server.IsExist(userId,iPhotoId,2))
-=======
-            if(Server.IsExist(userId,iPhotoId))
->>>>>>> 570db337abf07c7e0e9fda227f589e6f50245b19
-                return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied,"您已经赞过此照片");
+                return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied, "您已经赞过此照片");
             ScanOrSupportDt support = new ScanOrSupportDt { 
             DateTime=DateTime.Now,
             PhotoId = iPhotoId,

@@ -222,6 +222,8 @@
     <Content Include="images\hover-img.png" />
     <Content Include="images\icons.svg" />
     <Content Include="images\cover.png" />
+    <Content Include="images\like.png" />
+    <Content Include="images\liked.png" />
     <Content Include="images\mo.jpg" />
     <Content Include="images\p1.jpg" />
     <Content Include="images\p10.jpg" />
@@ -239,6 +241,8 @@
     <Content Include="images\plus.png" />
     <Content Include="images\port-line.png" />
     <Content Include="images\port-play.png" />
+    <Content Include="images\praise.png" />
+    <Content Include="images\praised.png" />
     <Content Include="images\scroller.png" />
     <Content Include="images\search.png" />
     <Content Include="images\t1.jpg" />

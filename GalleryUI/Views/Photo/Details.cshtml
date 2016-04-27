@@ -4,7 +4,7 @@
 }
 <script src="~/Scripts/Tool.js"></script>
 <script>
-    var photoId = getParamValue('photoId');    
+    var photoId = getParamValue('photoId');
     $(function () {
         load();
     });
@@ -17,13 +17,14 @@
                 if (data.StatusCode === 1) {
                     init(data.Data);
                 } else {
-                    layer.msg(data.Message, { time:2000 });
+                    layer.msg(data.Message, { time: 2000 });
                 }
             }
         });
     }
 
     function init(json) {
+        isCollectionAndSupport(json.IsCollection, json.IsSupport);
         //alert(json.Name);
         $('#photoName').text(json.Name);
         $('#imgRul').attr('src', json.ImgUrl);
@@ -31,6 +32,13 @@
         $('#userName').text(json.User.Name);
         initLastImg(json.ListLastPhotos);
         initComment(json.ListComment)
+    }
+
+    function isCollectionAndSupport(isCollection,isSupport) {
+        if (isCollection)
+            $('#imgCollection').attr('src', '/images/liked.png');
+        if (isSupport)
+            $('#imgSupport').attr('src','/images/praised.png');
     }
 
     function setSupCount(count) {
@@ -42,10 +50,10 @@
         $.each(json, function () {
             comment += '<div class="media mainborder"><a class="pull-left" href="#"><img class="media-object" src="/images/touxiang.png" style="width:50px;height:50px;" alt="作者"></a><div class="media-body"><h4 class="media-heading"><lable>' + this.User.Name + '</lable><a style="position: relative; float: right; font-size: 10px; cursor: pointer;">回复</a></h4>' + this.Content + '</div></div>';
         });
-        
+
         $('#comment').html(comment);
     }
-    
+
     function initLastImg(json) {
         var lastImg = '';
         $.each(json, function () {
@@ -59,8 +67,7 @@
 
     function submit() {
         var content = $('#content').val();
-        if(!content)
-        {
+        if (!content) {
             layer.msg('评论内容不能为空');
             $('#content').focus();
             return;
@@ -70,12 +77,11 @@
             type: 'post',
             data: { content: content, photoId: photoId, upId: 0 },
             success: function (data) {
-                if (data.StatusCode == 1)
-                {
+                if (data.StatusCode == 1) {
                     load();
                     $('#content').val('');
                 } else
-                layer.msg(data.Message);
+                    layer.msg(data.Message);
             }
         });
     }
@@ -97,11 +103,9 @@
             type: 'post',
             data: { photoId: photoId },
             success: function (data) {
-                if(data.StatusCode==1)
-                {
+                if (data.StatusCode == 1) {
                     setSupCount(data.Data.SupportCount);
-                }else
-                {
+                } else {
                     layer.msg(data.Message);
                 }
             }
@@ -116,10 +120,10 @@
     }
 
     .detial {
-        margin:auto;
+        margin: auto;
         width: 99%;
     }
-    
+
 
     .imgs img {
         display: inline-block;
@@ -128,16 +132,18 @@
 
     .imgs div {
         width: 48%;
-        height:8em;
+        height: 8em;
         display: inline-block;
-        margin:1%;
+        margin: 1%;
     }
+
     .mainborder {
         padding: 4px;
         border: 1px solid #ddd;
         border-radius: 4px;
         margin-top: 1em;
     }
+
     .imgs {
         position: relative;
     }
@@ -149,34 +155,36 @@
         <div class="detial">
             <img src="" id="imgRul" class="img-thumbnail" style="margin:auto;" />
             <div class="mainborder" style="margin-top:1em;">
-                <a style="cursor:pointer;margin-left:50%;" onclick="addLike()">喜欢</a>
-                <a style="cursor:pointer;margin-left:50%;" onclick="support()">
-                
-                赞
-                <label id="supCount">0</label></a>
+                <a style="cursor: pointer; margin-left: 40%; text-decoration: none;" onclick="addLike()">
+                    <span>收藏</span>
+                    <img alt="收藏" id="imgCollection" width="20" height="20" src="~/images/like.png" />
+                </a>
+                <a style="cursor: pointer; text-decoration: none;float:right;margin-right:40%;" onclick="support()">
+                    <img src="~/images/praise.png" id="imgSupport" width="23" height="23" alt="赞" /> <span id="supCount">0</span>
+                </a>
             </div>
         </div>
         <div class="detial mainborder" id="comment">
             @*<div class="media mainborder">
-                <a class="pull-left" href="#">
-                    <img class="media-object" src="~/images/touxiang.png" style="width:50px;height:50px;" alt="作者">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading">作者姓名<a style="position: relative; float: right; font-size: 10px; cursor: pointer;">回复</a></h4>
-                    这张图很有逼格。这张图很有逼格。
-                    <div class="media mainborder">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="~/images/touxiang.png" style="width:50px;height:50px;"
-                                 alt="作者">
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading">作者姓名<a style="position: relative; float: right; font-size: 10px; cursor: pointer;">回复</a></h4>
-                            这张图很有逼格。这张图很有逼格。
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="~/images/touxiang.png" style="width:50px;height:50px;" alt="作者">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">作者姓名<a style="position: relative; float: right; font-size: 10px; cursor: pointer;">回复</a></h4>
+                        这张图很有逼格。这张图很有逼格。
+                        <div class="media mainborder">
+                            <a class="pull-left" href="#">
+                                <img class="media-object" src="~/images/touxiang.png" style="width:50px;height:50px;"
+                                     alt="作者">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">作者姓名<a style="position: relative; float: right; font-size: 10px; cursor: pointer;">回复</a></h4>
+                                这张图很有逼格。这张图很有逼格。
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>*@
-            
+                </div>*@
+
         </div>
         <div class="detial mainborder">
             <textarea class="mainborder" id="content" style="margin:auto;width:100%;"></textarea>
@@ -188,7 +196,6 @@
         <div style="margin-bottom:1em;margin-top:1em;"><span id="userName"></span></div>
         <div class="imgs polaroid" id="lastPhotos">
 
-           
         </div>
 
     </div>
