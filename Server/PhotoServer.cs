@@ -57,6 +57,11 @@ namespace Server
             return Select(o => o.PhotoId == photoId).Any();
         }
 
+        public List<PhotoDt> GetPageOrderByDateTime(int pageIndex,int pageSize,out int rowCount)
+        {
+            List<Photo> list = SelectDesc(pageIndex, pageSize, o => true, o => o.DateTime, out rowCount).ToList();
+            return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(list);
+        }
 
     }
 }

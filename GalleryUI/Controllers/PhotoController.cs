@@ -38,5 +38,10 @@ namespace GalleryUI.Controllers
             
 
         }
+
+        public ActionResult Recent()
+        {
+            return View();
+        }
 	}
 }

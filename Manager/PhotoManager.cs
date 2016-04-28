@@ -64,5 +64,17 @@ namespace Manager
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
             return OutputHelper.GetOutputResponse(ResultCode.OK,list);
         }
+
+        public OutputModel GetPageOrderByDateTime(string pageIndex,string pageSize)
+        {
+            int index, size,rowCount,pageCount;
+            FormatVerify.PageCheck(pageIndex, pageSize, out index, out size);
+            List<PhotoDt> list= server.GetPageOrderByDateTime(index, size, out rowCount);
+            if (list.Count == 0)
+                return OutputHelper.GetOutputResponse(ResultCode.NoData);
+            pageCount =Convert.ToInt32( Math.Ceiling(rowCount * 1.0 / size));
+
+            return OutputHelper.GetOutputResponse(ResultCode.OK, new { List = list, PageCount = pageCount });
+        }
     }
 }
