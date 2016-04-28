@@ -36,8 +36,16 @@
     }
 
     function isCollectionAndSupport(isCollection,isSupport) {
+        showCollection(isCollection);
+        showSupport(isSupport);
+    }
+
+    function showCollection(isCollection) {
         if (isCollection)
             $('#imgCollection').attr('src', '/images/liked.png');
+    }
+
+    function showSupport(isSupport) {
         if (isSupport)
             $('#imgSupport').attr('src','/images/praised.png');
     }
@@ -46,16 +54,11 @@
         $('#supCount').text(count);
     }
 
-    //function initComment(json) {
-    //    var comment = '';
-    //    $.each(json, function () {
-    //        comment += '<div class="media mainborder"><a class="pull-left" href="#"><img class="media-object" src="/images/touxiang.png" style="width:50px;height:50px;" alt="作者"></a><div class="media-body"><h4 class="media-heading"><lable>' + this.User.Name + '</lable><a style="position: relative; float: right; font-size: 10px; cursor: pointer;">回复</a></h4>' + this.Content + '</div></div>';
-    //    });
-
-    //    $('#comment').html(comment);
-    //}
-
     function initComment(json) {
+        if (json.length > 0)
+        {
+            $('#comment').css('display', 'block');
+        }
         var comment = '';
         var headImg = '';
         $.each(json, function (index, value) {
@@ -135,6 +138,8 @@
             data: { photoId: photoId },
             success: function (data) {
                 layer.msg(data.Message);
+                if (data.StatusCode == 1)
+                    showCollection(true);
             }
         });
     }
@@ -147,6 +152,7 @@
             success: function (data) {
                 if (data.StatusCode == 1) {
                     setSupCount(data.Data.SupportCount);
+                    showSupport(true);
                 } else {
                     layer.msg(data.Message);
                 }
@@ -204,7 +210,7 @@
     <h2 id="photoName"></h2>
     <div class="col-lg-9">
         <div class="detial">
-            <img src="" id="imgRul" class="img-thumbnail" style="display: block; margin: auto;" />
+            <img src="" id="imgRul" class="img-thumbnail" style="display:none;margin:auto;" />
             <div class="mainborder" style="margin-top:1em;">
                 <a style="cursor: pointer; margin-left: 40%; text-decoration: none;" onclick="addLike()">
                     <span>收藏</span>
@@ -215,7 +221,7 @@
                 </a>
             </div>
         </div>
-        <div class="detial mainborder" id="comment">
+        <div class="detial mainborder" id="comment" style="display:none;">
             @*<div class="media mainborder">
                     <a class="pull-left" href="#">
                         <img class="media-object" src="~/images/touxiang.png" style="width:50px;height:50px;" alt="作者">
