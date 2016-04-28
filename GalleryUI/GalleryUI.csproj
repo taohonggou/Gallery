@@ -160,12 +160,16 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Admin\AdminBaseController.cs" />
+    <Compile Include="Controllers\Admin\AdminCommentController.cs" />
     <Compile Include="Controllers\Admin\AdminHomeController.cs" />
+    <Compile Include="Controllers\Admin\AdminPhotoCategoryController.cs" />
+    <Compile Include="Controllers\Admin\AdminPhotoController.cs" />
     <Compile Include="Controllers\Admin\AdminUserInfoController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LikeController.cs" />
+    <Compile Include="Controllers\PhotoCategoryController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\PhotoGalleryController.cs" />
     <Compile Include="Controllers\ScanOrSupportController.cs" />
@@ -191,6 +195,7 @@
     <Content Include="Content\layout\style.css" />
     <Content Include="Content\login\normalize.css" />
     <Content Include="Content\login\style.css" />
+    <Content Include="Content\pager.css" />
     <Content Include="Content\usercenter.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -286,6 +291,7 @@
     <Content Include="Scripts\masonry.pkgd.js" />
     <Content Include="Scripts\md5.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\page.js" />
     <Content Include="Scripts\plupload\Moxie.swf" />
     <Content Include="Scripts\plupload\Moxie.xap" />
     <Content Include="Scripts\plupload\plupload.full.min.js" />
@@ -346,6 +352,9 @@
     <Content Include="Views\AdminHome\Index.cshtml" />
     <Content Include="Views\AdminUserInfo\Index.cshtml" />
     <Content Include="Views\Photo\Recent.cshtml" />
+    <Content Include="Views\AdminPhoto\Index.cshtml" />
+    <Content Include="Views\AdminPhotoCategory\Index.cshtml" />
+    <Content Include="Views\AdminComment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -353,6 +362,7 @@
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\Like\" />
+    <Folder Include="Views\PhotoCategory\" />
     <Folder Include="Views\PhotoGallery\" />
     <Folder Include="Views\ScanOrSupport\" />
   </ItemGroup>

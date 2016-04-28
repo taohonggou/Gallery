@@ -20,13 +20,13 @@ namespace Server
         public List<PhotoDt> GetList(string userId)
         {
             List<Photo> list = Select(o => o.UserId == userId).OrderByDescending(o => o.DateTime).ToList();
-            return TransferObject.ConvertObjectByEntity<Photo,PhotoDt>(list);
+            return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(list);
         }
 
-        internal List<PhotoDt> GetList(string userId,IQueryable<Like> queryLike)
+        internal List<PhotoDt> GetList(string userId, IQueryable<Like> queryLike)
         {
             IQueryable<int> photoIds = queryLike.Select(o => o.PhotoId);
-            return TransferObject.ConvertObjectByEntity<Photo,PhotoDt>( Select(o => photoIds.Contains(o.PhotoId)).ToList());
+            return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(Select(o => photoIds.Contains(o.PhotoId)).ToList());
         }
 
         /// <summary>
@@ -35,13 +35,13 @@ namespace Server
         /// <param name="userId"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public List<LastPhotosDt> GetList(string userId,int count)
+        public List<LastPhotosDt> GetList(string userId, int count)
         {
-            List<Photo> list= Select(o => o.UserId == userId).OrderByDescending(o => o.DateTime).Take(count).ToList();
+            List<Photo> list = Select(o => o.UserId == userId).OrderByDescending(o => o.DateTime).Take(count).ToList();
             return TransferObject.ConvertObjectByEntity<Photo, LastPhotosDt>(list);
         }
 
-        public List<PhotoDt>  GetListByGallery(string userId,int galleryId)
+        public List<PhotoDt> GetListByGallery(string userId, int galleryId)
         {
             List<Photo> list = Select(o => o.UserId == userId && o.PhotoGalleryId == galleryId).ToList();
             return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(list);
@@ -49,7 +49,7 @@ namespace Server
 
         public PhotoDt Get(int photoId)
         {
-            return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(Select( o => o.PhotoId == photoId).FirstOrDefault());
+            return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(Select(o => o.PhotoId == photoId).FirstOrDefault());
         }
 
         public bool IsExist(int photoId)
@@ -57,11 +57,66 @@ namespace Server
             return Select(o => o.PhotoId == photoId).Any();
         }
 
-        public List<PhotoDt> GetPageOrderByDateTime(int pageIndex,int pageSize,out int rowCount)
+        public List<PhotoDt> GetPageOrderByDateTime(int pageIndex, int pageSize, out int rowCount)
         {
             List<Photo> list = SelectDesc(pageIndex, pageSize, o => true, o => o.DateTime, out rowCount).ToList();
             return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(list);
         }
+        public List<PhotoDt> GetPage(int pageindex, int pagesize, string name, string author, string category, out  int rowcount)
+        {
+            List<Photo> list = new List<Photo>();
+            int c=0;
+            rowcount = 0;
+            if (!string.IsNullOrWhiteSpace(category))
+            {
+                if (!int.TryParse(category, out c))
+                    return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(list);
+            }
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                if (!string.IsNullOrWhiteSpace(author))
+                {
+                    if (!string.IsNullOrWhiteSpace(category))
+                        list = SelectDesc(pageindex, pagesize, o => o.Name.Contains(name) && o.UserId.Contains(author) && o.PhotoCategoryId == c, o => o.DateTime, out rowcount).ToList();
+                    else
+                        list = SelectDesc(pageindex, pagesize, o => o.Name.Contains(name) && o.UserId.Contains(author), o => o.DateTime, out rowcount).ToList();
+                }
+                else
+                {
+                    if (!string.IsNullOrWhiteSpace(category))
+                        list = SelectDesc(pageindex, pagesize, o => o.Name.Contains(name) && o.PhotoCategoryId == c, o => o.DateTime, out rowcount).ToList();
+                    else
+                        list = SelectDesc(pageindex, pagesize, o => o.Name.Contains(name), o => o.DateTime, out rowcount).ToList();
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(author))
+                {
+                    if (!string.IsNullOrWhiteSpace(category))
+                    {
+                        list = SelectDesc(pageindex, pagesize, o => o.UserId.Contains(author) && o.PhotoCategoryId == c, o => o.DateTime, out rowcount).ToList();
+                    }
+                    else
+                    {
 
+                        list = SelectDesc(pageindex, pagesize, o => o.UserId.Contains(author), o => o.DateTime, out rowcount).ToList();
+                    }
+                }
+                else
+                {
+                    if (!string.IsNullOrWhiteSpace(category))
+                        list = SelectDesc(pageindex, pagesize, o => o.PhotoCategoryId == c, o => o.DateTime, out rowcount).ToList();
+                    else
+                        list = SelectDesc(pageindex, pagesize, o => true, o => o.DateTime, out rowcount).ToList();
+                }
+            }
+            return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(list);
+        }
+        public bool Delete(int id)
+        {
+            base.Delete(id);
+            return Save() > 0;
+        }
     }
 }

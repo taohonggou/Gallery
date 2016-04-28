@@ -1,0 +1,155 @@
+﻿@model IEnumerable<DataTrsfer.PhotoCategoryDt>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<style>
+    th, td {
+        text-align: center;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $(".tcdPageCode").createPage({
+            pageCount: parseInt('@ViewBag.pageCount'),
+            current: parseInt('@ViewBag.pageIndex'),
+            backFn: function (p) {
+                window.location.href = '/AdminPhotoCategory/Index?pageindex=' + p;
+            }
+        });
+    });
+    function deletethis(id) {
+        $.ajax({
+            type:"post",
+            url:"/AdminPhotoCategory/Delete",
+            data:{id:id},
+            success:function (o) {
+                if(o.StatusCode==1)
+                {
+                    layer.msg("成功");
+                    setTimeout(function () {
+                        location.reload();
+                    },1000);
+                }
+                else{
+                    layer.msg("失败");
+                }
+            }
+        });
+    }
+    function addSort() {
+        layer.open({
+            title: "添加分类",
+            type: 1,
+            shadeClose: true,
+            area: ['300px', '200px'],
+            content: ' <div style="margin:9%"><div>分类名称：<input type="text" id="name" class="inputstyle" /><br /></div><div>显示级别：<input type="number" id="priority" class="inputstyle" value="0"/><br /></div><div style="position:relative;float:right;margin:1em;"><input type="button" value="添加" class="btn btn-default" onclick="add();" /></div></div>'
+        });
+    }
+    function add() {
+        var name = $("#name").val();
+        var priority = $("#priority").val();
+        if (name.trim() == "") {
+            layer.msg("名称不能为空", { time: 1000 });
+            return;
+        }
+        $.ajax({
+            type: "post",
+            url: '/AdminPhotoCategory/Add',
+            data: { name: name.trim(), priority: priority},
+            success: function (o) {
+                if (o.StatusCode == 1) {
+                    layer.msg("成功");
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
+                }
+                else {
+                    layer.msg("失败");
+                }
+            }
+        });
+    }
+    function edit(id, name, priority) {
+        layer.open({
+            title: "编辑分类",
+            type: 1,
+            shadeClose: true,
+            area: ['300px', '200px'],
+            content: ' <div style="margin:9%"><div>分类名称：<input type="text" id="name" class="inputstyle" value="'+name+'"/><br /></div><div>显示级别：<input type="number" id="priority" class="inputstyle" value="'+priority+'"/><br /></div><div style="position:relative;float:right;margin:1em;"><input type="button" value="修改" class="btn btn-default" onclick="editPost('+id+');" /></div></div>'
+        });
+    }
+    function editPost(id) {
+        var name = $("#name").val();
+        var priority = $("#priority").val();
+        if (name.trim() == "") {
+            layer.msg("名称不能为空", { time: 1000 });
+            return;
+        }
+        $.ajax({
+            type: "post",
+            url: '/AdminPhotoCategory/Edit',
+            data: { id: id, name: name.trim(), priority: priority },
+            success: function (o) {
+                if (o.StatusCode == 1) {
+                    layer.msg("成功");
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
+                }
+                else {
+                    layer.msg("失败");
+                }
+            }
+        });
+    }
+</script>
+<div class="page-header">
+    <h1>
+        照片管理
+    </h1>
+</div>
+
+<p>
+    <a href="javascript:;" onclick="addSort();">添加分类</a>
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PhotoCategoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Priority)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhotoCategoryId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Priority)
+                </td>
+                <td>
+                    <a href="javascript:;" onclick="edit(@item.PhotoCategoryId,'@item.Name',@item.Priority);">Edit</a> |
+                    <a href="javascript:;" onclick="deletethis(@item.PhotoCategoryId)">Delete</a>
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+<div class="tcdPageCode">
+</div>

@@ -13,12 +13,12 @@ namespace Server
     {
         public bool Add(PhotoCategoryDt photocategory)
         {
-            base.Add(photocategory);
+            base.Add(TransferObject.ConvertObjectByEntity<PhotoCategoryDt,PhotoCategory>(photocategory));
             return Save() > 0;
         }
         public bool Update(PhotoCategoryDt photocategory)
         {
-            base.Update(photocategory);
+            base.Update(TransferObject.ConvertObjectByEntity<PhotoCategoryDt, PhotoCategory>(photocategory));
             return Save() > 0;
         }
         public bool Delete(int id)
@@ -37,6 +37,11 @@ namespace Server
         public List<PhotoCategoryDt> GetList()
         {
             return TransferObject.ConvertObjectByEntity<PhotoCategory, PhotoCategoryDt>(base.Select(o => true).OrderByDescending(o=>o.Priority).ToList());
+        }
+        public List<PhotoCategoryDt> GetPage(int pageindex, int pagesize, out int rowcount)
+        {
+            List<PhotoCategory> list = SelectDesc(pageindex, pagesize, o => true, o => o.Priority, out rowcount).ToList();
+            return TransferObject.ConvertObjectByEntity<PhotoCategory, PhotoCategoryDt>(list);
         }
     }
 }

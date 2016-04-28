@@ -11,27 +11,40 @@ namespace Manager
     public class PhotoCategoryManager
     {
         private PhotoCategoryServer Server = ObjectContainer.GetInstance<PhotoCategoryServer>();
-        public OutputModel Add(PhotoCategoryDt photocategory)
+        public OutputModel Add(string name, string priority)
         {
-            if (photocategory == null)
+            int p;//显示级别，数越大，显示越靠前
+            if (!int.TryParse(priority, out p))
+                p = 0;
+            if (string.IsNullOrWhiteSpace(name))
                 return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
+            PhotoCategoryDt photocategory = new PhotoCategoryDt { Name = name, Priority = p };
             if (Server.Get(photocategory.Name) != null)
                 return OutputHelper.GetOutputResponse(ResultCode.DataExisted);
             if (Server.Add(photocategory))
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
             return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
-        public OutputModel Update(PhotoCategoryDt photocategory)
+        public OutputModel Update(string id, string name, string priority)
         {
-            if (photocategory == null)
+            int i; int p;
+            if (!int.TryParse(priority, out p))
+                p = 0;
+            if (string.IsNullOrWhiteSpace(name))
                 return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
+            if (!int.TryParse(id, out i))
+                return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
+            PhotoCategoryDt photocategory = new PhotoCategoryDt { PhotoCategoryId = i, Name = name, Priority = p };
             if (Server.Update(photocategory))
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
             return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
-        public OutputModel Delete(int id)
+        public OutputModel Delete(string id)
         {
-            if (Server.Delete(id))
+            int i;
+            if (!int.TryParse(id, out i))
+                return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
+            if (Server.Delete(i))
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
             return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
@@ -55,6 +68,15 @@ namespace Manager
             if (list.Count == 0)
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
             return OutputHelper.GetOutputResponse(ResultCode.OK, list);
+        }
+        public List<PhotoCategoryDt> GetPage(string pageindex, int pagesize, out int pagecount)
+        {
+            int pageIndex;
+            FormatVerify.PageCheck(pageindex, out pageIndex);
+            int rowcount;
+            List<PhotoCategoryDt> list = Server.GetPage(pageIndex, pagesize, out rowcount);
+            pagecount = (int)Math.Ceiling(rowcount * 1.0 / pagesize);
+            return list;
         }
     }
 }

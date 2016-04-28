@@ -49,5 +49,10 @@ namespace Server
         {
             return Select(o => o.CommentId == commentId).Any();
         }
+        public List<CommentDt> GetPage(int pageindex, int pagesize, out int rowcount)
+        {
+            List<Comment> list = SelectDesc(pageindex, pagesize, o => true, o => o.DateTime,out rowcount).ToList();
+            return TransferObject.ConvertObjectByEntity<Comment, CommentDt>(list);
+        }
     }
 }
