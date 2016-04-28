@@ -4,5 +4,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script type="text/javascript">  
+    $(window).scroll(function () {
+        totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+        if ($(document).height() <= totalheight) {
+            //下啦加载时运行
+           
+            alert(1);
+        }
+    });
+
+    
+</script>
+
 <h2>最新图片</h2>
 
