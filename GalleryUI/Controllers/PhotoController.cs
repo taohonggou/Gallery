@@ -43,5 +43,10 @@ namespace GalleryUI.Controllers
         {
             return View();
         }
+
+        public ActionResult GetRecentPhotos(string pageIndex,string pageSize)
+        {
+            return Content(new PhotoManager().GetPageOrderByDateTime(pageIndex,pageSize));
+        }
 	}
 }
