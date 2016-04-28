@@ -8,6 +8,8 @@
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/layer9.1/layer.js"></script>
+    <script src="http://www.lanrenzhijia.com/ajaxjs/jquery.page.js"></script>
+    <link href="~/Content/pager.css" rel="stylesheet" />
 </head>
 <body>
     <nav class="navbar navbar-default" role="navigation">
@@ -46,11 +48,26 @@
                     </a>
                 </h4>
             </div>
-            <div id="collapseTwo" class="panel-collapse collapse">
+            <div id="collapseTwo" class="panel-collapse collapse in">
                 <div>
-                    <a href="/AdminPhoto/Index?pageindex=1" class="list-group-item">照片管理</a>
+                    <a href="/AdminPhoto/Index?pageindex=1&name=&author=&category=" class="list-group-item">照片管理</a>
                     <a href="#" class="list-group-item">评论管理</a>
                     <a href="#" class="list-group-item">点赞记录</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseThree">
+                        其他
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse in">
+                <div>
+                    <a href="/AdminPhotoCategory/Index?pageindex=1" class="list-group-item">分类管理</a>
                 </div>
             </div>
         </div>

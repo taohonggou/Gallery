@@ -35,12 +35,12 @@ namespace Tool
         /// 允许图片格式
         /// </summary>
         private static readonly string[] ImgExtension = { ".jpg", ".png", ".gif", ".jpeg", ".bmp" };
-        
+
         public static bool VerifyEmail(string email)
         {
             return Regex.IsMatch(email, RegexEmail);
         }
-        
+
         /// <summary>
         /// 验证手机号码格式是否正确
         /// </summary>
@@ -76,7 +76,7 @@ namespace Tool
         /// </summary>
         /// <param name="imgExtension"></param>
         /// <returns></returns>
-        public  static bool CheckImgExtension(string imgExtension)
+        public static bool CheckImgExtension(string imgExtension)
         {
             return ImgExtension.Contains(imgExtension.ToLower());
         }
@@ -96,7 +96,7 @@ namespace Tool
             return false;
         }
 
-        
+
         public static bool IsNullOrWhiteSpace(params string[] param)
         {
             foreach (string item in param)
@@ -107,5 +107,17 @@ namespace Tool
             return false;
         }
 
+        public static void PageCheck(string pageIndex, string pageSize, out int index, out int size)
+        {
+            if (!int.TryParse(pageIndex, out index))
+                index = 1;
+            if (!int.TryParse(pageSize, out size))
+                size = 12;
+        }
+        public static void PageCheck(string pageIndex, out int index)
+        {
+            if (!int.TryParse(pageIndex, out index))
+                index = 1;
+        }
     }
 }
