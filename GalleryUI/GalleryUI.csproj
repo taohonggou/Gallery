@@ -287,6 +287,15 @@
     <Content Include="Scripts\Tool.js" />
     <Content Include="Scripts\Upload.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Upload\Images\05b45bac134142708ebe6bce1eea1c22.jpg" />
+    <Content Include="Upload\Images\0e11fd14a8a84202b9855c7cd05ff7b1.jpg" />
+    <Content Include="Upload\Images\122846d585f4412aaaedfd2c8f6fa832.jpg" />
+    <Content Include="Upload\Images\5cc6122a2c144a26bd58704464ebf92e.jpg" />
+    <Content Include="Upload\Images\6a4a1e2eff2445659fba3ae4150375a4.jpg" />
+    <Content Include="Upload\Images\9ddf3882b4ce4cb2ab9853dc4cdea4ff.jpg" />
+    <Content Include="Upload\Images\a754b2d4f35e49da867da7d2ba676dd8.jpg" />
+    <Content Include="Upload\Images\d0be7161ddf2490da6649d376274b93b.jpg" />
+    <Content Include="Upload\Images\e20cc37672dc474cad1aae36c5ed0dfe.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -328,7 +337,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Upload\Images\" />
     <Folder Include="Views\AdminBase\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Comment\" />

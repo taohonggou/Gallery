@@ -29,12 +29,13 @@ html, body{
 	padding: 5px 0px 0px 0px;
 }
 .header-right {
+    width:270px;
 	float: right;
 	text-align: center;
 	padding: 5px 0px 0px 0px;
 }
 .header_top_right{
-	float:right;
+    padding:0px 25px 0px 0px;
 }
 .header_top_right ul li{
 	display: inline-block;
