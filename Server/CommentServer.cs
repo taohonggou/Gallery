@@ -40,9 +40,9 @@ namespace Server
         {
             return TransferObject.ConvertObjectByEntity<Comment, CommentDt>(base.Select(o => o.UpId == id).ToList());
         }
-        public List<CommentDt> GetByPhotoId(int photoId)
+        public List<CommentDt> GetListByPhotoId(int photoId)
         {
-            return TransferObject.ConvertObjectByEntity<Comment, CommentDt>(base.Select(o => o.PhotoId == photoId).OrderBy(o=>o.PhotoId).ToList());
+            return TransferObject.ConvertObjectByEntity<Comment, CommentDt>(base.Select(o => o.PhotoId == photoId).ToList());
         }
 
         public bool IsExist(int commentId)

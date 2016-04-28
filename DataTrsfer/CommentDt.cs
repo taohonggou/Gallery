@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataTrsfer
 {
-   public  class CommentDt
+    public class CommentDt
     {
         public int CommentId { get; set; }
         public string UserId { get; set; }
@@ -16,10 +16,16 @@ namespace DataTrsfer
         public string Content { get; set; }
         public System.DateTime DateTime { get; set; }
 
-       /// <summary>
-       /// 评论人的信息
-       /// </summary>
+        /// <summary>
+        /// 评论人的信息
+        /// </summary>
         public UserInfoDt User { get; set; }
 
+        private List<CommentDt> sonComment = new List<CommentDt>();
+
+        /// <summary>
+        /// 二级评论
+        /// </summary>
+        public List<CommentDt> SonComment { get { return sonComment; } set { sonComment = value; } }
     }
 }
