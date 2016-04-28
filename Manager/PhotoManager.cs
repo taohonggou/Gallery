@@ -64,9 +64,6 @@ namespace Manager
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
             return OutputHelper.GetOutputResponse(ResultCode.OK,list);
         }
-        public List<PhotoDt> GetPage(string pageindex, int pagesize, out int pagecount)
-        {
-            
-        }
+        
     }
 }

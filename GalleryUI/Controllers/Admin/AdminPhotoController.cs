@@ -16,7 +16,7 @@ namespace GalleryUI.Controllers.Admin
         public ActionResult Index(string pageindex)
         {
             int pagesize = 5;
-            new ph
+            //new PhotoManager().GetListByGallery
 
             return View();
         }
