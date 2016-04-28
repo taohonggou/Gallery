@@ -76,12 +76,12 @@ namespace Manager
 
             return OutputHelper.GetOutputResponse(ResultCode.OK, new { List = list, PageCount = pageCount });
         }
-        public List<PhotoDt> GetPage(string pageindex, int pagesize, string name, string author, string category,out int pagecount)
+        public List<PhotoDt> GetPage(string pageindex, int pagesize, string name, string author, string category, out int pagecount)
         {
             int pageIndex;
             int rowcount;
             FormatVerify.PageCheck(pageindex, out pageIndex);
-            List<PhotoDt> list = server.GetPage(pageIndex, pagesize, name, author, category,out rowcount);
+            List<PhotoDt> list = server.GetPage(pageIndex, pagesize, name, author, category, out rowcount);
             pagecount = (int)Math.Ceiling(rowcount * 1.0 / pagesize);
             foreach (PhotoDt item in list)
             {
@@ -99,6 +99,11 @@ namespace Manager
             if (server.Delete(i))
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
             return OutputHelper.GetOutputResponse(ResultCode.Error);
+        }
+
+        public PhotoDt Get(int photoId)
+        {
+            return server.Get(photoId);
         }
     }
 }

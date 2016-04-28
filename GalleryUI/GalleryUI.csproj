@@ -160,6 +160,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Admin\AdminBaseController.cs" />
+    <Compile Include="Controllers\Admin\AdminCommentController.cs" />
     <Compile Include="Controllers\Admin\AdminHomeController.cs" />
     <Compile Include="Controllers\Admin\AdminPhotoCategoryController.cs" />
     <Compile Include="Controllers\Admin\AdminPhotoController.cs" />
@@ -351,6 +352,7 @@
     <Content Include="Views\Photo\Recent.cshtml" />
     <Content Include="Views\AdminPhoto\Index.cshtml" />
     <Content Include="Views\AdminPhotoCategory\Index.cshtml" />
+    <Content Include="Views\AdminComment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
