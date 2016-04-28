@@ -1,5 +1,4 @@
-﻿
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -37,7 +36,28 @@
 <body>
     <!--header start here-->
     <div class="header">
+        
         <div class="container">
+            <div class="header_top_right">
+                <div style="float:right;">
+                    <ul>@if (ViewBag.IsLogin)
+                        {<li><a href="/Upload/Upload" class="upload">上传</a></li>
+                            <li> |</li>
+                            <li><a href="/UserCenter/UserCenter">@ViewBag.User.Name</a> </li>
+                            <li> |</li>
+                            <li><a href="/UserInfo/LogOut">退出</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="/UserInfo/Login">登录</a></li>
+                            <li> |</li>
+                            <li><a href="/UserInfo/Register">注册</a></li>
+                        }
+
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
             <div class="header-main">
                 <div class="header-left">
                     <div class="logo">
@@ -55,12 +75,12 @@
                 </div>
                 <div class="header-right">
                     <div class="search">
-                        <form>
-                            <input type="text" value="搜索" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" />
+                        <form style="margin-bottom: 0;">
+                            <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" />
                             <input type="submit" value="" />
                         </form>
                     </div>
-                    <div class="header_top_right">
+                    @*<div class="header_top_right">
                         <ul>
                             @if (ViewBag.IsLogin)
                             {
@@ -79,7 +99,7 @@
                             }
 
                         </ul>
-                    </div>
+                    </div>*@
                 </div>
                 <div class="clearfix"> </div>
             </div>

@@ -298,6 +298,7 @@
     <Content Include="Upload\Images\5cc6122a2c144a26bd58704464ebf92e.jpg" />
     <Content Include="Upload\Images\6a4a1e2eff2445659fba3ae4150375a4.jpg" />
     <Content Include="Upload\Images\9ddf3882b4ce4cb2ab9853dc4cdea4ff.jpg" />
+<<<<<<< HEAD
     <Content Include="Upload\Images\a4b77237c1fb4268b4dd03329c27814e.jpg" />
     <Content Include="Upload\Images\a754b2d4f35e49da867da7d2ba676dd8.jpg" />
     <Content Include="Upload\Images\b9d933de097d4538877696d3dc0a9969.png" />
@@ -305,6 +306,11 @@
     <Content Include="Upload\Images\e20cc37672dc474cad1aae36c5ed0dfe.jpg" />
     <Content Include="Upload\Images\man.png" />
     <Content Include="Upload\Images\women.png" />
+=======
+    <Content Include="Upload\Images\a754b2d4f35e49da867da7d2ba676dd8.jpg" />
+    <Content Include="Upload\Images\d0be7161ddf2490da6649d376274b93b.jpg" />
+    <Content Include="Upload\Images\e20cc37672dc474cad1aae36c5ed0dfe.jpg" />
+>>>>>>> 6faa3328d54d45920746ab1b10410d5280e39af0
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
