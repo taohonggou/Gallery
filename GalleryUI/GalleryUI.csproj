@@ -223,12 +223,13 @@
     <Content Include="images\f17.jpg" />
     <Content Include="images\f6.jpg" />
     <Content Include="images\header.jpg" />
-    <Content Include="images\heart.png" />
     <Content Include="images\hover-img.png" />
     <Content Include="images\icons.svg" />
     <Content Include="images\cover.png" />
+    <Content Include="images\jian.png" />
     <Content Include="images\like.png" />
     <Content Include="images\liked.png" />
+    <Content Include="images\line.png" />
     <Content Include="images\mo.jpg" />
     <Content Include="images\p1.jpg" />
     <Content Include="images\p10.jpg" />
@@ -244,16 +245,9 @@
     <Content Include="images\p9.jpg" />
     <Content Include="images\play.png" />
     <Content Include="images\plus.png" />
-    <Content Include="images\port-line.png" />
-    <Content Include="images\port-play.png" />
     <Content Include="images\praise.png" />
     <Content Include="images\praised.png" />
-    <Content Include="images\scroller.png" />
     <Content Include="images\search.png" />
-    <Content Include="images\t1.jpg" />
-    <Content Include="images\t2.jpg" />
-    <Content Include="images\t3.jpg" />
-    <Content Include="images\t4.jpg" />
     <Content Include="images\touxiang.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -304,13 +298,24 @@
     <Content Include="Upload\Images\05b45bac134142708ebe6bce1eea1c22.jpg" />
     <Content Include="Upload\Images\0e11fd14a8a84202b9855c7cd05ff7b1.jpg" />
     <Content Include="Upload\Images\122846d585f4412aaaedfd2c8f6fa832.jpg" />
+    <Content Include="Upload\Images\12c3b620e85942ebafa00c4d7ce36785.jpg" />
+    <Content Include="Upload\Images\1afded4641274a7fb8a3416c6a5d53a1.jpg" />
+    <Content Include="Upload\Images\21e882a64e81444282f2ce700516247b.jpg" />
     <Content Include="Upload\Images\5cc6122a2c144a26bd58704464ebf92e.jpg" />
+    <Content Include="Upload\Images\5fc1f7fd15e147b5b2dbb3a0f6838f9c.jpg" />
     <Content Include="Upload\Images\6a4a1e2eff2445659fba3ae4150375a4.jpg" />
+    <Content Include="Upload\Images\7676ed92960942ee96902cc01a9043aa.jpg" />
+    <Content Include="Upload\Images\82318f3a5c43462e946fc70f2cdeb614.jpg" />
+    <Content Include="Upload\Images\981696790d534976bfd2b190b024ab73.jpg" />
     <Content Include="Upload\Images\9ddf3882b4ce4cb2ab9853dc4cdea4ff.jpg" />
     <Content Include="Upload\Images\a4b77237c1fb4268b4dd03329c27814e.jpg" />
+    <Content Include="Upload\Images\b31a8ec71a9a4542b82045e5ab5d1b8d.jpg" />
     <Content Include="Upload\Images\b9d933de097d4538877696d3dc0a9969.png" />
+    <Content Include="Upload\Images\c194e6833555437dafe548ceb01fb8fd.jpg" />
+    <Content Include="Upload\Images\cc4bc7fc5be040af835b2a53ab2526de.jpg" />
     <Content Include="Upload\Images\d0be7161ddf2490da6649d376274b93b.jpg" />
     <Content Include="Upload\Images\e20cc37672dc474cad1aae36c5ed0dfe.jpg" />
+    <Content Include="Upload\Images\fbdfd0948f6441da83a4ba5c5c0fb967.jpg" />
     <Content Include="Upload\Images\man.png" />
     <Content Include="Upload\Images\women.png" />
     <Content Include="Upload\Images\a754b2d4f35e49da867da7d2ba676dd8.jpg" />
@@ -356,6 +361,7 @@
     <Content Include="Views\AdminPhoto\Index.cshtml" />
     <Content Include="Views\AdminPhotoCategory\Index.cshtml" />
     <Content Include="Views\AdminComment\Index.cshtml" />
+    <Content Include="Views\PhotoCategory\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -363,7 +369,6 @@
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\Like\" />
-    <Folder Include="Views\PhotoCategory\" />
     <Folder Include="Views\PhotoGallery\" />
     <Folder Include="Views\ScanOrSupport\" />
   </ItemGroup>
