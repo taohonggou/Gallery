@@ -257,6 +257,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\FormatVerify.js" />
     <Content Include="Scripts\home\jquery.swipebox.min.js" />
+    <Content Include="Scripts\home\PhotoHottest.js" />
     <Content Include="Scripts\home\responsiveslides.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
