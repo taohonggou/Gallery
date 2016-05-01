@@ -2,8 +2,56 @@
     ViewBag.Title = "美图网";
 }
 
+<style type="text/css">
+    img {
+        border: none;
+    }
+
+    .wrapper {
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+        .wrapper h3 {
+            color: #3366cc;
+            font-size: 16px;
+            height: 35px;
+            line-height: 1.9;
+            text-align: center;
+            border-bottom: 1px solid #E5E5E5;
+            margin: 0 0 10px 0;
+        }
+
+    #con1_1 {
+        position: relative;
+    }
+
+        #con1_1 .product_list {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            padding: 10px;
+            background: #eee;
+            margin: 5px;
+        }
+
+    .product_list img {
+        width: 342px;
+    }
+
+    .product_list p {
+        padding: 5px 0px;
+        font-size: 12px;
+        text-align: center;
+        color: #333;
+        white-space: normal;
+        width: 200px;
+    }
+</style>
+
 <!--banner start here-->
 <script src="~/Scripts/home/responsiveslides.min.js"></script>
+<script src="~/Scripts/home/PhotoHottest.js"></script>
 <script>
     $(function () {
         $("#slider").responsiveSlides({
@@ -56,6 +104,8 @@
 <!--portfolio start here-->
 <link href="~/Content/home/swipebox.css" rel="stylesheet" />
 <script src="~/Scripts/home/jquery.swipebox.min.js"></script>
+<script src="~/Scripts/jquery.masonry.min.js"></script>
+
 <script type="text/javascript">
     jQuery(function ($) {
         $(".swipebox").swipebox();
@@ -69,232 +119,11 @@
                 <h6>超乎想象的灵感来源</h6>
                 <p>寻找由社群中的业余及专业摄影师拍摄的动人相片。</p>
             </div>
+            <div class="container">
+                <div id="con1_1">
 
-            <div id="portfoliolist">
-                <div class="pa-more" style="float:left;">
-                    <a href="#small-dialog5" class="thickbox play-icon popup-with-zoom-anim">
-                        <div class="work-column">
-                            <img src="/images/p1.jpg" alt="" class="img-cap img-responsive" width="400px" height="400px">
-                        </div>
-                    </a>
+                    <div class="clear"></div>
                 </div>
-
-                <div class="pa-more" style="float:left;">
-                    <a href="#small-dialog5" class="thickbox play-icon popup-with-zoom-anim">
-                        <div class="work-column">
-                            <img src="/images/p2.jpg" alt="" class="img-cap img-responsive" width="400px" height="400px">
-
-                        </div>
-                    </a>
-                </div>
-                <div class="pa-more" style="float:left;">
-                    <a href="#small-dialog5" class="thickbox play-icon popup-with-zoom-anim">
-                        <div class="work-column">
-                            <img src="/images/p3.jpg" alt="" class="img-cap img-responsive" width="400px" height="400px">
-                        </div>
-                    </a>
-                </div>
-                <div class="pa-more" style="float:left;">
-                    <a href="#small-dialog5" class="thickbox play-icon popup-with-zoom-anim">
-                        <div class="work-column">
-                            <img src="/images/p4.jpg" alt="" class="img-cap img-responsive" width="400px" height="400px">
-                        </div>
-                    </a>
-                </div>
-                <div class="clearfix"> </div>
-            </div>
-            <div id="portfoliolist">
-                <div class="col-md-3 pa-more">
-                    <a href="#small-dialog5" class="thickbox play-icon popup-with-zoom-anim">
-                        <div class="work-column">
-                            <img src="/Upload/Images/c194e6833555437dafe548ceb01fb8fd.jpg" alt="" class="img-cap img-responsive">
-                            <div class="porthover">
-                                <h3>South America</h3>
-                                <span class="hover-line"> </span>
-                                <small class="port-play"> </small>
-                                <div class="porthover-grids">
-                                    <div class="porthover-left">
-                                        <span class="port-lady"> </span>
-                                        <p>By Elena Smith</p>
-                                    </div>
-                                    <div class="porthover-right">
-                                        <span class="heart"> </span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3 pa-more">
-                    <a href="#small-dialog5" class="thickbox play-icon popup-with-zoom-anim">
-                        <div class="work-column">
-                            <img src="/images/p6.jpg" alt="" class="img-cap img-responsive">
-                            <div class="porthover">
-                                <h3>South America</h3>
-                                <span class="hover-line"> </span>
-                                <small class="port-play"> </small>
-                                <div class="porthover-grids">
-                                    <div class="porthover-left">
-                                        <span class="port-lady"> </span>
-                                        <p>By Elena Smith</p>
-                                    </div>
-                                    <div class="porthover-right">
-                                        <span class="heart"> </span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 pa-more">
-                    <a href="#small-dialog5" class="thickbox play-icon popup-with-zoom-anim">
-                        <div class="work-column">
-                            <img src="/images/p7.jpg" alt="" class="img-cap img-responsive">
-                            <div class="porthover">
-                                <h3>South America</h3>
-                                <span class="hover-line"> </span>
-                                <small class="port-play"> </small>
-                                <div class="porthover-grids">
-                                    <div class="porthover-left">
-                                        <span class="port-lady"> </span>
-                                        <p>By Elena Smith</p>
-                                    </div>
-                                    <div class="porthover-right">
-                                        <span class="heart"> </span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 pa-more">
-                    <a href="#small-dialog5" class="thickbox play-icon popup-with-zoom-anim">
-                        <div class="work-column">
-                            <img src="/images/p8.jpg" alt="" class="img-cap img-responsive">
-                            <div class="porthover">
-                                <h3>South America</h3>
-                                <span class="hover-line"> </span>
-                                <small class="port-play"> </small>
-                                <div class="porthover-grids">
-                                    <div class="porthover-left">
-                                        <span class="port-lady"> </span>
-                                        <p>By Elena Smith</p>
-                                    </div>
-                                    <div class="porthover-right">
-                                        <span class="heart"> </span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="clearfix"> </div>
-            </div>
-            <div id="portfoliolist">
-                <div class="col-md-3 pa-more">
-                    <a href="#small-dialog5" class="thickbox play-icon popup-with-zoom-anim">
-                        <div class="work-column">
-                            <img src="/images/p9.jpg" alt="" class="img-cap img-responsive">
-                            <div class="porthover">
-                                <h3>South America</h3>
-                                <span class="hover-line"> </span>
-                                <small class="port-play"> </small>
-                                <div class="porthover-grids">
-                                    <div class="porthover-left">
-                                        <span class="port-lady"> </span>
-                                        <p>By Elena Smith</p>
-                                    </div>
-                                    <div class="porthover-right">
-                                        <span class="heart"> </span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3 pa-more">
-                    <a href="#small-dialog5" class="thickbox play-icon popup-with-zoom-anim">
-                        <div class="work-column">
-                            <img src="/images/p10.jpg" alt="" class="img-cap img-responsive">
-                            <div class="porthover">
-                                <h3>South America</h3>
-                                <span class="hover-line"> </span>
-                                <small class="port-play"> </small>
-                                <div class="porthover-grids">
-                                    <div class="porthover-left">
-                                        <span class="port-lady"> </span>
-                                        <p>By Elena Smith</p>
-                                    </div>
-                                    <div class="porthover-right">
-                                        <span class="heart"> </span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 pa-more">
-                    <a href="#small-dialog5" class="thickbox play-icon popup-with-zoom-anim">
-                        <div class="work-column">
-                            <img src="/images/p11.jpg" alt="" class="img-cap img-responsive">
-                            <div class="porthover">
-                                <h3>South America</h3>
-                                <span class="hover-line"> </span>
-                                <small class="port-play"> </small>
-                                <div class="porthover-grids">
-                                    <div class="porthover-left">
-                                        <span class="port-lady"> </span>
-                                        <p>By Elena Smith</p>
-                                    </div>
-                                    <div class="porthover-right">
-                                        <span class="heart"> </span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 pa-more">
-                    <a href="#small-dialog5" class="thickbox play-icon popup-with-zoom-anim">
-                        <div class="work-column">
-                            <img src="/images/p12.jpg" alt="" class="img-cap img-responsive">
-                            <div class="porthover">
-                                <h3>South America</h3>
-                                <span class="hover-line"> </span>
-                                <small class="port-play"> </small>
-                                <div class="porthover-grids">
-                                    <div class="porthover-left">
-                                        <span class="port-lady"> </span>
-                                        <p>By Elena Smith</p>
-                                    </div>
-                                    <div class="porthover-right">
-                                        <span class="heart"> </span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </a>
-
-                </div>
-                <div class="clearfix"> </div>
             </div>
         </div>
     </div>

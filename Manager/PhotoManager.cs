@@ -105,5 +105,37 @@ namespace Manager
         {
             return server.Get(photoId);
         }
+<<<<<<< HEAD
+
+        public OutputModel GetPageHottest(string pageIndex,string pageSize)
+        {
+            int index, size;
+            FormatVerify.PageCheck(pageIndex, pageSize, out index, out size);
+            List<PhotoDt> list = server.GetPageOrderByHottest(index, size);
+            if (list.Count == 0)
+                return OutputHelper.GetOutputResponse(ResultCode.NoData);
+            return OutputHelper.GetOutputResponse(ResultCode.OK,list);
+        }
+
+        /// <summary>
+        /// 获取没个分类下面的最火图片
+        /// </summary>
+        /// <param name="num">每个分类下面选取几张图片</param>
+        /// <returns></returns>
+        public OutputModel GetCategoryHottest(int num)
+        {
+            //获取所有分类
+            List<PhotoCategoryDt> list = new PhotoCategoryServer().GetList();
+            if (list.Count == 0)
+                return OutputHelper.GetOutputResponse(ResultCode.NoData);
+
+
+
+            return new OutputModel();
+        }
     }
 }
+=======
+    }
+}
+>>>>>>> 47d249e6aa66a6fabd0a7be6931852ced70617ed
