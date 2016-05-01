@@ -105,7 +105,6 @@ namespace Manager
         {
             return server.Get(photoId);
         }
-<<<<<<< HEAD
 
         public OutputModel GetPageHottest(string pageIndex,string pageSize)
         {
@@ -135,7 +134,3 @@ namespace Manager
         }
     }
 }
-=======
-    }
-}
->>>>>>> 47d249e6aa66a6fabd0a7be6931852ced70617ed

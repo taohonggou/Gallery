@@ -227,6 +227,7 @@
     <Content Include="images\icons.svg" />
     <Content Include="images\cover.png" />
     <Content Include="images\jian.png" />
+    <Content Include="images\jianbian.jpg" />
     <Content Include="images\like.png" />
     <Content Include="images\liked.png" />
     <Content Include="images\line.png" />
@@ -257,7 +258,6 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\FormatVerify.js" />
     <Content Include="Scripts\home\jquery.swipebox.min.js" />
-    <Content Include="Scripts\home\PhotoHottest.js" />
     <Content Include="Scripts\home\responsiveslides.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -287,7 +287,6 @@
     <Content Include="Scripts\md5.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\page.js" />
-    <Content Include="Scripts\photo.js" />
     <Content Include="Scripts\plupload\Moxie.swf" />
     <Content Include="Scripts\plupload\Moxie.xap" />
     <Content Include="Scripts\plupload\plupload.full.min.js" />
@@ -388,6 +387,7 @@
     <Content Include="Views\AdminPhotoCategory\Index.cshtml" />
     <Content Include="Views\AdminComment\Index.cshtml" />
     <Content Include="Views\PhotoCategory\Index.cshtml" />
+    <Content Include="Views\UserCenter\PersonalData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

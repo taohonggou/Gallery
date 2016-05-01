@@ -5,9 +5,7 @@
 }
 <link href="~/Content/usercenter.css" rel="stylesheet" />
 <style>
-    body {
-        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, TeXGyreHeros, FreeSans, "Nimbus Sans L", "Liberation Sans", Arial, sans-serif;
-    }
+  
     .list-group-item:first-child {
         border-top-right-radius: 0px;
         border-top-left-radius: 0px;
@@ -53,48 +51,7 @@
     .polaroid:hover .hiddenbtn {
         display: block;
     }
-    .profile_nav {
-        border-top: 1px solid #eeeff2;
-        position: relative;
-        z-index: 501;
-        border-bottom: 1px solid #eeeff2;
-    }
-    .profile_nav_wrapper {
-        height: 50px;
-    }
-    .px_tabs {
-        background-color: #fff;
-        list-style-type: none;
-        text-align: center;
-        white-space: nowrap;
-        overflow-x: auto;
-    }
-
-        .px_tabs > li {
-            display: inline;
-            margin: 0 10px;
-        }
-    li {
-        list-style: none;
-    }
-    .px_tabs > li > a {
-        font-size: 14px;
-        display: inline-block;
-        padding: 15px 0;
-        height: 50px;
-        border-bottom: 2px solid transparent;
-        color: #71767a;
-        white-space: nowrap;
-        text-transform: uppercase;
-        font-weight: bold;
-        cursor: pointer;
-        text-decoration: none;
-        outline: none;
-    }
-    .px_tabs > li.active > a {
-        color: #0099e5;
-        border-bottom: 2px solid #0099e5;
-    }
+    
 </style>
 <script type="text/javascript">
     function loadPhotos(galleryId) {
@@ -178,18 +135,17 @@
             <div class="tabs_wrapper fix_width_on_modal">
                 <ul class="profile_nav px_tabs">
                     <li class="active">
-                        <a data-nav="photos" href="/cl889521">
+                        <a data-nav="photos" href="javascript:;" onclick="getAllPhotos()">
                             相片
-                            <span class="count">1</span>
                         </a>
                     </li>
                     <li>
-                        <a data-nav="galleries" href="/cl889521/galleries">
+                        <a data-nav="galleries" href="/usercenter/usercenter">
                             <span class="translation_missing" title="translation missing: en.profiles.show.nav.galleries">相册</span>
                         </a>
                     </li>
                     <li>
-                        <a data-nav="groups" href="/cl889521/groups">
+                        <a data-nav="groups" href="javacript:;" onclick="getLikePhotos()">
                             喜欢
                         </a>
                     </li>

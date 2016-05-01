@@ -1,4 +1,5 @@
 ﻿body {
+    font-family: "Helvetica Neue", HelveticaNeue, Helvetica, TeXGyreHeros, FreeSans, "Nimbus Sans L", "Liberation Sans", Arial, sans-serif;
 }
 
 .middle {
@@ -9,7 +10,7 @@
 }
 
 .headerUC {
-    position:absolute;
+    position: absolute;
     height: 300px;
     width: 100%;
     background-image: url(/images/header.jpg);
@@ -21,4 +22,52 @@
     height: 300px;
     overflow: hidden;
     z-index: 2;
+}
+
+.profile_nav {
+    border-top: 1px solid #eeeff2;
+    position: relative;
+    z-index: 501;
+    border-bottom: 1px solid #eeeff2;
+}
+
+.profile_nav_wrapper {
+    height: 50px;
+}
+
+.px_tabs {
+    background-color: #fff;
+    list-style-type: none;
+    text-align: center;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+    .px_tabs > li {
+        display: inline;
+        margin: 0 10px;
+    }
+
+li {
+    list-style: none;
+}
+
+.px_tabs > li > a {
+    font-size: 14px;
+    display: inline-block;
+    padding: 15px 0;
+    height: 50px;
+    border-bottom: 2px solid transparent;
+    color: #71767a;
+    white-space: nowrap;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+}
+
+.px_tabs > li.active > a {
+    color: #0099e5;
+    border-bottom: 2px solid #0099e5;
 }

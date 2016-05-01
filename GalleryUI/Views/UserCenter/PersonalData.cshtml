@@ -1,0 +1,182 @@
+﻿@model DataTrsfer.UserInfoDt
+
+@{
+    ViewBag.Title = "PersonalData";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/usercenter.css" rel="stylesheet" />
+<style>
+    .touxiang {
+        display: none;
+    }
+    .imgtouxiang:hover .touxiang {
+        display: block;
+    }
+    .tablepernal {
+        width: 40%;
+        margin-top: 20px;
+    }
+    tr {
+        line-height: 3;
+        border-bottom: 1px solid #eeeff2;
+    }
+    tr:last-child{
+        border:0px;
+    }
+</style>
+<script>
+    function edit(id) {
+        layer.open({
+            title: "添加分类",
+            type: 1,
+            shadeClose: true,
+            area: ['450px'],
+            content: '<div style="text-align:center;width:450px;margin-top:20px;"><table width="100%"><tr style="line-height: 1.5;"><td>姓名：</td><td><input type="text" value="" /></td></tr><tr style="line-height: 1.5;"><td>性别：</td><td><input type="radio" name="sex" value="" />女    <input type="radio" name="sex" value="" />男</td></tr><tr style="line-height: 1.5;"><td>年龄：</td><td><input type="number"  value="" /></td></tr><tr style="line-height: 1.5;"><td>电话：</td><td><input type="tel" name="name" value=" " /></td></tr><tr style="line-height: 1.5;"><td>所在地：</td><td><input type="text" value="" /></td></tr><tr style="line-height: 1.5;"><td></td><td><input type="button" class="btn btn-default" onclick="editsubmit();" value="提交" /></td></tr></table></div>'
+        });
+
+    }
+</script>
+<div class="container" style="min-height:633px;">
+    <div style="width: 100%; height: 250px; margin: auto; text-align: center;">
+        <div style="position:relative;height:50px; border-bottom:1px solid #d8d8d8;">
+        </div>
+        <div style=" position: relative; top: -49px;" class="imgtouxiang">
+            <div>
+                <img src="/images/touxiang.png" alt="Alternate Text" style="border-radius:50%;width:100px;"  />
+            </div>
+            <div style="position: absolute; left:50%;" class="touxiang"><input type="button" class="btn btn-default" style="position:absolute;width:80px;height:40px; right:-40px;top:-70px;" value="修改头像" /></div>
+            <div class="clear"></div>
+        </div>
+        <div><span style="font-size: 30px; position: relative; top: -43px;">黄色小金鱼</span></div>
+        <div class="profile_nav_wrapper">
+            <div class="tabs_wrapper fix_width_on_modal">
+                <ul class="profile_nav px_tabs">
+                    <li>
+                        <a data-nav="photos" href="javascript:;" onclick="getAllPhotos()">
+                            相片
+                        </a>
+                    </li>
+                    <li>
+                        <a data-nav="galleries" href="/usercenter/usercenter">
+                            <span class="translation_missing" title="translation missing: en.profiles.show.nav.galleries">相册</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-nav="groups" href="javacript:;" onclick="getLikePhotos()">
+                            喜欢
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a data-nav="about" href="/cl889521/about">
+                            个人资料
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="divContainer" style="margin: auto; text-align: center;">
+        <div style="position:relative;">
+            <table style="position:absolute;left:30%;" class="tablepernal">
+                <tr>
+                    <td>姓名：</td>
+                    <td>悦悦yueyue</td>
+                </tr>
+                <tr>
+                    <td>性别：</td>
+                    <td>女</td>
+                </tr>
+                <tr>
+                    <td>年龄：</td>
+                    <td>18</td>
+                </tr>
+                <tr>
+                    <td>电话：</td>
+                    <td>187129393345</td>
+                </tr>
+                <tr>
+                    <td>所在地：</td>
+                    <td>河北石家庄</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="button" class="btn btn-default" onclick="edit(id);" value="修改个人资料" /></td>
+                </tr>
+
+            </table>
+        </div>
+        
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+
+
+
+
+
+
+
+
+<h2>PersonalData</h2>
+
+<div>
+    <h4>UserInfoDt</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pwd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pwd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HeadUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HeadUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
