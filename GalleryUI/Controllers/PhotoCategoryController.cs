@@ -20,5 +20,7 @@ namespace GalleryUI.Controllers
         {
             return View();
         }
+
+        //public
 	}
 }

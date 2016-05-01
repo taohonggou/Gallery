@@ -21,6 +21,7 @@ namespace GalleryUI.Controllers
             PhotoGalleryManager galleryManager = new PhotoGalleryManager();
             List<PhotoGalleryDt> list = galleryManager.GetList(user.UserId);
             ViewBag.Gallery = list;
+            ViewBag.Category= new PhotoCategoryManager().GetAll();
             return View();
         }
 

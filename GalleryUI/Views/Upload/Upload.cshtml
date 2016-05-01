@@ -78,10 +78,23 @@
             }
         </select>
        分类: <select id="category" class="btn btn-default dropdown-toggle">
+        @{
+            List<PhotoCategoryDt> listCate = ViewBag.Category;
+            if (listCate == null || list.Count == 0)
+            { 
             <option value="4">默认</option>
-            <option value="1">风景</option>
+            }else
+            {
+                foreach (PhotoCategoryDt item in listCate)
+                {
+                    <option value="@item.PhotoCategoryId">@item.Name</option>
+                }
+            }
+            
+        }
+            @*<option value="1">风景</option>
             <option value="2">人物</option>
-            <option value="3">搞笑</option>
+            <option value="3">搞笑</option>*@
         </select>
         <button id="browse" class="btn btn-default">选择文件</button>
         <button id="upload-btn" class="btn btn-default">开始上传</button>
