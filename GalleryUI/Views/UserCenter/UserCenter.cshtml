@@ -5,6 +5,9 @@
 }
 <link href="~/Content/usercenter.css" rel="stylesheet" />
 <style>
+    body {
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, TeXGyreHeros, FreeSans, "Nimbus Sans L", "Liberation Sans", Arial, sans-serif;
+    }
     .list-group-item:first-child {
         border-top-right-radius: 0px;
         border-top-left-radius: 0px;
@@ -23,7 +26,7 @@
 
     div.polaroid {
         position: relative;
-        width: 21.8%;
+        width: 22.8%;
         background-color: white;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         margin: 0px 12.5px 25px 12.5px;
@@ -35,16 +38,62 @@
         padding: 10px 20px;
         cursor: pointer;
     }
+
     .img1 {
         display: inline-block;
         width: 180px;
         height: 180px;
         cursor: pointer;
     }
-    .hiddenbtn{
-        display:none;
-    } .polaroid:hover .hiddenbtn {
+
+    .hiddenbtn {
+        display: none;
+    }
+
+    .polaroid:hover .hiddenbtn {
         display: block;
+    }
+    .profile_nav {
+        border-top: 1px solid #eeeff2;
+        position: relative;
+        z-index: 501;
+        border-bottom: 1px solid #eeeff2;
+    }
+    .profile_nav_wrapper {
+        height: 50px;
+    }
+    .px_tabs {
+        background-color: #fff;
+        list-style-type: none;
+        text-align: center;
+        white-space: nowrap;
+        overflow-x: auto;
+    }
+
+        .px_tabs > li {
+            display: inline;
+            margin: 0 10px;
+        }
+    li {
+        list-style: none;
+    }
+    .px_tabs > li > a {
+        font-size: 14px;
+        display: inline-block;
+        padding: 15px 0;
+        height: 50px;
+        border-bottom: 2px solid transparent;
+        color: #71767a;
+        white-space: nowrap;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        outline: none;
+    }
+    .px_tabs > li.active > a {
+        color: #0099e5;
+        border-bottom: 2px solid #0099e5;
     }
 </style>
 <script type="text/javascript">
@@ -58,7 +107,7 @@
                     galleryPhotos(data.Data)
                 }
                 else
-                    layer.msg(data.Message); 
+                    layer.msg(data.Message);
             }
         });
     }
@@ -77,14 +126,14 @@
         console.log(json);
         var str = '';
         $.each(json, function () {
-            str += '<div class="polaroid" onclick="getPhotoDetails(' + this.PhotoId + ')"><a href="javascript:;"><img src="' + this.ImgUrl + '" alt="Norway" style="width:100%;" class="img1" /></a><div class="pcenter"><p style="overflow: hidden; text-overflow: ellipsis; " title="' + this.Name + '">'+this.Name+'</p></div></div>';
+            str += '<div class="polaroid" onclick="getPhotoDetails(' + this.PhotoId + ')"><a href="javascript:;"><img src="' + this.ImgUrl + '" alt="Norway" style="width:100%;" class="img1" /></a><div class="pcenter"><p style="overflow: hidden; text-overflow: ellipsis; " title="' + this.Name + '">' + this.Name + '</p></div></div>';
         });
         $('#h2Name').text('图片列表');
         $('#divContainer').html(str);
     }
 
     function getPhotoDetails(photoId) {
-        window.location.href = "/Photo/Details?photoId="+photoId;
+        window.location.href = "/Photo/Details?photoId=" + photoId;
     }
 
     function getAllPhotos() {
@@ -117,7 +166,48 @@
 
 </script>
 <div class="container" style="min-height:633px;">
-    <h2 id="h2Name">相册列表</h2>
+    <div style="width: 100%; height: 250px; margin: auto; text-align: center;">
+        <div style="position:relative;height:50px; border-bottom:1px solid #d8d8d8;">
+        </div>
+        <div style=" position: relative; top: -49px;">
+            <img src="/images/touxiang.png" alt="Alternate Text" style="border-radius:50%;" width="100px;" />
+        </div>
+        <div><span style="font-size: 30px; position: relative; top: -43px;">黄色小金鱼</span></div>
+
+        <div class="profile_nav_wrapper">
+            <div class="tabs_wrapper fix_width_on_modal">
+                <ul class="profile_nav px_tabs">
+                    <li class="active">
+                        <a data-nav="photos" href="/cl889521">
+                            相片
+                            <span class="count">1</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-nav="galleries" href="/cl889521/galleries">
+                            <span class="translation_missing" title="translation missing: en.profiles.show.nav.galleries">相册</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-nav="groups" href="/cl889521/groups">
+                            喜欢
+                        </a>
+                    </li>
+                    <li>
+                        <a data-nav="about" href="/cl889521/about">
+                            个人资料
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="clear"></div>
+
+
+    </div>
+    @*<h2 id="h2Name">相册列表</h2>
     <div class="panel-group pull-left" id="accordion" style="position:absolute;width:10%;min-width:50px;">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -151,45 +241,46 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div id="divContainer" class="pull-right" style="width:82%;">
-        
-            @{
-                List<PhotoGalleryDt> list = ViewBag.ListGallery;
-                if (list == null || list.Count == 0)
-                {
-                    <label>没有图片</label>
-                }
-                else
-                {
-                    foreach (PhotoGalleryDt phtot in list)
-                    {
+    </div>*@
+    <div id="divContainer">
 
-                        <div class="polaroid" onclick="loadPhotos('@phtot.PhotoGalleryId')">
-                            <a href="javascript:;">
-                                @if (phtot.CoverImg == null)
-                                {
-                                    phtot.CoverImg = "/images/cover.png";
-                                }
-                                <img src="@phtot.CoverImg" alt="Norway" style="width:100%;" class="img1" />
-                            </a>
-                            <div class="pcenter">
-                                <p style="overflow: hidden; text-overflow: ellipsis; " title="@phtot.Name">@phtot.Name</p>
-                            </div>
+        @{
+            List<PhotoGalleryDt> list = ViewBag.ListGallery;
+            if (list == null || list.Count == 0)
+            {
+                <label>没有图片</label>
+            }
+            else
+            {
+                foreach (PhotoGalleryDt phtot in list)
+                {
+
+                    <div class="polaroid" onclick="loadPhotos('@phtot.PhotoGalleryId')">
+                        <a href="javascript:;">
+                            @if (phtot.CoverImg == null)
+                            {
+                                phtot.CoverImg = "/images/cover.png";
+                            }
+                            <img src="@phtot.CoverImg" alt="Norway" style="width:100%;" class="img1" />
+                        </a>
+                        <div class="pcenter">
+                            <p style="overflow: hidden; text-overflow: ellipsis; " title="@phtot.Name">@phtot.Name</p>
                         </div>
+                    </div>
 
-                        @*<li class="list-group-item" style="float:left;width:24.5%;height:250px;">
+                    @*<li class="list-group-item" style="float:left;width:24.5%;height:250px;">
                             <div>
                                 <img src="@phtot.ImgUrl" style="max-width:100%;max-height:76%;" />
                             </div>
                             <p style="width: 90%; word-wrap: break-word;position:absolute;bottom:2px;">@phtot.Name</p>
                         </li>*@
-                    }
-
                 }
 
             }
+
+        }
         @*</ul>*@
+        <div class="clear"></div>
     </div>
     <div class="clear"></div>
 </div>
