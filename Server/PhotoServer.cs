@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -65,7 +66,7 @@ namespace Server
         public List<PhotoDt> GetPage(int pageindex, int pagesize, string name, string author, string category, out  int rowcount)
         {
             List<Photo> list = new List<Photo>();
-            int c=0;
+            int c = 0;
             rowcount = 0;
             if (!string.IsNullOrWhiteSpace(category))
             {
@@ -117,6 +118,17 @@ namespace Server
         {
             base.Delete(id);
             return Save() > 0;
+        }
+
+        public List<PhotoDt> GetPageOrderByHottest(int pageIndex, int pageSize)
+        {
+            string sql = "select * from (select * ,row_number() over (order by d.rank desc) AS 'ranking' from (select  * ,rank=((select count(*) from [like] where photoId=c.photoId)+(select Count(*) from scanorsupport where photoid=c.photoid)+(select count(*) from comment where photoid =c.photoid)) from photo as c  ) as d  ) as e  where e.ranking between (@pageIndex*@pageSize+1) and @pageIndex*@pageSize";
+            SqlParameter[] param = { 
+                                   new SqlParameter("@pageIndex",pageIndex),
+                                   new SqlParameter("@pageSize",pageSize)
+                                   };
+            return  SqlQuery<PhotoDt>(sql, param);
+
         }
     }
 }

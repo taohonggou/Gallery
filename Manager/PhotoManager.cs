@@ -105,5 +105,15 @@ namespace Manager
         {
             return server.Get(photoId);
         }
+
+        public OutputModel GetPageHottest(string pageIndex,string pageSize)
+        {
+            int index, size;
+            FormatVerify.PageCheck(pageIndex, pageSize, out index, out size);
+            List<PhotoDt> list = server.GetPageOrderByHottest(index, size);
+            if (list.Count == 0)
+                return OutputHelper.GetOutputResponse(ResultCode.NoData);
+            return OutputHelper.GetOutputResponse(ResultCode.OK,list);
+        }
     }
 }
