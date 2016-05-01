@@ -47,8 +47,15 @@ namespace GalleryUI.Controllers
             return Content(new LikeManager().GetLikePhotos(user.UserId));
         }
 
+<<<<<<< HEAD
         public ActionResult Photos()
         {
+=======
+        public ActionResult PersonalData()
+        {
+            //if (!IsLogin())
+            //    return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
+>>>>>>> 038ee02b0832e11e3f80cc94a97b0e714bd65104
             return View();
         }
 	}
