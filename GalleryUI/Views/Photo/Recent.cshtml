@@ -1,8 +1,176 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "最新图片";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>最新图片</h2>
+<style type="text/css">
+    img {
+        border: none;
+    }
+
+    .wrapper {
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+        .wrapper h3 {
+            color: #3366cc;
+            font-size: 16px;
+            height: 35px;
+            line-height: 1.9;
+            text-align: center;
+            border-bottom: 1px solid #E5E5E5;
+            margin: 0 0 10px 0;
+        }
+
+    #con1_1 {
+        position: relative;
+    }
+
+        #con1_1 .product_list {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            padding: 10px;
+            background: #eee;
+            margin: 5px;
+        }
+
+    .product_list img {
+        width: 200px;
+    }
+
+    .product_list p {
+        padding: 5px 0px;
+        font-size: 12px;
+        text-align: center;
+        color: #333;
+        white-space: normal;
+        width: 200px;
+    }
+</style>
+
+<script src="~/Scripts/jquery.masonry.min.js"></script>
+
+<script type="text/javascript">
+    var pageIndex = 1, pageSize = 10;
+    $(document).ready(function () {
+        loadPhotosFirst(pageIndex, pageSize);
+
+        //var $container = $('#con1_1');
+        //$container.imagesLoaded(function () {
+        //    $container.masonry({
+        //        itemSelector: '.product_list',
+        //        columnWidth: 5 //每两列之间的间隙为5像素
+        //    });
+        //});
+
+
+
+        //滚动条滚动到离底部距离50的时候触发
+        $(window).scroll(function () {
+            // 当滚动到最底部以上100像素时， 加载新内容
+            //if ($(document).height() - $(this).scrollTop() - $(this).height() < 50) {
+            //    pageIndex++;
+            //    var $boxes = $(loadPhotos(pageIndex,pageSize));
+            //    $container.append($boxes).masonry('appended', $boxes, true);
+            //    $container.imagesLoaded(function () {
+            //        $container.masonry();
+            //    });//加载完图片后，会实现自动重新排列。【这里是重点】
+
+            //}
+
+            if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                if (trackLoad.groupNumber <= totalGroups && !trackLoad.loading) {
+                    //trackLoad.loading = true;   // Blocks other loading data again.
+                    //$('.animation_image').show();
+                    //$.getData(trackLoad);
+                    pageIndex++;
+                    alert(pageIndex);
+                    var $boxes = $(loadPhotos(pageIndex, pageSize));
+                    $container.append($boxes).masonry('appended', $boxes, true);
+                    $container.imagesLoaded(function () {
+                        $container.masonry();
+                    });//加载完图片后，会实现自动重新排列。【这里是重点】
+                }
+            }
+        });
+
+
+    });
+
+    //测试获取列表
+    function loadPhotos(index, size, isFirst) {
+        var data = '';
+        $.ajax({
+            url: '/Photo/GetRecentPhotos',
+            type: 'get',
+            data: { pageIndex: index, pageSize: size },
+            success: function (data) {
+                if (data.StatusCode == 1) {
+
+                    data = initPhotos(data.Data.List);
+                }
+
+
+                else
+                    return layer.msg(data.Message);
+            }
+
+        });
+        return data;
+    };
+
+    function loadPhotosFirst(index, size) {
+        $.ajax({
+            url: '/Photo/GetRecentPhotos',
+            type: 'get',
+            data: { pageIndex: index, pageSize: size },
+            success: function (data) {
+                if (data.StatusCode == 1) {
+                    var str = initPhotos(data.Data.List);
+                    $('#con1_1').html(str);
+
+                    var $container = $('#con1_1');
+                    $container.imagesLoaded(function () {
+                        $container.masonry({
+                            itemSelector: '.product_list',
+                            columnWidth: 5 //每两列之间的间隙为5像素
+                        });
+                    });
+                    $container.imagesLoaded(function () {
+                        $container.masonry();
+                    });//加载完图片后，会实现自动重新排列。【这里是重点】
+                }
+                else
+                    return layer.msg(data.Message);
+            }
+
+        });
+    };
+
+    function initPhotos(json) {
+        var str = '';
+        $.each(json, function () {
+            str += '<div class="product_list"><a href="#"><img src="' + this.ImgUrl + '"  alt="" /></a><p>' + this.Name + '</p></div>';
+        })
+        return str;
+    }
+</script>
+
+<div class="wrapper">
+
+    <div id="con1_1">
+        @*<div class="product_list"> <a href="#"><img src="~/Upload/Images/1afded4641274a7fb8a3416c6a5d53a1.jpg"></a><p>【乖怪蜜桃.搭搭配】~貂绒嫁到~今年好流行的材质呢~跟风购入~颜色质感都好喜欢de 说呢~重点还很保暖</p></div>
+            <div class="product_list"> <a href="#"><img src="/images/img4.jpg"></a><p>夏天花裤子是一定要有的哦！</p> </div>
+            <div class="product_list"> <a href="#"><img src="/images/img1.jpg"></a><p>薄荷绿的西裤子 怎么穿怎么好看</p></div>
+            <div class="product_list"> <a href="#"><img src="/images/img2.jpg"></a><p>超长款的雪纺开衫，很仙很气场呢，敞开穿比较大气，扣起来系个腰带，很淑女哈</p></div>
+            <div class="product_list"> <a href="#"><img src="/images/img3.jpg"></a><p>二零一二，十月。去年夏季最喜欢的雏菊小衬衫+牛仔长裙 还有最爱的复古手工包</p></div>
+            <div class="product_list"> <a href="#"><img src="/images/img3.jpg"></a><p>二零一二，十月。去年夏季最喜欢的雏菊小衬衫+牛仔长裙 还有最爱的复古手工包</p></div>
+            <div class="product_list"> <a href="#"><img src="/images/img5.jpg"></a><p>还有4年就奔3了，现在就拼命地装嫩吧，不然真到30大几岁还这副模样真真是恶心透了 啊哈哈~~ 装嫩必备蛋糕裙！</p></div>
+            <div class="product_list"> <a href="#"><img src="/images/img8.jpg"></a><p>依旧牛仔上衣和室内照。不要以为主角是衣服，其实是鞋子。</p></div>
+            <div class="product_list"> <a href="#"><img src="/images/img7.jpg"></a><p>很简单的大学生而已</p></div>*@
+        <div class="clear"></div>
+    </div>
+</div>
 

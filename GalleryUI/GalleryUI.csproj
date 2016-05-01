@@ -262,6 +262,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.fancybox.js" />
+    <Content Include="Scripts\jquery.masonry.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -281,6 +282,7 @@
     <Content Include="Scripts\layout\modernizr.custom.53451.js" />
     <Content Include="Scripts\layout\move-top.js" />
     <Content Include="Scripts\loginRegister.js" />
+    <Content Include="Scripts\masonry.pkgd.js" />
     <Content Include="Scripts\md5.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\page.js" />
