@@ -105,7 +105,7 @@ namespace Manager
         {
             return server.Get(photoId);
         }
-<<<<<<< HEAD
+
 
         public OutputModel GetPageHottest(string pageIndex,string pageSize)
         {
@@ -118,7 +118,7 @@ namespace Manager
         }
 
         /// <summary>
-        /// 获取没个分类下面的最火图片
+        /// 获取每个分类下面的最火图片
         /// </summary>
         /// <param name="num">每个分类下面选取几张图片</param>
         /// <returns></returns>
@@ -128,14 +128,17 @@ namespace Manager
             List<PhotoCategoryDt> list = new PhotoCategoryServer().GetList();
             if (list.Count == 0)
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
-
-
-
-            return new OutputModel();
+            List<CategoryPhotoDt> listCate = new List<CategoryPhotoDt>();
+            foreach (PhotoCategoryDt item in list)
+            {
+                CategoryPhotoDt cate = new CategoryPhotoDt();
+                cate.CategoryName = item.Name;
+                cate.CategoryPhotos = server.GetListByCategoryHottest(num, item.PhotoCategoryId);
+                listCate.Add(cate);
+            }
+            return OutputHelper.GetOutputResponse(ResultCode.OK,listCate);
         }
     }
 }
-=======
-    }
-}
->>>>>>> 47d249e6aa66a6fabd0a7be6931852ced70617ed
+
+

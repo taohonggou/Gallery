@@ -130,5 +130,19 @@ namespace Server
             return  SqlQuery<PhotoDt>(sql, param);
 
         }
+
+        /// <summary>
+        /// 根据分类获取最火的几张图片
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        public List<PhotoDt> GetListByCategoryHottest(int num,int categoryId)
+        {
+            string sql = "select top "+num+" * ,rank=((select count(*) from [like] where photoId=p.photoId)+(select Count(*) from scanorsupport where photoid=p.photoid)+(select count(*) from comment where photoid =p.photoid)) from photo as p where p.photocategoryid=@photocategoryid order by rank desc";
+            SqlParameter[] param = { 
+                                   new SqlParameter("@photocategoryid", categoryId)
+                                   };
+            return SqlQuery<PhotoDt>(sql, param);
+        }
     }
 }

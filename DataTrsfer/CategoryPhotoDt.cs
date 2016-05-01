@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataTrsfer
 {
-   public class CategoryPhoto
+   public class CategoryPhotoDt
     {
        public string CategoryName { get; set; }
 
