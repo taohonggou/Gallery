@@ -19,10 +19,11 @@ var uploader = new plupload.Uploader({
 //在实例对象上调用init()方法进行初始化
 uploader.init();
 
-
+var isCanUpload = false;
 
 //绑定文件添加进队列事件
 uploader.bind('FilesAdded', function (uploader, files) {
+    isCanUpload = true;
     for (var i = 0, len = files.length; i < len; i++) {
         var file_name = files[i].name; //文件名
         //构造html来更新UI
@@ -75,7 +76,11 @@ uploader.bind('UploadProgress', function (uploader, file) {
 
 //上传按钮
 $('#upload-btn').click(function () {
-    uploader.start(); //开始上传
+    if (isCanUpload)
+        uploader.start(); //开始上传
+    else
+        return layer.msg("请选择图片");
+
 });
 
 
