@@ -15,5 +15,10 @@ namespace GalleryUI.Controllers
         {
            return Content(new PhotoCategoryManager().GetList());
         }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
 	}
 }
