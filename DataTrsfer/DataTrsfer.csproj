@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CategoryPhoto.cs" />
+    <Compile Include="CategoryPhotoDt.cs" />
     <Compile Include="CommentDt.cs" />
     <Compile Include="LikeDt.cs" />
     <Compile Include="LocationDt.cs" />

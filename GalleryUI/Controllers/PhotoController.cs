@@ -54,10 +54,9 @@ namespace GalleryUI.Controllers
             return Content(new PhotoManager().GetPageHottest(pageIndex, pageSize));
         }
 
-        public ActionResult GetCategory()
+        public ActionResult GetCategory(int num)
         {
-            //PhotoManager
-            return Content("") ;
+            return Content(new PhotoManager().GetCategoryHottest(num));
         }
 	}
 }
