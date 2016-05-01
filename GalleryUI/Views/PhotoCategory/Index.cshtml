@@ -75,7 +75,7 @@
         var str = '';
         var temp;
         $.each(json, function (index, value) {
-            str += '<div class="title"><img src="/images/jian.png" width="11" height="18"><a href="javascript:void(0);">' + value.CategoryName + '</a></div><div class="pic"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody>';
+            str += '<div class="title"><img src="/images/jian.png" width="11" height="18"><a href="/PhotoCategory/ShowCategory?categoryId=' + value.CategoryId + '">' + value.CategoryName + '</a></div><div class="pic"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody>';
             var times = value.CategoryPhotos.length;
             temp = value.CategoryPhotos;
             if (times > 0) {

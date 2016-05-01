@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "分类";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    img {
+        border: none;
+    }
+
+    .wrapper {
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+        .wrapper h3 {
+            color: #3366cc;
+            font-size: 16px;
+            height: 35px;
+            line-height: 1.9;
+            text-align: center;
+            border-bottom: 1px solid #E5E5E5;
+            margin: 0 0 10px 0;
+        }
+
+    #con1_1 {
+        position: relative;
+    }
+
+        #con1_1 .product_list {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            padding: 10px;
+            background: #eee;
+            margin: 5px;
+        }
+
+    .product_list img {
+        width: 342px;
+    }
+
+    .product_list p {
+        padding: 5px 0px;
+        font-size: 12px;
+        text-align: center;
+        color: #333;
+        white-space: normal;
+        width: 200px;
+    }
+</style>
+
+<script src="~/Scripts/jquery.masonry.min.js"></script>
+<script src="~/Scripts/Tool.js"></script>
+<script src="~/Scripts/photoCategory/showCategory.js"></script>
+
+<div class="container">
+    <div id="con1_1">
+
+        <div class="clear"></div>
+    </div>
+</div>
+

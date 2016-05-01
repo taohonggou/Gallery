@@ -21,6 +21,11 @@ namespace GalleryUI.Controllers
             return View();
         }
 
-        //public
+        public ActionResult ShowCategory(string categoryId)
+        {
+            if (string.IsNullOrWhiteSpace(categoryId))
+                return RedirectHome();
+            return View();
+        }
 	}
 }

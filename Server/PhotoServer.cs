@@ -120,6 +120,12 @@ namespace Server
             return Save() > 0;
         }
 
+        /// <summary>
+        /// 分页获取最火图片
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         public List<PhotoDt> GetPageOrderByHottest(int pageIndex, int pageSize)
         {
             string sql = "select * from (select * ,row_number() over (order by d.rank desc) AS 'ranking' from (select  * ,rank=((select count(*) from [like] where photoId=c.photoId)+(select Count(*) from scanorsupport where photoid=c.photoid)+(select count(*) from comment where photoid =c.photoid)) from photo as c  ) as d  ) as e  where e.ranking between ((@pageIndex-1)*@pageSize+1) and @pageIndex*@pageSize";
@@ -141,6 +147,23 @@ namespace Server
             string sql = "select top "+num+" * ,rank=((select count(*) from [like] where photoId=p.photoId)+(select Count(*) from scanorsupport where photoid=p.photoid)+(select count(*) from comment where photoid =p.photoid)) from photo as p where p.photocategoryid=@photocategoryid order by rank desc";
             SqlParameter[] param = { 
                                    new SqlParameter("@photocategoryid", categoryId)
+                                   };
+            return SqlQuery<PhotoDt>(sql, param);
+        }
+
+        /// <summary>
+        /// 根据分类分页获取最火图片
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public List<PhotoDt> GetPageByCategoryOrderByHottest(int pageIndex,int pageSize,int categoryId)
+        {
+            string sql = "select * from (select * ,row_number() over (order by d.rank desc) AS 'ranking' from (select  * ,rank=((select count(*) from [like] where photoId=c.photoId)+(select Count(*) from scanorsupport where photoid=c.photoid)+(select count(*) from comment where photoid =c.photoid)) from photo  as c where c.photocategoryid=@photocategoryid ) as d  ) as e  where e.ranking between ((@pageIndex-1)*@pageSize+1) and @pageIndex*@pageSize";
+            SqlParameter[] param = { 
+                                   new SqlParameter("@pageIndex",pageIndex),
+                                   new SqlParameter("@pageSize",pageSize),
+                                   new SqlParameter("@photocategoryid",categoryId)
                                    };
             return SqlQuery<PhotoDt>(sql, param);
         }

@@ -23,9 +23,6 @@ namespace GalleryUI.Controllers
             return Content(new PhotoGalleryManager().Add(name,user.UserId));
         }
 
-       // public ActionResult GetAllGallery()
-       //{
-
-       //}
+       
 	}
 }

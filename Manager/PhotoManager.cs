@@ -133,10 +133,32 @@ namespace Manager
             {
                 CategoryPhotoDt cate = new CategoryPhotoDt();
                 cate.CategoryName = item.Name;
+                cate.CategoryId = item.PhotoCategoryId;
                 cate.CategoryPhotos = server.GetListByCategoryHottest(num, item.PhotoCategoryId);
                 listCate.Add(cate);
             }
             return OutputHelper.GetOutputResponse(ResultCode.OK,listCate);
+        }
+
+        /// <summary>
+        /// 根据分类分页获取最火照片
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="categoryId"></param>
+        /// <returns></returns>
+        public OutputModel GetPageByCategoryId(string pageIndex,string pageSize,string categoryId)
+        {
+            int index, size, iCategoryId;
+            FormatVerify.PageCheck(pageIndex, pageSize, out index, out size);
+
+            if (!int.TryParse(categoryId, out iCategoryId))
+                return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
+
+            List<PhotoDt> list= server.GetPageByCategoryOrderByHottest(index, size, iCategoryId);
+            if(list.Count==0)
+                return OutputHelper.GetOutputResponse(ResultCode.NoData);
+            return OutputHelper.GetOutputResponse(ResultCode.OK,list);
         }
     }
 }

@@ -9,6 +9,7 @@ namespace DataTrsfer
    public class CategoryPhotoDt
     {
        public string CategoryName { get; set; }
+       public int CategoryId { get; set; }
 
        private List<PhotoDt> categoryPhotos = new List<PhotoDt>();
 

@@ -288,6 +288,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\page.js" />
     <Content Include="Scripts\photo.js" />
+    <Content Include="Scripts\photoCategory\showCategory.js" />
     <Content Include="Scripts\plupload\Moxie.swf" />
     <Content Include="Scripts\plupload\Moxie.xap" />
     <Content Include="Scripts\plupload\plupload.full.min.js" />
@@ -388,6 +389,7 @@
     <Content Include="Views\AdminPhotoCategory\Index.cshtml" />
     <Content Include="Views\AdminComment\Index.cshtml" />
     <Content Include="Views\PhotoCategory\Index.cshtml" />
+    <Content Include="Views\PhotoCategory\ShowCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
