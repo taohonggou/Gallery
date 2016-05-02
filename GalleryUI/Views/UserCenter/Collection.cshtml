@@ -1,6 +1,6 @@
 ﻿@using DataTrsfer
 @{
-    ViewBag.Title = "Photos";
+    ViewBag.Title = "收藏";
     Layout = "~/Views/Shared/_UserCenterLayout.cshtml";
 }
 <style>
@@ -51,13 +51,11 @@
     }
 </style>
 
-
 <script type="text/javascript">
     var pageIndex = 1, pageSize = 20;
     var flag = true;
-
     $(function () {
-        $('#liPhotos').addClass('active');
+        $('#liLikes').addClass('active');
 
         $(window).scroll(function () {
             var scrollTop = document.body.scrollTop;
@@ -72,7 +70,7 @@
 
     function loadPhotos() {
         $.ajax({
-            url: '/Photo/GetPageByUserId',
+            url: '/Photo/GetPageByUserCollection',
             type: 'get',
             data: { pageIndex: pageIndex, pageSize: pageSize },
             async: false,
@@ -93,34 +91,36 @@
         $.each(json, function () {
             str += '<div class="polaroid" ><a href="/photo/details?photoId=' + this.PhotoId + '"><img src="' + this.ImgUrl + '" alt="Norway" style="width:100%;" class="img1" /></a><div class="pcenter"><p style="overflow: hidden; text-overflow: ellipsis;height: 22px;" title="' + this.Name + '">' + this.Name + '</p></div></div>';
         });
-        
+
         $('#divClear').before(str);
     }
 </script>
 
+<div id="divContainer">
 
-
-    <div id="divContainer">
-
-        @{
-            List<PhotoDt> list = ViewBag.ListPhotos;
-            if (list == null || list.Count == 0)
+    @{
+        List<PhotoDt> list = ViewBag.ListCollections;
+        if (list == null || list.Count == 0)
+        {
+            <label>暂无图片,<a href="/Upload/Upload">点击这里上传图片</a></label>
+        }
+        else
+        {
+            foreach (PhotoDt phtot in list)
             {
-                <label>暂无图片,<a href="/Upload/Upload">点击这里上传图片</a></label>
-            }
-            else
-            {
-                foreach (PhotoDt phtot in list)
-                {
-                    <div class="polaroid" >
-                        <a href="/photo/details?photoId=@phtot.PhotoId"><img src="@phtot.ImgUrl" alt="Norway" style="width:100%;" class="img1" /></a>
-                        <div class="pcenter">
-                            <p style="overflow: hidden; text-overflow: ellipsis;height:22px;" title="@phtot.Name ">@phtot.Name</p>
-                        </div>
+                <div class="polaroid" >
+                    <a href="/photo/details?photoId=@phtot.PhotoId"><img src="@phtot.ImgUrl" alt="Norway" style="width:100%;" class="img1" /></a>
+                    <div class="pcenter">
+                        <p style="overflow: hidden; text-overflow: ellipsis;height:22px;" title="@phtot.Name ">@phtot.Name</p>
                     </div>
-                }
+                </div>
             }
         }
-        <div class="clear" id="divClear"></div>
-    </div>
+    }
+    <div class="clear" id="divClear"></div>
+</div>
+
+
+
+
 

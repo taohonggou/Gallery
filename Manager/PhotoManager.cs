@@ -65,6 +65,11 @@ namespace Manager
             return OutputHelper.GetOutputResponse(ResultCode.OK, list);
         }
 
+        public List<PhotoDt> GetListByGallery(string userId,int galleryId)
+        {
+            return  server.GetListByGallery(userId, galleryId);
+        }
+
         public OutputModel GetPageOrderByDateTime(string pageIndex, string pageSize)
         {
             int index, size, rowCount, pageCount;
@@ -180,6 +185,22 @@ namespace Manager
                 return OutputHelper.GetOutputResponse(ResultCode.OK, list);
         }
 
+        public List<PhotoDt> GetPageByCollection(string userId,string pageIndex,string pageSize)
+        {
+            int index,size;
+            FormatVerify.PageCheck(pageIndex, pageSize, out index, out size);
+            return  server.GetPageByUserCollection(index, size, userId);
+        }
+
+        public OutputModel GetPageByCollections(string userId, string pageIndex, string pageSize)
+        {
+            int index, size;
+            FormatVerify.PageCheck(pageIndex, pageSize, out index, out size);
+            List<PhotoDt> list= server.GetPageByUserCollection(index, size, userId);
+            if (list.Count == 0)
+                return OutputHelper.GetOutputResponse(ResultCode.NoData);
+            return OutputHelper.GetOutputResponse(ResultCode.OK, list);
+        }
     }
 }
 

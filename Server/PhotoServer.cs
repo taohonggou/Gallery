@@ -24,11 +24,11 @@ namespace Server
             return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(list);
         }
 
-        internal List<PhotoDt> GetList(string userId, IQueryable<Like> queryLike)
-        {
-            IQueryable<int> photoIds = queryLike.Select(o => o.PhotoId);
-            return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(Select(o => photoIds.Contains(o.PhotoId)).ToList());
-        }
+        //internal List<PhotoDt> GetList(string userId, IQueryable<Like> queryLike)
+        //{
+        //    IQueryable<int> photoIds = queryLike.Select(o => o.PhotoId);
+        //    return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(Select(o => photoIds.Contains(o.PhotoId)).ToList());
+        //}
 
         /// <summary>
         /// 获取某人最近的count张图片
@@ -171,6 +171,20 @@ namespace Server
         public List<PhotoDt> GetPageByUserIdOrderByDateTime(string userId,int pageIndex,int pageSize)
         {
             List<Photo> list = SelectDesc(pageIndex, pageSize, o => o.UserId == userId, o => o.DateTime).ToList();
+            return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(list);
+        }
+
+        /// <summary>
+        /// 分页获取某人收藏的照片
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public List<PhotoDt> GetPageByUserCollection(int pageIndex,int pageSize,string userId)
+        {
+            IQueryable<int> queryPhotoId = new LikeServer().GetQueryable(userId).Select(o => o.PhotoId);
+            List<Photo> list= SelectDesc(pageIndex, pageSize, o => queryPhotoId.Contains(o.PhotoId), o => o.DateTime).ToList();
             return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(list);
         }
     }

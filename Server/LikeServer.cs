@@ -32,10 +32,15 @@ namespace Server
             return Select(o => o.UserId == userId && o.PhotoId == photoId).Any();
         }
 
-        public List<PhotoDt> GetList(string userId)
+        //public List<PhotoDt> GetList(string userId)
+        //{
+        //    IQueryable<Like> queryLike = Select(o => o.UserId == userId);
+        //    return new PhotoServer().GetList(userId, queryLike);
+        //}
+
+        public IQueryable<Like> GetQueryable(string userId)
         {
-            IQueryable<Like> queryLike = Select(o => o.UserId == userId);
-            return new PhotoServer().GetList(userId, queryLike);
+            return Select(o => o.UserId == userId);
         }
     }
 }

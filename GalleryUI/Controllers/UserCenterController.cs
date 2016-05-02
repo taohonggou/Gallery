@@ -40,12 +40,12 @@ namespace GalleryUI.Controllers
             return Content(new PhotoManager().GetAllPhotoByUserId(user.UserId));
         }
 
-        public ActionResult GetLikePhotos()
-        {
-            if (!IsLogin())
-                return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
-            return Content(new LikeManager().GetLikePhotos(user.UserId));
-        }
+        //public ActionResult GetLikePhotos()
+        //{
+        //    if (!IsLogin())
+        //        return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
+        //    return Content(new LikeManager().GetLikePhotos(user.UserId));
+        //}
 
 
         public ActionResult Photos(string pageIndex="1",string pageSize="20")
@@ -61,6 +61,24 @@ namespace GalleryUI.Controllers
             //if (!IsLogin())
             //    return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
 
+            return View();
+
+        }
+
+        public ActionResult Collection()
+        {
+            if(!IsLogin())
+                return RedirectHome();
+            //先获取20张照片
+            ViewBag.ListCollections = new PhotoManager().GetPageByCollection(user.UserId, "1", "20");
+            return View();
+        }
+
+        public ActionResult GalleryPhotos(int galleryId)
+        {
+            if (!IsLogin())
+                return RedirectHome();
+            ViewBag.GalleryPhotos = new PhotoManager().GetListByGallery(user.UserId, galleryId);
             return View();
 
         }

@@ -99,4 +99,5 @@ function change() {
         photoGalleryId: $('#gallery').val(),
         PhotoCategoryId: $('#category').val()
     }
+    
 }

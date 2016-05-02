@@ -77,7 +77,7 @@
         console.log(json);
         var str = '';
         $.each(json, function () {
-            str += '<div class="polaroid" onclick="getPhotoDetails(' + this.PhotoId + ')"><div style="position:absolute;right:0px;border:0px" class="hiddenbtn"><input type="button" class="btn btn-default" style="background-color:red;color:white;border-radius:0;"  value="设为封面" /></div><a href="javascript:;" class="ahover"><img src="' + this.ImgUrl + '" alt="Norway" style="width:100%;" class="img1" /></a><div class="pcenter"><p style="overflow: hidden; text-overflow: ellipsis; " title="' + this.Name + '">' + this.Name + '</p></div></div>';
+            str += '<div class="polaroid" onclick="getPhotoDetails(' + this.PhotoId + ')"><div style="position:absolute;right:0px;border:0px" class="hiddenbtn"><input type="button" class="btn btn-default" style="background-color:red;color:white;border-radius:0;"  value="设为封面" /></div><a href="javascript:;" class="ahover"><img src="' + this.ImgUrl + '" alt="Norway" style="width:100%;" class="img1" /></a><div class="pcenter"><p style="overflow: hidden; text-overflow: ellipsis;height:22px;" title="' + this.Name + '">' + this.Name + '</p></div></div>';
         });
         $('#h2Name').text('图片列表');
         $('#divContainer').html(str);
