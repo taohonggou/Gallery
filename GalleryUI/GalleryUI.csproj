@@ -390,6 +390,7 @@
     <Content Include="Views\AdminComment\Index.cshtml" />
     <Content Include="Views\PhotoCategory\Index.cshtml" />
     <Content Include="Views\PhotoCategory\ShowCategory.cshtml" />
+    <Content Include="Views\UserCenter\PersonalData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
