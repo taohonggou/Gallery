@@ -395,6 +395,7 @@
     <Content Include="Views\Shared\_UserCenterLayout.cshtml" />
     <Content Include="Views\UserCenter\Photos.cshtml" />
     <Content Include="Views\UserCenter\Collection.cshtml" />
+    <Content Include="Views\UserCenter\GalleryPhotos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

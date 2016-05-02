@@ -58,44 +58,44 @@
         $('#liGallery').addClass('active');
     });
 
-    function loadPhotos(galleryId) {
-        $.ajax({
-            url: '/usercenter/PhotoGallery',
-            type: 'post',
-            data: { galleryId: galleryId },
-            success: function (data) {
-                if (data.StatusCode == 1) {
-                    galleryPhotos(data.Data)
-                }
-                else
-                    layer.msg(data.Message);
-            }
-        });
-    }
-    //相册下的照片
-    function galleryPhotos(json) {
-        console.log(json);
-        var str = '';
-        $.each(json, function () {
-            str += '<div class="polaroid" onclick="getPhotoDetails(' + this.PhotoId + ')"><div style="position:absolute;right:0px;border:0px" class="hiddenbtn"><input type="button" class="btn btn-default" style="background-color:red;color:white;border-radius:0;"  value="设为封面" /></div><a href="javascript:;" class="ahover"><img src="' + this.ImgUrl + '" alt="Norway" style="width:100%;" class="img1" /></a><div class="pcenter"><p style="overflow: hidden; text-overflow: ellipsis;height:22px;" title="' + this.Name + '">' + this.Name + '</p></div></div>';
-        });
-        $('#h2Name').text('图片列表');
-        $('#divContainer').html(str);
-    }
+    //function loadPhotos(galleryId) {
+    //    $.ajax({
+    //        url: '/usercenter/PhotoGallery',
+    //        type: 'post',
+    //        data: { galleryId: galleryId },
+    //        success: function (data) {
+    //            if (data.StatusCode == 1) {
+    //                galleryPhotos(data.Data)
+    //            }
+    //            else
+    //                layer.msg(data.Message);
+    //        }
+    //    });
+    //}
+    ////相册下的照片
+    //function galleryPhotos(json) {
+    //    console.log(json);
+    //    var str = '';
+    //    $.each(json, function () {
+    //        str += '<div class="polaroid" onclick="getPhotoDetails(' + this.PhotoId + ')"><div style="position:absolute;right:0px;border:0px" class="hiddenbtn"><input type="button" class="btn btn-default" style="background-color:red;color:white;border-radius:0;"  value="设为封面" /></div><a href="javascript:;" class="ahover"><img src="' + this.ImgUrl + '" alt="Norway" style="width:100%;" class="img1" /></a><div class="pcenter"><p style="overflow: hidden; text-overflow: ellipsis;height:22px;" title="' + this.Name + '">' + this.Name + '</p></div></div>';
+    //    });
+    //    $('#h2Name').text('图片列表');
+    //    $('#divContainer').html(str);
+    //}
 
-    function initPhotos(json) {
+    //function initPhotos(json) {
         
-        var str = '';
-        $.each(json, function () {
-            str += '<div class="polaroid" onclick="getPhotoDetails(' + this.PhotoId + ')"><a href="javascript:;"><img src="' + this.ImgUrl + '" alt="Norway" style="width:100%;" class="img1" /></a><div class="pcenter"><p style="overflow: hidden; text-overflow: ellipsis; " title="' + this.Name + '">' + this.Name + '</p></div></div>';
-        });
-        $('#h2Name').text('图片列表');
-        $('#divContainer').html(str);
-    }
+    //    var str = '';
+    //    $.each(json, function () {
+    //        str += '<div class="polaroid" onclick="getPhotoDetails(' + this.PhotoId + ')"><a href="javascript:;"><img src="' + this.ImgUrl + '" alt="Norway" style="width:100%;" class="img1" /></a><div class="pcenter"><p style="overflow: hidden; text-overflow: ellipsis; " title="' + this.Name + '">' + this.Name + '</p></div></div>';
+    //    });
+    //    $('#h2Name').text('图片列表');
+    //    $('#divContainer').html(str);
+    //}
 
-    function getPhotoDetails(photoId) {
-        window.location.href = "/Photo/Details?photoId=" + photoId;
-    }
+    //function getPhotoDetails(photoId) {
+    //    window.location.href = "/Photo/Details?photoId=" + photoId;
+    //}
 
     //function getAllPhotos() {
     //    $.ajax({
@@ -141,8 +141,8 @@
                 foreach (PhotoGalleryDt phtot in list)
                 {
 
-                    <div class="polaroid" onclick="loadPhotos('@phtot.PhotoGalleryId')">
-                        <a href="javascript:;">
+                    <div class="polaroid" >
+                        <a href="/UserCenter/GalleryPhotos?galleryId=@phtot.PhotoGalleryId">
                             @if (phtot.CoverImg == null)
                             {
                                 phtot.CoverImg = "/images/cover.png";
