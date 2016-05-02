@@ -298,11 +298,8 @@
     <Content Include="Scripts\Upload.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Upload\Images\050c71d431cc4ebb8c5412666c330e0d.png" />
-    <Content Include="Upload\Images\05b45bac134142708ebe6bce1eea1c22.jpg" />
-    <Content Include="Upload\Images\0e11fd14a8a84202b9855c7cd05ff7b1.jpg" />
     <Content Include="Upload\Images\0f2789003d1048fa81b3dd527bcbce3d.jpg" />
     <Content Include="Upload\Images\1130d9fa7f494087ae5fe722ec92216d.jpg" />
-    <Content Include="Upload\Images\122846d585f4412aaaedfd2c8f6fa832.jpg" />
     <Content Include="Upload\Images\12c3b620e85942ebafa00c4d7ce36785.jpg" />
     <Content Include="Upload\Images\14dbda260d6c42e29a8666b7bee71725.jpg" />
     <Content Include="Upload\Images\1afded4641274a7fb8a3416c6a5d53a1.jpg" />
@@ -314,21 +311,16 @@
     <Content Include="Upload\Images\4348c8ba88204c8a9bac5f604d5e9e8b.png" />
     <Content Include="Upload\Images\4f6093afaaca46f1954aeee3173db335.jpg" />
     <Content Include="Upload\Images\5185f88ec6de43d3a442e5e3cb4bfb0e.png" />
-    <Content Include="Upload\Images\5cc6122a2c144a26bd58704464ebf92e.jpg" />
     <Content Include="Upload\Images\5fc1f7fd15e147b5b2dbb3a0f6838f9c.jpg" />
-    <Content Include="Upload\Images\6a4a1e2eff2445659fba3ae4150375a4.jpg" />
     <Content Include="Upload\Images\71f4caa9d70f4f9891a1814042c433e9.jpg" />
     <Content Include="Upload\Images\7676ed92960942ee96902cc01a9043aa.jpg" />
     <Content Include="Upload\Images\7810107aff3840b88c50e38b08049eb7.png" />
     <Content Include="Upload\Images\82318f3a5c43462e946fc70f2cdeb614.jpg" />
     <Content Include="Upload\Images\981696790d534976bfd2b190b024ab73.jpg" />
     <Content Include="Upload\Images\98742d4e91434583ab655356fc26eada.jpg" />
-    <Content Include="Upload\Images\9ddf3882b4ce4cb2ab9853dc4cdea4ff.jpg" />
-    <Content Include="Upload\Images\a4b77237c1fb4268b4dd03329c27814e.jpg" />
     <Content Include="Upload\Images\abd211628ad5484893d49e1f301cefd6.png" />
     <Content Include="Upload\Images\b22f1f70fc1d426681815b2a49ce8797.png" />
     <Content Include="Upload\Images\b31a8ec71a9a4542b82045e5ab5d1b8d.jpg" />
-    <Content Include="Upload\Images\b9d933de097d4538877696d3dc0a9969.png" />
     <Content Include="Upload\Images\c17bca49ac934bf4a7235a4fe15d1dac.jpg" />
     <Content Include="Upload\Images\c194e6833555437dafe548ceb01fb8fd.jpg" />
     <Content Include="Upload\Images\c284b96fd3f34da6b93eea84fe64c188.jpg" />
@@ -337,15 +329,10 @@
     <Content Include="Upload\Images\c8d9e59ce89443f6b3760174d5be8b4a.png" />
     <Content Include="Upload\Images\cc4bc7fc5be040af835b2a53ab2526de.jpg" />
     <Content Include="Upload\Images\ceefc44d017b40508efbe80f0a0d9fd3.gif" />
-    <Content Include="Upload\Images\d0be7161ddf2490da6649d376274b93b.jpg" />
     <Content Include="Upload\Images\da5b6ba1e5414bae95a14a5c3d90a2fa.jpg" />
-    <Content Include="Upload\Images\e20cc37672dc474cad1aae36c5ed0dfe.jpg" />
     <Content Include="Upload\Images\e4171e596bc642c2ba3138d4c9a2e86e.jpg" />
     <Content Include="Upload\Images\f784dab306bc4528850d3e2ae65b91c4.png" />
     <Content Include="Upload\Images\fbdfd0948f6441da83a4ba5c5c0fb967.jpg" />
-    <Content Include="Upload\Images\man.png" />
-    <Content Include="Upload\Images\women.png" />
-    <Content Include="Upload\Images\a754b2d4f35e49da867da7d2ba676dd8.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
