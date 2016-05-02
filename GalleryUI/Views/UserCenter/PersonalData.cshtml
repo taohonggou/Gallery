@@ -82,23 +82,32 @@
             <table style="position:absolute;left:30%;" class="tablepernal">
                 <tr>
                     <td>姓名：</td>
-                    <td>悦悦yueyue</td>
+                    <td>@ViewBag.User.Name</td>
                 </tr>
                 <tr>
                     <td>性别：</td>
-                    <td>女</td>
+                    <td>
+                        @if (ViewBag.User.Gender)
+                        {
+                            <p>男</p>
+                        }
+                        else
+                        {
+                            <p>女</p>
+                        }
+                    </td>
                 </tr>
                 <tr>
                     <td>年龄：</td>
-                    <td>18</td>
+                    <td>@ViewBag.User.Age</td>
                 </tr>
                 <tr>
                     <td>电话：</td>
-                    <td>187129393345</td>
+                    <td>@ViewBag.User.Phone</td>
                 </tr>
                 <tr>
                     <td>所在地：</td>
-                    <td>河北石家庄</td>
+                    <td>@ViewBag.User.Address</td>
                 </tr>
                 <tr>
                     <td></td>
