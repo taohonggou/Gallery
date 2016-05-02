@@ -59,7 +59,7 @@ namespace GalleryUI.Controllers
         public ActionResult PersonalData()
         {
             if (!IsLogin())
-                return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
+                return RedirectHome();
             return View();
         }
 
