@@ -160,6 +160,26 @@ namespace Manager
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
             return OutputHelper.GetOutputResponse(ResultCode.OK,list);
         }
+
+
+        public List<PhotoDt> GetPageByUserIdOrderByDatetime(string userId,string pageIndex,string pageSize)
+        {
+            int index,size;
+            FormatVerify.PageCheck(pageIndex,pageSize,out index,out size);
+            return server.GetPageByUserIdOrderByDateTime(userId, index, size);
+        }
+
+        public OutputModel  GetPageByUserId(string userId,string pageIndex,string pageSize)
+        {
+            int index, size;
+            FormatVerify.PageCheck(pageIndex, pageSize, out index, out size);
+            List<PhotoDt> list= server.GetPageByUserIdOrderByDateTime(userId, index, size);
+            if (list.Count == 0)
+                return OutputHelper.GetOutputResponse(ResultCode.NoData);
+            else
+                return OutputHelper.GetOutputResponse(ResultCode.OK, list);
+        }
+
     }
 }
 

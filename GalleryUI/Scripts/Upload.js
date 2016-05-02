@@ -91,7 +91,7 @@ uploader.bind("UploadComplete", function (uploader, file) {
 
 function exit() {
     //window.parent.location.href = window.parent.location.href;
-    window.parent.location.href = "/UserCenter/UserCenter";
+    window.parent.location.href = "/UserCenter/Photos";
 }
 
 function change() {

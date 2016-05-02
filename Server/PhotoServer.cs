@@ -167,5 +167,11 @@ namespace Server
                                    };
             return SqlQuery<PhotoDt>(sql, param);
         }
+
+        public List<PhotoDt> GetPageByUserIdOrderByDateTime(string userId,int pageIndex,int pageSize)
+        {
+            List<Photo> list = SelectDesc(pageIndex, pageSize, o => o.UserId == userId, o => o.DateTime).ToList();
+            return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(list);
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace GalleryUI.Controllers
     {
         //
         // GET: /UserCenter/
-        public ActionResult UserCenter()
+        public ActionResult Gallerys()
         {
             if (!IsLogin())
                 return Redirect("/");
@@ -48,9 +48,12 @@ namespace GalleryUI.Controllers
         }
 
 
-        public ActionResult Photos()
+        public ActionResult Photos(string pageIndex="1",string pageSize="20")
         {
-            return Content("");
+            if(!IsLogin())
+                return RedirectHome();
+            ViewBag.ListPhotos = new PhotoManager().GetPageByUserIdOrderByDatetime(user.UserId, pageIndex, pageSize);
+            return View();
         }
 
         public ActionResult PersonalData()

@@ -15,7 +15,7 @@ $(document).ready(function () {
 });
 
 function loadPhotos(index, size, isFirst) {
-    var data = '';
+    
     $.ajax({
         url: '/Photo/GetRecentPhotos',
         type: 'get',
@@ -23,8 +23,8 @@ function loadPhotos(index, size, isFirst) {
         async: false,
         success: function (data) {
             if (data.StatusCode == 1) {
-                data = initPhotos(data.Data.List);
-                var $boxes = $(data);
+                da = initPhotos(data.Data.List);
+                var $boxes = $(da);
                 $container.append($boxes).masonry('appended', $boxes, true);
                 $container.imagesLoaded(function () {
                     $container.masonry();
@@ -40,7 +40,6 @@ function loadPhotos(index, size, isFirst) {
         }
 
     });
-    return data;
 };
 var $container;
 function loadPhotosFirst(index, size) {

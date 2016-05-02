@@ -64,5 +64,12 @@ namespace GalleryUI.Controllers
             return Content(new PhotoManager().GetPageByCategoryId(pageIndex, pageSize, categoryId));
         }
 
+        public ActionResult GetPageByUserId(string pageIndex,string pageSize)
+        {
+            if (!IsLogin())
+                return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
+            return Content(new PhotoManager().GetPageByUserId(user.UserId,pageIndex, pageSize));
+        }
+
 	}
 }

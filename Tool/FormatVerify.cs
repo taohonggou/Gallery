@@ -112,7 +112,7 @@ namespace Tool
             if (!int.TryParse(pageIndex, out index))
                 index = 1;
             if (!int.TryParse(pageSize, out size))
-                size = 12;
+                size = 10;
         }
         public static void PageCheck(string pageIndex, out int index)
         {
