@@ -18,5 +18,15 @@ namespace DataTrsfer
         public int Status { get; set; }
         public string HeadUrl { get; set; }
         public System.DateTime DateTime { get; set; }
+
+        private bool gender = true;
+
+        public bool Gender { get { return gender; } set { gender = value; } }
+        private int age = 18;
+        public int Age { get { return age; } set { age = value; } }
+        private string phone = "18888888888";
+        public string Phone { get { return phone; } set { phone = value; } }
+        private string address = "火星";
+        public string Address { get { return address; } set { address = value; } }
     }
 }

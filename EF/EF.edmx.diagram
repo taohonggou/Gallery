@@ -16,15 +16,15 @@
         <EntityTypeShape EntityType="GalleryModel.Role" Width="1.5" PointX="3.75" PointY="13.75" />
         <EntityTypeShape EntityType="GalleryModel.ScanOrSupport" Width="1.5" PointX="3" PointY="17.75" />
         <EntityTypeShape EntityType="GalleryModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="3.75" />
-        <EntityTypeShape EntityType="GalleryModel.UserInfo" Width="1.5" PointX="0.75" PointY="9.125" />
         <EntityTypeShape EntityType="GalleryModel.UserRole" Width="1.5" PointX="6" PointY="9.625" />
         <EntityTypeShape EntityType="GalleryModel.VerifyRegister" Width="1.5" PointX="3" PointY="5.25" />
-        <AssociationConnector Association="GalleryModel.FK_COMMENT_REFERENCE_USERINFO" />
         <AssociationConnector Association="GalleryModel.FK_Photo_Location" />
         <AssociationConnector Association="GalleryModel.FK_Photo_PhotoCategory" />
+        <AssociationConnector Association="GalleryModel.FK_USERROLE_REFERENCE_ROLE" />
+        <EntityTypeShape EntityType="GalleryModel.UserInfo" Width="1.5" PointX="0.75" PointY="12.125" />
+        <AssociationConnector Association="GalleryModel.FK_COMMENT_REFERENCE_USERINFO" />
         <AssociationConnector Association="GalleryModel.FK_PHOTO_REFERENCE_USERINFO" />
         <AssociationConnector Association="GalleryModel.FK_PHOTOGAL_REFERENCE_USERINFO" />
-        <AssociationConnector Association="GalleryModel.FK_USERROLE_REFERENCE_ROLE" />
         <AssociationConnector Association="GalleryModel.FK_SCANORSU_REFERENCE_USERINFO" />
         <AssociationConnector Association="GalleryModel.FK_USERROLE_REFERENCE_USERINFO" />
         <AssociationConnector Association="GalleryModel.FK_VERIFYRE_REFERENCE_USERINFO" />
