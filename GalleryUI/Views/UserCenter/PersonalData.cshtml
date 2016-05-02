@@ -2,13 +2,14 @@
 
 @{
     ViewBag.Title = "PersonalData";
-    Layout = "~/Views/Shared/_UserCenterLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/usercenter.css" rel="stylesheet" />
 <style>
     .touxiang {
         display: none;
     }
+
     .imgtouxiang:hover .touxiang {
         display: block;
     }
@@ -25,9 +26,6 @@
     }
 </style>
 <script>
-    $(function () {
-        $('#liPersonalData').addClass('active');
-    });
     function edit(id) {
         layer.open({
             title: "添加分类",
@@ -40,7 +38,45 @@
     }
 </script>
 <div class="container" style="min-height:633px;">
- 
+    <div style="width: 100%; height: 250px; margin: auto; text-align: center;">
+        <div style="position:relative;height:50px; border-bottom:1px solid #d8d8d8;">
+        </div>
+        <div style=" position: relative; top: -49px;" class="imgtouxiang">
+            <div>
+                <img src="/images/touxiang.png" alt="Alternate Text" style="border-radius:50%;width:100px;"  />
+            </div>
+            <div style="position: absolute; left:50%;" class="touxiang"><input type="button" class="btn btn-default" style="position:absolute;width:80px;height:40px; right:-40px;top:-70px;" value="修改头像" /></div>
+            <div class="clear"></div>
+        </div>
+        <div><span style="font-size: 30px; position: relative; top: -43px;">@ViewBag.User.Name</span></div>
+        <div class="profile_nav_wrapper">
+            <div class="tabs_wrapper fix_width_on_modal">
+                <ul class="profile_nav px_tabs">
+                    <li id="liPhotos">
+                        <a data-nav="photos" href="/Usercenter/photos">
+                            相片
+                        </a>
+                    </li>
+                    <li id="liGallery">
+                        <a data-nav="galleries" href="/usercenter/Gallerys">
+                            <span class="translation_missing" title="translation missing: en.profiles.show.nav.galleries">相册</span>
+                        </a>
+                    </li>
+                    <li id="liLikes">
+                        <a data-nav="groups" href="/usercenter/collection">
+                            收藏
+                        </a>
+                    </li>
+                    <li id="liPersonalData" class="active">
+                        <a data-nav="about" href="/usercenter/PersonalData">
+                            个人资料
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
     <div id="divContainer" style="margin: auto; text-align: center;">
         <div style="position:relative;">
             <table style="position:absolute;left:30%;" class="tablepernal">
