@@ -29,6 +29,10 @@ function loadPhotos(index, size, isFirst) {
                 $container.imagesLoaded(function () {
                     $container.masonry();
                 });//加载完图片后，会实现自动重新排列。【这里是重点】
+                //layer.photos().reload();
+                layer.photos({
+                    photos: '#con1_1'
+                });
             }
             else {
                 flag = false;
@@ -42,14 +46,18 @@ function loadPhotosFirst(index, size) {
     $.ajax({
         url: '/Photo/GetHottest',
         type: 'get',
+        async: false,
         data: { pageIndex: index, pageSize: size },
         success: function (data) {
             
             if (data.StatusCode == 1) {
                 var str = initPhotos(data.Data);
-                $('#con1_1').html(str);
 
-                
+                $('#con1_1').html(str);
+                //layer.photos({}).clear();
+                layer.photos({
+                    photos: '#con1_1'
+                });
                 $container = $('#con1_1');
                 $container.imagesLoaded(function () {
                     $container.masonry({
@@ -74,11 +82,13 @@ function loadPhotosFirst(index, size) {
 function initPhotos(json) {
     var str = '';
     $.each(json, function () {
-        str += '<div class="product_list" onclick="redirectDetails(&quot;'+this.PhotoId+'&quot;)"><a href="javascript:;"><img src="' + this.ImgUrl + '"  alt="" /></a><p>' + this.Name + '</p></div>';
+        str += '<div class="product_list"><a href="javascript:;"><img src="' + this.ImgUrl + '"  alt="' + this.Name + '" layer-pid="' + this.PhotoId + '"/></a><p>' + this.Name + '</p></div>';
+        //str += '<div class="product_list" onclick="redirectDetails(&quot;' + this.PhotoId + '&quot;)"><a href="javascript:;"><img src="' + this.ImgUrl + '"  alt="" /></a><p>' + this.Name + '</p></div>';
     })
+
     return str;
 }
 
 function redirectDetails(photoId) {
-    window.location.href = "/Photo/Details?photoId="+photoId;
+    window.location.href = "/Photo/Details?photoId=" + photoId;
 }
