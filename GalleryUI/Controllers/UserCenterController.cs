@@ -61,7 +61,6 @@ namespace GalleryUI.Controllers
             if (!IsLogin())
                 return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
             return View();
-
         }
 
         public ActionResult Collection()
