@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,5 +67,16 @@ namespace Server
         {
             return TransferObject.ConvertObjectByEntity<ScanOrSupport, ScanOrSupportDt>(base.Select(o => true).ToList());
         }
+
+        public bool IsExist(string userId,int photoId,int type)
+        {
+            return Select(o => o.UserId == userId && o.PhotoId == photoId&&o.Type==type).Any();
+        }
+
+        public int GetCount(int type,int photoId)
+        {
+            return Select(o => o.Type == type && o.PhotoId == photoId).Count();
+        }
+
     }
 }

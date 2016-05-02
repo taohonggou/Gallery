@@ -10,5 +10,6 @@ namespace DataTrsfer
     {
         public int PhotoCategoryId { get; set; }
         public string Name { get; set; }
+        public int Priority { get; set; }
     }
 }

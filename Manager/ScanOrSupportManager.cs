@@ -11,16 +11,32 @@ namespace Manager
     public class ScanOrSupportManager
     {
         private ScanOrSupportServer Server = ObjectContainer.GetInstance<ScanOrSupportServer>();
-        public OutputModel Add(ScanOrSupportDt scanorsupport)
+        
+        public OutputModel AddSupport(string photoId,string userId)
         {
-            if (scanorsupport == null)
-                return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
-            ScanOrSupportDt s = Server.Get(scanorsupport.PhotoId, scanorsupport.UserId);
-            if (s != null)
-                Delete(s.ScanOrSupportId);
-            if (Server.Add(scanorsupport))
-                return OutputHelper.GetOutputResponse(ResultCode.OK);
+            int iPhotoId;
+            if(!int.TryParse(photoId,out iPhotoId))
+                return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
+            if(!new PhotoServer().IsExist(iPhotoId))
+                return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied);
+
+
+            if(Server.IsExist(userId,iPhotoId,2))
+                return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied, "您已经赞过此照片");
+            ScanOrSupportDt support = new ScanOrSupportDt { 
+            DateTime=DateTime.Now,
+            PhotoId = iPhotoId,
+            Type=2,//2是点赞
+            UserId=userId
+            };
+            if (Server.Add(support))
+            {
+                int count= Server.GetCount(2, iPhotoId);
+                return OutputHelper.GetOutputResponse(ResultCode.OK, new { SupportCount=count});
+            }
+                
             return OutputHelper.GetOutputResponse(ResultCode.Error);
+
         }
         public OutputModel Update(ScanOrSupportDt scanorsupport)
         {

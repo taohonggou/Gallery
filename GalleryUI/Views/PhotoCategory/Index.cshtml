@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .slogan {
+        float: left;
+        font-size: 36px;
+        color: #666;
+        text-align: center;
+        margin: 40px 190px;
+    }
+
+    .title {
+        float: left;
+        margin: 35px 0 22px 0;
+    }
+
+        .title img {
+            margin-right: 15px;
+            margin-bottom: 7px;
+        }
+
+        .title a {
+            color: #666;
+            font-size: 24px;
+            text-decoration:none;
+        }
+        .title:hover a{
+            color:#26a2fb;
+            font-size: 24px;
+        }
+    .pic {
+        /*float: left;*/
+    }
+
+    tbody {
+        display: table-row-group;
+        vertical-align: middle;
+        border-color: inherit;
+    }
+
+    tr {
+        display: table-row;
+        vertical-align: inherit;
+        border-color: inherit;
+    }
+
+    td {
+        padding: 0 5px 5px 0;
+    }
+</style>
+
+<script type="text/javascript">
+    var num = 8;
+    $(function () {
+        loadCategory();
+    });
+
+    function loadCategory() {
+        $.ajax({
+            url: '/photo/GetCategory',
+            type: 'get',
+            data: { num: num },
+            success: function (data) {
+                if (data.StatusCode == 1)
+                    initData(data.Data);
+                else
+                    layer.msg(data.Message);
+            }
+        });
+    }
+
+    function initData(json) {
+        var str = '';
+        var temp;
+        $.each(json, function (index, value) {
+            str += '<div class="title"><img src="/images/jian.png" width="11" height="18"><a href="/PhotoCategory/ShowCategory?categoryId=' + value.CategoryId + '">' + value.CategoryName + '</a></div><div class="pic"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody>';
+            var times = value.CategoryPhotos.length;
+            temp = value.CategoryPhotos;
+            if (times > 0) {
+                if (times <= 4) {
+                    str += '<tr>';
+                    for (var i = 0; i < times; i++) {
+                        str += setTd(temp[i]);
+                    }
+                    str += '</tr>';
+                }
+                else {
+                    str += '<tr>';
+                    for (var i = 0; i < 4; i++) {
+                        str += setTd(temp[i]);
+                    }
+                    str += '</tr>';
+                    str += '<tr>';
+                    for (var i = 4; i < times; i++) {
+                        str += setTd(temp[i]);
+                    }
+                    str += '</tr>';
+                }
+            } else {
+                str += '<tr><td>暂无图片</td></tr>';
+            }
+            str += '</tbody></table></div>';
+
+        });
+        $('#photoList').append(str);
+    }
+
+    function setTd(obj) {
+        return '<td><a href="/photo/details?photoId='+obj.PhotoId+'" target="_blank"><img alt="' + obj.Name + '" src="' + obj.ImgUrl + '" width="270" height="215"></a></td>';
+    }
+</script>
+
+<div class="container" id="photoList">
+    <div class="slogan">从3000万图片中获取无止境灵感。现在就开始！</div>
+    <div><img src="/images/line.png" width="100%" height="1"></div>
+</div>
+

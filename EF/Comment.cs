@@ -18,10 +18,10 @@ namespace EF
         public string UserId { get; set; }
         public int PhotoId { get; set; }
         public int UpId { get; set; }
+        public int RootId { get; set; }
         public string Content { get; set; }
         public System.DateTime DateTime { get; set; }
     
-        public virtual Photo Photo { get; set; }
         public virtual UserInfo UserInfo { get; set; }
     }
 }

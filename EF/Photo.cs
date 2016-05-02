@@ -14,29 +14,18 @@ namespace EF
     
     public partial class Photo
     {
-        public Photo()
-        {
-            this.Comment = new HashSet<Comment>();
-            this.Like = new HashSet<Like>();
-            this.ScanOrSupport = new HashSet<ScanOrSupport>();
-        }
-    
         public int PhotoId { get; set; }
-        public int LocationId { get; set; }
+        public Nullable<int> LocationId { get; set; }
         public int PhotoCategoryId { get; set; }
-        public int PhotoGalleryId { get; set; }
+        public Nullable<int> PhotoGalleryId { get; set; }
         public string UserId { get; set; }
         public string ImgUrl { get; set; }
         public string Name { get; set; }
         public short Status { get; set; }
         public System.DateTime DateTime { get; set; }
     
-        public virtual ICollection<Comment> Comment { get; set; }
-        public virtual ICollection<Like> Like { get; set; }
         public virtual Location Location { get; set; }
         public virtual PhotoCategory PhotoCategory { get; set; }
-        public virtual PhotoGallery PhotoGallery { get; set; }
-        public virtual ICollection<ScanOrSupport> ScanOrSupport { get; set; }
         public virtual UserInfo UserInfo { get; set; }
     }
 }

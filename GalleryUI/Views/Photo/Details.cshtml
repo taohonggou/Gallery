@@ -1,0 +1,258 @@
+﻿@{
+    ViewBag.Title = "详情";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/Tool.js"></script>
+<script>
+    var pId = 0;
+    var photoId = getParamValue('photoId');
+    $(function () {
+        load();
+    });
+
+    function load() {
+        $.ajax({
+            url: '/Photo/GetDetails?photoId=' + photoId,
+            type: 'get',
+            success: function (data) {
+                if (data.StatusCode === 1) {
+                    init(data.Data);
+                } else {
+                    layer.msg(data.Message, { time: 2000 });
+                }
+            }
+        });
+    }
+
+    function init(json) {
+        isCollectionAndSupport(json.IsCollection, json.IsSupport);
+        //alert(json.Name);
+        $('#photoName').text(json.Name);
+        $('#imgRul').attr('src', json.ImgUrl);
+        setSupCount(json.SuppostCount);
+        $('#userName').text(json.User.Name);
+        initLastImg(json.ListLastPhotos);
+        initComment(json.ListComment)
+    }
+
+    function isCollectionAndSupport(isCollection,isSupport) {
+        showCollection(isCollection);
+        showSupport(isSupport);
+    }
+
+    function showCollection(isCollection) {
+        if (isCollection)
+            $('#imgCollection').attr('src', '/images/liked.png');
+    }
+
+    function showSupport(isSupport) {
+        if (isSupport)
+            $('#imgSupport').attr('src','/images/praised.png');
+    }
+
+    function setSupCount(count) {
+        $('#supCount').text(count);
+    }
+
+    function initComment(json) {
+        if (json.length > 0)
+        {
+            $('#comment').css('display', 'block');
+        }
+        var comment = '';
+        var headImg = '';
+        $.each(json, function (index, value) {
+            
+
+            comment += '<div class="media mainborder"><a class="pull-left" href="#"><img class="media-object" src="/images/touxiang.png" style="width:50px;height:50px;" alt="作者"></a><div class="media-body"><h4 class="media-heading"><lable>' + value.User.Name + '</lable><a style="position: relative; float: right; font-size: 10px; cursor: pointer;" onclick="reply(' + value.CommentId + ',' + value.CommentId + ',&quot;' + value.User.Name + '&quot;)">回复</a></h4><p>' + value.Content + '</p> ';
+            //判断有没有二级评论
+            if (value.SonComment.length > 0) {
+                $.each(value.SonComment, function (key, item) {
+
+                    comment += '<div class="media mainborder"><a class="pull-left" href="#"><img class="media-object" src="/images/touxiang.png" style="width:50px;height:50px;" alt="作者"></a><div class="media-body"><h4 class="media-heading"><lable>' + item.User.Name + '</lable><a style="position: relative; float: right; font-size: 10px; cursor: pointer;" onclick="reply(' + value.CommentId + ',' + item.CommentId + ',&quot;' + item.User.Name + '&quot;)" >回复</a></h4><p>' + item.Content + '</p></div></div>';
+                })
+            }
+            comment += '<div class="detial mainborder showhidden" id="' + value.CommentId + '" style="display:none" ><textarea id="' + value.CommentId + '1" class="mainborder"  style="margin:auto;width:100%;"></textarea><input type="button" onclick="submit(' + value.CommentId + '1,' + value.CommentId + ')" value="评论" class="btn-default" style="position:relative;float:right;" /><div class="clear"></div></div></div></div>';
+        });
+        $('#comment').html(comment);
+    }
+
+    function initLastImg(json) {
+        var lastImg = '';
+        $.each(json, function () {
+            lastImg += '<a href="/photo/details?photoId=' + this.PhotoId + '"><div><img style="width:99%;height:99%;margin:1%;" src="' + this.ImgUrl + '" /></div></a>';
+        });
+        $('#lastPhotos a').remove();
+        $('#lastPhotos').prepend(lastImg);
+    }
+
+
+    function submit(id, rootId, pid) {
+        if (pid == 0)
+            pId = 0;
+        var content = $('#' + id.toString()).val();
+        $('#' + temp + '1').val('');
+        if (pId == 0)
+        {
+            $(".showhidden").css("display", "none");
+        }
+        if (!content) {
+            layer.msg('评论内容不能为空');
+            $('#' + id.toString()).focus();
+            return;
+        }
+        $('#' + temp).css('display', 'none');
+        
+        $.ajax({
+            url: '/comment/AddComment',
+            type: 'post',
+            data: { content: content, photoId: photoId, upId: pId, rootId: rootId },
+            success: function (data) {
+                if (data.StatusCode == 1) {
+                    loadComment();
+                    $('#content').val('');
+                } else
+                    layer.msg(data.Message);
+            }
+        });
+    }
+
+    function loadComment() {
+        $.ajax({
+            url: '/Comment/GetComment',
+            type: 'get',
+            data: { photoId: photoId },
+            success: function (data) {
+                if (data.StatusCode == 1)
+                    initComment(data.Data);
+                else
+                    layer.msg(data.Message, {time:2000});
+            }
+        });
+    }
+
+    function addLike() {
+        $.ajax({
+            url: '/like/AddLike',
+            type: 'post',
+            data: { photoId: photoId },
+            success: function (data) {
+                layer.msg(data.Message);
+                if (data.StatusCode == 1)
+                    showCollection(true);
+            }
+        });
+    }
+
+    function support() {
+        $.ajax({
+            url: '/ScanOrSupport/AddSupport',
+            type: 'post',
+            data: { photoId: photoId },
+            success: function (data) {
+                if (data.StatusCode == 1) {
+                    setSupCount(data.Data.SupportCount);
+                    showSupport(true);
+                } else {
+                    layer.msg(data.Message);
+                }
+            }
+        });
+    }
+
+    var temp = '';//存储临时代开的回复框
+    function reply(commentId, pid, name) {
+        $(".showhidden").css("display", "none");
+        $('#' + commentId.toString()).css('display', 'block');
+        pId = pid;
+        temp = commentId;
+        $('#' + temp + '1').val('回复 ' + name + ' ：');
+        $('#' + temp + '1').focus();
+    }
+
+</script>
+<style>
+    .detial {
+        margin: auto;
+        width: 99%;
+    }
+
+
+    .imgs img {
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .imgs div {
+        width: 48%;
+        height: 8em;
+        display: inline-block;
+        margin: 1%;
+    }
+
+    .mainborder {
+        padding: 4px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-top: 1em;
+    }
+
+    .imgs {
+        position: relative;
+    }
+</style>
+
+<div class="container">
+    <h2 id="photoName"></h2>
+    <div class="col-lg-9">
+        <div class="detial">
+            <img src="" id="imgRul" class="img-thumbnail" style="display:block;margin:auto;" />
+            <div class="mainborder" style="margin-top:1em;">
+                <a style="cursor: pointer; margin-left: 40%; text-decoration: none;" onclick="addLike()">
+                    <span>收藏</span>
+                    <img alt="收藏" id="imgCollection" width="20" height="20" src="~/images/like.png" />
+                </a>
+                <a style="cursor: pointer; text-decoration: none;float:right;margin-right:40%;" onclick="support()">
+                    <img src="~/images/praise.png" id="imgSupport" width="23" height="23" alt="赞" /> <span id="supCount">0</span>
+                </a>
+            </div>
+        </div>
+        <div class="detial mainborder" id="comment" style="display:none;">
+            @*<div class="media mainborder">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="~/images/touxiang.png" style="width:50px;height:50px;" alt="作者">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">作者姓名<a style="position: relative; float: right; font-size: 10px; cursor: pointer;">回复</a></h4>
+                        这张图很有逼格。这张图很有逼格。
+                        <div class="media mainborder">
+                            <a class="pull-left" href="#">
+                                <img class="media-object" src="~/images/touxiang.png" style="width:50px;height:50px;"
+                                     alt="作者">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">作者姓名<a style="position: relative; float: right; font-size: 10px; cursor: pointer;">回复</a></h4>
+                                这张图很有逼格。这张图很有逼格。
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+        </div>
+        <div class="detial mainborder">
+            <textarea class="mainborder" id="content" style="margin:auto;width:100%;"></textarea>
+            <input type="button" onclick="submit('content', 0, 0)" value="评论" class="btn-default" style="position:relative;float:right;" />
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="col-lg-3" style="padding: 4px; border: 1px solid #ddd; border-radius: 4px;">
+        <div style="margin-bottom:1em;margin-top:1em;"><span id="userName"></span></div>
+        <div class="imgs polaroid" id="lastPhotos">
+
+        </div>
+
+    </div>
+    <div class="clear"></div>
+</div>
+
+
