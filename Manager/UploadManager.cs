@@ -13,7 +13,7 @@ namespace Manager
 {
     public class UploadManager
     {
-        public OutputModel UploadImg(HttpPostedFileBase img, string userId, string galleryId, string categoryId)
+        public OutputModel UploadImg(HttpPostedFileBase img, string userId, string galleryId, string categoryId,string name)
         {
             string newPath;
             OutputModel model = UploadHelper.UploadImg(img, out newPath);
@@ -32,7 +32,7 @@ namespace Manager
             {
                 DateTime = DateTime.Now,
                 ImgUrl = newPath,
-                Name = img.FileName,
+                Name =name?? img.FileName.Substring(0,img.FileName.LastIndexOf('.')),
                 PhotoCategoryId = iCateGory,
                 PhotoGalleryId = (iGallery == -1? (int?)null:iGallery),
                 Status = 1,
