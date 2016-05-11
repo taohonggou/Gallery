@@ -27,7 +27,7 @@ uploader.bind('FilesAdded', function (uploader, files) {
     for (var i = 0, len = files.length; i < len; i++) {
         var file_name = files[i].name; //文件名
         //构造html来更新UI
-        var html = '<li id="file-' + files[i].id + '" class="list-group-item" style="float:left;width:33%;height:300px;"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
+        var html = '<li id="file-' + files[i].id + '" class="list-group-item" style="float:left;width:33%;height:300px;"><p class="file-name">' + file_name + '</p><p class="progress"></p><input type="button" onclick="removeFile(&quot;' + files[i].id + '&quot;)" value="删除" /></li>';
         $(html).appendTo('#file-list');
         !function (i) {
             previewImage(files[i], function (imgsrc) {
@@ -37,6 +37,21 @@ uploader.bind('FilesAdded', function (uploader, files) {
     }
 });
 
+//移除照片
+function removeFile(id) {
+    
+    $('#file-'+id).remove();
+    var toremove = '';
+    //var id = $(this).attr("data-val");
+    for (var i in uploader.files) {
+        if (uploader.files[i].id === id) {
+            toremove = i;
+        }
+    }
+    uploader.files.splice(toremove, 1);
+    //alert(id);
+    //uploader.removeFile(id);
+}
 
 //异常事件
 uploader.bind('Error', function (uploader, errObject) {
@@ -76,7 +91,7 @@ uploader.bind('UploadProgress', function (uploader, file) {
 
 //上传按钮
 $('#upload-btn').click(function () {
-    if (isCanUpload)
+    if (uploader.files.length > 0)
         uploader.start(); //开始上传
     else
         return layer.msg("请选择图片");
@@ -99,5 +114,5 @@ function change() {
         photoGalleryId: $('#gallery').val(),
         PhotoCategoryId: $('#category').val()
     }
-    
 }
+
