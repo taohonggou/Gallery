@@ -73,7 +73,7 @@
     {
         foreach (PhotoDt phtot in list)
         {
-                <div class="polaroid">
+                <div class="polaroid"><div style="position:absolute;right:0px;border:0px" class="hiddenbtn"><input type="button" class="btn btn-default" style="background-color:red;color:white;border-radius:0;" value="设为封面" /></div>
                     <a href="/photo/details?photoId=@phtot.PhotoId"><img src="@phtot.ImgUrl" alt="Norway" style="width:100%;" class="img1" /></a>
                     <div class="pcenter">
                         <p style="overflow: hidden; text-overflow: ellipsis;height:22px;" title="@phtot.Name ">@phtot.Name</p>
