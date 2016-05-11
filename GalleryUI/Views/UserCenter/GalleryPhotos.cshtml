@@ -57,6 +57,20 @@
     $(function () {
         $('#liGallery').addClass('active');
     });
+    function fengmian(photoid,photogalleryid) {
+        $.ajax({
+            url:"/PhotoGallery/UpdateFengmian",
+            type:"post",
+            data:{photoid:photoid,photogalleryid:photogalleryid},
+            success:function (o) {
+                if(o.StatusCode==1){
+                    layer.msg("设为封面成功");
+                }else{
+                    layer.msg("设为封面失败");
+                }
+            }
+        });
+    }
 </script>
 
 
@@ -71,12 +85,12 @@
     }
     else
     {
-        foreach (PhotoDt phtot in list)
+        foreach (PhotoDt photo in list)
         {
-                <div class="polaroid"><div style="position:absolute;right:0px;border:0px" class="hiddenbtn"><input type="button" class="btn btn-default" style="background-color:red;color:white;border-radius:0;" value="设为封面" /></div>
-                    <a href="/photo/details?photoId=@phtot.PhotoId"><img src="@phtot.ImgUrl" alt="Norway" style="width:100%;" class="img1" /></a>
+                <div class="polaroid"><div style="position:absolute;right:0px;border:0px" class="hiddenbtn"><input type="button" class="btn btn-default" style="background-color:red;color:white;border-radius:0;" value="设为封面" onclick="fengmian(@photo.PhotoId,@photo.PhotoGalleryId)"/></div>
+                    <a href="/photo/details?photoId=@photo.PhotoId"><img src="@photo.ImgUrl" alt="Norway" style="width:100%;" class="img1" /></a>
                     <div class="pcenter">
-                        <p style="overflow: hidden; text-overflow: ellipsis;height:22px;" title="@phtot.Name ">@phtot.Name</p>
+                        <p style="overflow: hidden; text-overflow: ellipsis;height:22px;" title="@photo.Name ">@photo.Name</p>
                     </div>
                 </div>
             }

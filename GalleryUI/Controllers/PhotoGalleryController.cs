@@ -23,6 +23,10 @@ namespace GalleryUI.Controllers
             return Content(new PhotoGalleryManager().Add(name,user.UserId));
         }
 
+        public ActionResult UpdateFengmian(string photoid,string photogalleryid)
+       {
+          return Content(new PhotoGalleryManager().UpdateFengmian(photoid, photogalleryid));
+       }
        
 	}
 }
