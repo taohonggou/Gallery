@@ -15,18 +15,27 @@ namespace GalleryUI.Controllers
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-       [HttpPost]
+        [HttpPost]
         public ActionResult Add(string name)
         {
             if (!IsLogin())
                 return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
-            return Content(new PhotoGalleryManager().Add(name,user.UserId));
+            return Content(new PhotoGalleryManager().Add(name, user.UserId));
         }
 
-        public ActionResult UpdateFengmian(string photoid,string photogalleryid)
-       {
-          return Content(new PhotoGalleryManager().UpdateFengmian(photoid, photogalleryid));
-       }
-       
-	}
+        public ActionResult UpdateFengmian(string photoid, string photogalleryid)
+        {
+            return Content(new PhotoGalleryManager().UpdateFengmian(photoid, photogalleryid));
+        }
+        public ActionResult GetList()
+        {
+            return Content(new PhotoGalleryManager().GetListOutputModel(user.UserId));
+        }
+        public ActionResult DeleteAll(string idstr)
+        {
+            string[] ids = idstr.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            return Content(new PhotoGalleryManager().DeleteAll(ids));
+        }
+
+    }
 }

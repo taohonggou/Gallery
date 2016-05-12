@@ -65,9 +65,9 @@ namespace Manager
             return OutputHelper.GetOutputResponse(ResultCode.OK, list);
         }
 
-        public List<PhotoDt> GetListByGallery(string userId,int galleryId)
+        public List<PhotoDt> GetListByGallery(string userId, int galleryId)
         {
-            return  server.GetListByGallery(userId, galleryId);
+            return server.GetListByGallery(userId, galleryId);
         }
 
         public OutputModel GetPageOrderByDateTime(string pageIndex, string pageSize)
@@ -112,14 +112,14 @@ namespace Manager
         }
 
 
-        public OutputModel GetPageHottest(string pageIndex,string pageSize)
+        public OutputModel GetPageHottest(string pageIndex, string pageSize)
         {
             int index, size;
             FormatVerify.PageCheck(pageIndex, pageSize, out index, out size);
             List<PhotoDt> list = server.GetPageOrderByHottest(index, size);
             if (list.Count == 0)
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
-            return OutputHelper.GetOutputResponse(ResultCode.OK,list);
+            return OutputHelper.GetOutputResponse(ResultCode.OK, list);
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Manager
                 cate.CategoryPhotos = server.GetListByCategoryHottest(num, item.PhotoCategoryId);
                 listCate.Add(cate);
             }
-            return OutputHelper.GetOutputResponse(ResultCode.OK,listCate);
+            return OutputHelper.GetOutputResponse(ResultCode.OK, listCate);
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace Manager
         /// <param name="pageSize"></param>
         /// <param name="categoryId"></param>
         /// <returns></returns>
-        public OutputModel GetPageByCategoryId(string pageIndex,string pageSize,string categoryId)
+        public OutputModel GetPageByCategoryId(string pageIndex, string pageSize, string categoryId)
         {
             int index, size, iCategoryId;
             FormatVerify.PageCheck(pageIndex, pageSize, out index, out size);
@@ -160,46 +160,60 @@ namespace Manager
             if (!int.TryParse(categoryId, out iCategoryId))
                 return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
 
-            List<PhotoDt> list= server.GetPageByCategoryOrderByHottest(index, size, iCategoryId);
-            if(list.Count==0)
+            List<PhotoDt> list = server.GetPageByCategoryOrderByHottest(index, size, iCategoryId);
+            if (list.Count == 0)
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
-            return OutputHelper.GetOutputResponse(ResultCode.OK,list);
+            return OutputHelper.GetOutputResponse(ResultCode.OK, list);
         }
 
 
-        public List<PhotoDt> GetPageByUserIdOrderByDatetime(string userId,string pageIndex,string pageSize)
-        {
-            int index,size;
-            FormatVerify.PageCheck(pageIndex,pageSize,out index,out size);
-            return server.GetPageByUserIdOrderByDateTime(userId, index, size);
-        }
-
-        public OutputModel  GetPageByUserId(string userId,string pageIndex,string pageSize)
+        public List<PhotoDt> GetPageByUserIdOrderByDatetime(string userId, string pageIndex, string pageSize)
         {
             int index, size;
             FormatVerify.PageCheck(pageIndex, pageSize, out index, out size);
-            List<PhotoDt> list= server.GetPageByUserIdOrderByDateTime(userId, index, size);
+            return server.GetPageByUserIdOrderByDateTime(userId, index, size);
+        }
+
+        public OutputModel GetPageByUserId(string userId, string pageIndex, string pageSize)
+        {
+            int index, size;
+            FormatVerify.PageCheck(pageIndex, pageSize, out index, out size);
+            List<PhotoDt> list = server.GetPageByUserIdOrderByDateTime(userId, index, size);
             if (list.Count == 0)
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
             else
                 return OutputHelper.GetOutputResponse(ResultCode.OK, list);
         }
 
-        public List<PhotoDt> GetPageByCollection(string userId,string pageIndex,string pageSize)
+        public List<PhotoDt> GetPageByCollection(string userId, string pageIndex, string pageSize)
         {
-            int index,size;
+            int index, size;
             FormatVerify.PageCheck(pageIndex, pageSize, out index, out size);
-            return  server.GetPageByUserCollection(index, size, userId);
+            return server.GetPageByUserCollection(index, size, userId);
         }
 
         public OutputModel GetPageByCollections(string userId, string pageIndex, string pageSize)
         {
             int index, size;
             FormatVerify.PageCheck(pageIndex, pageSize, out index, out size);
-            List<PhotoDt> list= server.GetPageByUserCollection(index, size, userId);
+            List<PhotoDt> list = server.GetPageByUserCollection(index, size, userId);
             if (list.Count == 0)
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
             return OutputHelper.GetOutputResponse(ResultCode.OK, list);
+        }
+        public OutputModel DeleteAll(string[] ids)
+        {
+            int[] id=new int[ids.Length];
+            for (int i = 0; i < ids.Length; i++)
+			{
+                if (!int.TryParse(ids[i], out id[i]))
+                    return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
+			}
+            if (server.Delete(id))
+            {
+                return OutputHelper.GetOutputResponse(ResultCode.OK);
+            }
+            return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
     }
 }

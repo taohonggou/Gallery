@@ -78,5 +78,11 @@ namespace GalleryUI.Controllers
             return Content(new PhotoManager().GetPageByCollections(user.UserId,pageIndex,pageSize));
         }
 
+
+        public ActionResult DeleteAll(string idstr)
+        {
+            string[] ids = idstr.Split(new char[]{','},StringSplitOptions.RemoveEmptyEntries);
+            return Content(new PhotoManager().DeleteAll(ids));
+        }
 	}
 }

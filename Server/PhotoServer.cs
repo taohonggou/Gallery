@@ -119,7 +119,11 @@ namespace Server
             base.Delete(id);
             return Save() > 0;
         }
-
+        public bool Delete(int[] ids)
+        {
+            base.Delete(ids);
+            return Save() > 0;
+        }
         /// <summary>
         /// 分页获取最火图片
         /// </summary>

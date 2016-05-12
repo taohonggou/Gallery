@@ -18,7 +18,7 @@ namespace Server
         /// <returns></returns>
         public int GetCount(int photoId)
         {
-            return  Select(o => o.PhotoId == photoId).Count();
+            return Select(o => o.PhotoId == photoId).Count();
         }
 
         public bool Add(LikeDt like)
@@ -27,7 +27,7 @@ namespace Server
             return Save() > 0;
         }
 
-        public bool IsExist(string userId,int photoId)
+        public bool IsExist(string userId, int photoId)
         {
             return Select(o => o.UserId == userId && o.PhotoId == photoId).Any();
         }
@@ -41,6 +41,12 @@ namespace Server
         public IQueryable<Like> GetQueryable(string userId)
         {
             return Select(o => o.UserId == userId);
+        }
+        public bool Delete(string userId, int[] ids)
+        {
+            List<Like> list = base.Select(o => o.UserId == userId && ids.Contains(o.PhotoId)).ToList();
+            base.Delete(list);
+            return Save() > 0;
         }
     }
 }

@@ -20,5 +20,10 @@ namespace GalleryUI.Controllers
                 return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
             return Content(new LikeManager().AddLike(photoId,user.UserId));
         }
+        public ActionResult DeleteLikeAll(string pidstr)
+        {
+            string[] pids = pidstr.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            return Content(new LikeManager().DeleteAll(user.UserId,pids));
+        }
 	}
 }

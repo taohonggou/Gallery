@@ -55,5 +55,18 @@ namespace Manager
         //        return OutputHelper.GetOutputResponse(ResultCode.NoData);
         //    return OutputHelper.GetOutputResponse(ResultCode.OK, listPhotos);
         //}
+        public OutputModel DeleteAll(string userid,string[] ids)
+        {
+            int[] id = new int[ids.Length];
+            for (int i = 0; i < ids.Length; i++)
+            {
+                if (!int.TryParse(ids[i], out id[i]))
+                    return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
+            }
+            if (server.Delete(userid, id))
+                return OutputHelper.GetOutputResponse(ResultCode.OK);
+            return OutputHelper.GetOutputResponse(ResultCode.Error);
+        }
+
     }
 }
