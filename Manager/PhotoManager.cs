@@ -203,16 +203,43 @@ namespace Manager
         }
         public OutputModel DeleteAll(string[] ids)
         {
-            int[] id=new int[ids.Length];
+            int[] id = new int[ids.Length];
             for (int i = 0; i < ids.Length; i++)
-			{
+            {
                 if (!int.TryParse(ids[i], out id[i]))
                     return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
-			}
+            }
             if (server.Delete(id))
             {
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
             }
+            return OutputHelper.GetOutputResponse(ResultCode.Error);
+        }
+
+        public OutputModel UpdateGallery(int galleryid, string[] ids)
+        {
+            int[] id = new int[ids.Length];
+            for (int i = 0; i < ids.Length; i++)
+            {
+                if (!int.TryParse(ids[i], out id[i]))
+                    return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
+            }
+            List<PhotoDt> list = new List<PhotoDt>();
+            foreach (int i in id)
+            {
+                PhotoDt p = server.Get(i);
+                if (p != null)
+                {
+                    p.PhotoGalleryId = galleryid;
+                    list.Add(p);
+                }
+                else
+                {
+                    return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
+                }
+            }
+            if (server.Update(list))
+                return OutputHelper.GetOutputResponse(ResultCode.OK);
             return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
     }

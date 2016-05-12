@@ -54,6 +54,7 @@
     .hiddenbtncheck {
         display: none;
     }
+
     .title {
         margin: -25px 0 22px 0;
     }
@@ -92,6 +93,7 @@
                 hidden = true;
             }
         });
+
     });
     function fengmian(photoid, photogalleryid) {
         $.ajax({
@@ -124,7 +126,9 @@
             success: function (o) {
                 if (o.StatusCode == 1) {
                     layer.msg("成功");
-                    setTimeout(location.reload(), { time: 1000 });
+                    setTimeout(function () {
+                        location.reload();
+                    } ,1000);
                 }
                 else {
                     layer.msg(o.Message);
@@ -146,7 +150,7 @@
                     $.each(o.Data, function () {
                         str += '<input type="radio" name="gallery" value="' + this.PhotoGalleryId + '"/>' + this.Name + '<br/>';
                     });
-                    str += '<input type="button" class="btn btn-default" id="move" value="移动"/></div>';
+                    str += '<input type="button" class="btn btn-default" onclick="moveto()" value="移动"/></div>';
                     layer.open({
                         title: "移动到相册",
                         type: 1,
@@ -163,6 +167,32 @@
         });
 
     }
+    function moveto() {
+        if ($("input[name='gallery']:checked").length <= 0) {
+            layer.msg("请选择相册", { time: 1000 });
+            return;
+        }
+        var galleryid=$("input[name='gallery']:checked").val();
+        var str = '';
+        $("input[type='checkbox']:checked").each(function () {
+            str += $(this).val() + ',';
+        });
+        $.ajax({
+            type:"post",
+            url:"/Photo/UpdateGallery",
+            data:{galleryid:galleryid,pids:str},
+            success:function (o) {
+                if(o.StatusCode==1){
+                    layer.msg("成功");
+                    setTimeout(function () {
+                        location.href = "/UserCenter/GalleryPhotos?galleryId=" + galleryid;
+                    } ,2000);
+                }else{
+                    layer.msg(o.Message);
+                }
+            }
+        });
+    }
 </script>
 
 
@@ -176,7 +206,7 @@
         List<PhotoDt> list = ViewBag.GalleryPhotos;
         if (list == null || list.Count == 0)
         {
-            <div style=" position: absolute; top: 25%; left: 43%;"><label>暂无图片,<a href="/Upload/Upload">点击这里上传图片</a></label></div>
+            <div style=" position: absolute; top: 25%; left: 43%;"><label>暂无图片,<a href="/Upload/Upload?galleryId=@ViewBag.galleryid">点击这里上传图片</a></label></div>
         }
         else
         {

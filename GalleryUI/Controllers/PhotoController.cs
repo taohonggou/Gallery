@@ -84,5 +84,10 @@ namespace GalleryUI.Controllers
             string[] ids = idstr.Split(new char[]{','},StringSplitOptions.RemoveEmptyEntries);
             return Content(new PhotoManager().DeleteAll(ids));
         }
+        public ActionResult UpdateGallery(int galleryid, string pids)
+        {
+            string[] ids = pids.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            return Content(new PhotoManager().UpdateGallery(galleryid, ids));
+        }
 	}
 }

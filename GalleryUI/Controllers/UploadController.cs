@@ -13,7 +13,7 @@ namespace GalleryUI.Controllers
         //
         // GET: 
         [HttpGet]
-        public ActionResult Upload()
+        public ActionResult Upload(int? galleryId=null)
         {
             if (!IsLogin())
                 return RedirectHome();
@@ -21,6 +21,8 @@ namespace GalleryUI.Controllers
             PhotoGalleryManager galleryManager = new PhotoGalleryManager();
             List<PhotoGalleryDt> list = galleryManager.GetList(user.UserId);
             ViewBag.Gallery = list;
+            if (galleryId != null)
+                ViewBag.galleryId = galleryId;
             ViewBag.Category= new PhotoCategoryManager().GetAll();
             return View();
         }

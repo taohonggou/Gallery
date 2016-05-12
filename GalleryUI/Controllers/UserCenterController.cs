@@ -79,6 +79,7 @@ namespace GalleryUI.Controllers
             PhotoGalleryDt pg = (PhotoGalleryDt)new PhotoGalleryManager().Get(galleryId).Data;
             if (pg != null)
                 ViewBag.galleryName = pg.Name;
+            ViewBag.galleryid = galleryId;
             ViewBag.GalleryPhotos = new PhotoManager().GetListByGallery(user.UserId, galleryId);
             return View();
 

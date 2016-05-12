@@ -6,6 +6,7 @@
 }
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/plupload/plupload.full.min.js"></script>
+<script src="~/Scripts/Tool.js"></script>
 <style>
     .list-group-item:first-child {
         border-top-right-radius: 0px;
@@ -23,9 +24,10 @@
 </style>
 
 <script type="text/javascript">
+
     function addGallery() {
         layer.open({
-            title:"添加相册",
+            title: "添加相册",
             type: 1,
             scrollbar: false,
             area: ['360px', '200px'],
@@ -37,15 +39,14 @@
 
     function submitAdd() {
         var addName = $('#addName').val();
-        if(!addName)
-        {
+        if (!addName) {
             layer.tips('名称不能为空', '#addName');
             return;
         }
         $.ajax({
             type: 'post',
             url: '/PhotoGallery/Add',
-            data: {name:addName},
+            data: { name: addName },
             success: function (data) {
                 if (data.StatusCode == 1) {
                     window.location.reload();
@@ -60,8 +61,8 @@
 <div class="container" style="min-height:633px;">
     <h2>上传图片&nbsp;&nbsp;<a style="font-size:10px;cursor:pointer;text-decoration:none;" onclick="addGallery()">新建相册</a></h2>
     <p>
-        
-       相册: <select id="gallery" onchange="change()" class="btn btn-default dropdown-toggle">
+
+        相册: <select id="gallery" onchange="change()" class="btn btn-default dropdown-toggle">
             @{
                 List<PhotoGalleryDt> list = ViewBag.Gallery;
                 if (list == null || list.Count == 0)
@@ -72,29 +73,36 @@
                 {
                     foreach (PhotoGalleryDt gallery in list)
                     {
-                        <option value="@gallery.PhotoGalleryId">@gallery.Name</option>
+                        if (ViewBag.galleryId == @gallery.PhotoGalleryId)
+                        {
+                            <option value="@gallery.PhotoGalleryId" selected="selected">@gallery.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@gallery.PhotoGalleryId">@gallery.Name</option>
+                        }
                     }
                 }
             }
         </select>
-       分类: <select id="category" onchange="change()" class="btn btn-default dropdown-toggle">
-    @{
-        List<PhotoCategoryDt> listCate = ViewBag.Category;
-        if (listCate == null || list.Count == 0)
-        {
-            <option value="4">默认</option>
-        }
-        else
-        {
-            foreach (PhotoCategoryDt item in listCate)
-            {
-                <option value="@item.PhotoCategoryId">@item.Name</option>
+        分类: <select id="category" onchange="change()" class="btn btn-default dropdown-toggle">
+            @{
+                List<PhotoCategoryDt> listCate = ViewBag.Category;
+                if (listCate == null || list.Count == 0)
+                {
+                    <option value="4">默认</option>
+                }
+                else
+                {
+                    foreach (PhotoCategoryDt item in listCate)
+                    {
+                        <option value="@item.PhotoCategoryId">@item.Name</option>
+                    }
+                }
+
             }
-        }
 
-    }
-
-</select>
+        </select>
 
         <button id="browse" class="btn btn-default">选择文件</button>
         <button id="upload-btn" class="btn btn-default">开始上传</button>

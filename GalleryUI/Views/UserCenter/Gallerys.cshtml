@@ -94,7 +94,9 @@
             success: function (o) {
                 if (o.StatusCode == 1) {
                     layer.msg("成功");
-                    setTimeout(location.reload(), { time: 1000 });
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
                 }
                 else {
                     layer.msg(o.Message);
