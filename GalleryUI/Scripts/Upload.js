@@ -13,7 +13,9 @@ var uploader = new plupload.Uploader({
     multipart_params: {
         photoGalleryId: $('#gallery').val(),
         PhotoCategoryId: $('#category').val()
-    }
+
+    },
+    unique_names: true,
 });
 
 //在实例对象上调用init()方法进行初始化
@@ -26,8 +28,9 @@ uploader.bind('FilesAdded', function (uploader, files) {
     isCanUpload = true;
     for (var i = 0, len = files.length; i < len; i++) {
         var file_name = files[i].name; //文件名
+        file_name = file_name.substring(0,file_name.indexOf('.'));
         //构造html来更新UI
-        var html = '<li id="file-' + files[i].id + '" class="list-group-item" style="float:left;width:33%;height:300px;"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
+        var html = '<li id="file-' + files[i].id + '" class="list-group-item" style="float:left;width:33%;height:300px;"><input type="text" class="file-name" id="name_'+files[i].id+'" value="' + file_name + '" /><p style="width:0"  class="progress"></p><input type="button" onclick="removeFile(&quot;' + files[i].id + '&quot;)" value="删除" /></li>';
         $(html).appendTo('#file-list');
         !function (i) {
             previewImage(files[i], function (imgsrc) {
@@ -37,6 +40,17 @@ uploader.bind('FilesAdded', function (uploader, files) {
     }
 });
 
+//移除照片
+function removeFile(id) {
+    $('#file-' + id).remove();
+    var toremove = '';
+    for (var i in uploader.files) {
+        if (uploader.files[i].id === id) {
+            toremove = i;
+        }
+    }
+    uploader.files.splice(toremove, 1);
+}
 
 //异常事件
 uploader.bind('Error', function (uploader, errObject) {
@@ -74,9 +88,21 @@ uploader.bind('UploadProgress', function (uploader, file) {
     $('#file-' + file.id + ' .progress').css('width', file.percent + '%');//控制进度条
 });
 
+uploader.bind('FileUploaded', function (uploader,file) {
+    $('#file-' + file.id).remove();
+});
+
+uploader.bind('BeforeUpload', function (uploader,file) {
+    uploader.settings.multipart_params = {
+        photoGalleryId: $('#gallery').val(),
+        PhotoCategoryId: $('#category').val(),
+        name:$('#name_'+file.id).val(),
+    }
+});
+
 //上传按钮
 $('#upload-btn').click(function () {
-    if (isCanUpload)
+    if (uploader.files.length > 0)
         uploader.start(); //开始上传
     else
         return layer.msg("请选择图片");
@@ -99,5 +125,5 @@ function change() {
         photoGalleryId: $('#gallery').val(),
         PhotoCategoryId: $('#category').val()
     }
-    
 }
+
