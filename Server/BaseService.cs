@@ -115,6 +115,7 @@ namespace Server
 
         protected T Select(int id)
         {
+            
             return context.Set<T>().Find(id);
         }
 
@@ -145,6 +146,5 @@ namespace Server
         {
             return context.SaveChanges();
         }
-
     }
 }

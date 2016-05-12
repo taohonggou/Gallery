@@ -27,8 +27,10 @@ namespace Server
             return Save() > 0;
         }
         public PhotoGalleryDt Get(int id)
-        {
-           return TransferObject.ConvertObjectByEntity<PhotoGallery,PhotoGalleryDt>(base.Select(id));
+        {//UpdateStatus
+            PhotoGallery pg = base.Select(id);
+            UpdateStatus(pg, System.Data.Entity.EntityState.Detached);
+            return TransferObject.ConvertObjectByEntity<PhotoGallery, PhotoGalleryDt>(pg);
         }
         /// <summary>
         /// 获取某用户下名为name的相册,防止一个用户拥有相同名称的相册
