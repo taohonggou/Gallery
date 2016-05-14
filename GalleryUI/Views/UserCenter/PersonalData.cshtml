@@ -1,7 +1,7 @@
 ﻿@model DataTrsfer.UserInfoDt
 
 @{
-    ViewBag.Title = "PersonalData";
+    ViewBag.Title = "个人资料";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/usercenter.css" rel="stylesheet" />
@@ -25,7 +25,9 @@
         border:0px;
     }
 </style>
-<script>
+<script src="~/Scripts/plupload/plupload.full.min.js"></script>
+
+<script type="text/javascript">
     function edit(id) {
         layer.open({
             title: "添加分类",
@@ -34,8 +36,22 @@
             area: ['450px'],
             content: '<div style="text-align:center;width:450px;margin-top:20px;"><table width="100%"><tr style="line-height: 1.5;"><td>姓名：</td><td><input type="text" value="" /></td></tr><tr style="line-height: 1.5;"><td>性别：</td><td><input type="radio" name="sex" value="" />女    <input type="radio" name="sex" value="" />男</td></tr><tr style="line-height: 1.5;"><td>年龄：</td><td><input type="number"  value="" /></td></tr><tr style="line-height: 1.5;"><td>电话：</td><td><input type="tel" name="name" value=" " /></td></tr><tr style="line-height: 1.5;"><td>所在地：</td><td><input type="text" value="" /></td></tr><tr style="line-height: 1.5;"><td></td><td><input type="button" class="btn btn-default" onclick="editsubmit();" value="提交" /></td></tr></table></div>'
         });
-
     }
+
+    //实例化一个plupload上传对象
+    var uploader = new plupload.Uploader({
+        browse_button: 'editHead', //触发文件选择对话框的按钮，为那个元素id
+        url: '/Upload/PostUpload', //服务器端的上传页面地址
+        flash_swf_url: '~/Scripts/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+        silverlight_xap_url: '~/Scripts/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+        filters: {
+            mime_types: [ //只允许上传图片文件
+                { title: "图片文件", extensions: "jpg,gif,png" }
+            ]
+        },
+    });
+    //在实例对象上调用init()方法进行初始化
+    uploader.init();
 </script>
 <div class="container" style="min-height:633px;">
     <div style="width: 100%; height: 250px; margin: auto; text-align: center;">
@@ -43,9 +59,11 @@
         </div>
         <div style=" position: relative; top: -49px;" class="imgtouxiang">
             <div>
-                <img src="/images/touxiang.png" alt="Alternate Text" style="border-radius:50%;width:100px;"  />
+                <img src="/images/touxiang.png" alt="Alternate Text" style="border-radius:50%;width:100px;" />
             </div>
-            <div style="position: absolute; left:50%;" class="touxiang"><input type="button" class="btn btn-default" style="position:absolute;width:80px;height:40px; right:-40px;top:-70px;" value="修改头像" /></div>
+            <div style="position: absolute; left:50%;" class="touxiang">
+                <button id="editHead" class="btn btn-default" style="position:absolute;width:80px;height:40px; right:-40px;top:-70px;">修改头像</button>
+            </div>
             <div class="clear"></div>
         </div>
         <div><span style="font-size: 30px; position: relative; top: -43px;">@ViewBag.User.Name</span></div>
@@ -116,7 +134,7 @@
 
             </table>
         </div>
-        
+
         <div class="clear"></div>
     </div>
     <div class="clear"></div>
