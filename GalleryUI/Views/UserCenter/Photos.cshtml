@@ -1,0 +1,224 @@
+﻿@using DataTrsfer
+@{
+    ViewBag.Title = "Photos";
+    Layout = "~/Views/Shared/_UserCenterLayout.cshtml";
+}
+<style>
+    .list-group-item:first-child {
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+    }
+
+    .list-group-item:last-child {
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+
+    .list-group-item {
+        margin: 0px 1px 2px 1px;
+    }
+
+
+
+    div.polaroid {
+        position: relative;
+        width: 22.8%;
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin: 0px 12.5px 25px 12.5px;
+        float: left;
+    }
+
+    div.pcenter {
+        text-align: center;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    .img1 {
+        display: inline-block;
+        width: 180px;
+        height: 180px;
+        cursor: pointer;
+    }
+
+    .hiddenbtn {
+        display: none;
+    }
+    
+
+</style>
+
+
+<script type="text/javascript">
+    var pageIndex = 1, pageSize = 20;
+    var flag = true;
+    var hidden = true;
+    $(function () {
+        $('#liPhotos').addClass('active');
+
+        $(window).scroll(function () {
+            var scrollTop = document.body.scrollTop;
+            var clientHeight = document.documentElement.clientHeight;
+            var scrollHeight = document.body.scrollHeight;
+            if (100 >= scrollHeight - clientHeight - scrollTop && flag) {
+                pageIndex++;
+                loadPhotos();
+            }
+        });
+        $("#eidtall").click(function () {
+            if (hidden) {
+                $(".hiddenbtn").css("display", "block");
+                $("#eidtall").val("取消操作");
+                hidden = false;
+            } else {
+                $(".hiddenbtn").css("display", "none");
+                $("input[type=checkbox]").removeAttr("checked");
+                $("#eidtall").val("批量操作");
+                hidden = true;
+            }
+        });
+    });
+    
+    function loadPhotos() {
+        $.ajax({
+            url: '/Photo/GetPageByUserId',
+            type: 'get',
+            data: { pageIndex: pageIndex, pageSize: pageSize },
+            async: false,
+            success: function (data) {
+                if (data.StatusCode == 1) {
+                    initPhotos(data.Data);
+                }
+                else {
+                    flag = false;
+                    layer.msg(data.Message);
+                }
+            }
+        });
+    }
+
+    function initPhotos(json) {
+        var str = '';
+        $.each(json, function () {
+            str += '<div class="polaroid" ><div style="position:absolute;right:0px;border:0px;top:0px;" class="hiddenbtn"><input type="checkbox" class="btn btn-default" style="height:25px;width:25px;color:blue;" name="photos" value="' + this.PhotoId + '" /></div><a href="/photo/details?photoId=' + this.PhotoId + '"><img src="' + this.ImgUrl + '" alt="Norway" style="width:100%;" class="img1" /></a><div class="pcenter"><p style="overflow: hidden; text-overflow: ellipsis;height: 22px;" title="' + this.Name + '">' + this.Name + '</p></div></div>';
+        });
+        
+        $('#divClear').before(str);
+    }
+    function move() {
+        if ($("input[type='checkbox']:checked").length <= 0)
+        {
+            layer.msg("请选择照片", { time: 1000 });
+            return;
+        }
+        var str='<div id="movediv" class="center" style="text-align:center;">';
+        $.ajax({
+            type:"post",
+            url: "/PhotoGallery/GetList",
+            success:function (o) {
+                if(o.StatusCode==1){
+                    $.each(o.Data,function () {
+                        str += '<input type="radio" name="gallery" value="' + this.PhotoGalleryId + '"/>' + this.Name + '<br/>';
+                    });
+                    str+='<input type="button" class="btn btn-default" onclick="moveto()" value="移动"/></div>';
+                    layer.open({
+                        title: "移动到相册",
+                        type: 1,
+                        skin: 'layui-layer-rim', //加上边框
+                        shadeClose: true,
+                        shade: 0.8,
+                        content:str
+                        });
+                }
+                else{
+                    layer.msg("出错了！"+o.Message);
+                }
+            }
+        });
+        
+    }
+    function moveto() {
+        if ($("input[name='gallery']:checked").length <= 0) {
+            layer.msg("请选择相册", { time: 1000 });
+            return;
+        }
+        var galleryid = $("input[name='gallery']:checked").val();
+        var str = '';
+        $("input[type='checkbox']:checked").each(function () {
+            str += $(this).val() + ',';
+        });
+        $.ajax({
+            type: "post",
+            url: "/Photo/UpdateGallery",
+            data: { galleryid: galleryid, pids: str },
+            success: function (o) {
+                if (o.StatusCode == 1) {
+                    layer.msg("成功");
+                    setTimeout(function () {
+                        location.href = "/UserCenter/GalleryPhotos?galleryId=" + galleryid;
+                    } ,2000);
+                } else {
+                    layer.msg(o.Message);
+                }
+            }
+        });
+    }
+    function deleteall() {
+        if ($("input[type='checkbox']:checked").length <= 0){
+            layer.msg("请选择照片", { time: 1000 });
+            return;
+        }
+        var str = '';
+        $("input[type='checkbox']:checked").each(function () {
+            str += $(this).val() + ',';
+        });
+        $.ajax({
+            type: "post",
+            url: "/Photo/DeleteAll",
+            data: { idstr: str },
+            success: function (o) {
+                if (o.StatusCode == 1) {
+                    layer.msg("成功");
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
+                }
+                else {
+                    layer.msg(o.Message);
+                }
+            }
+        });
+    }
+</script>
+
+
+<div style="position:relative;top:-50px;z-index:999;width:400px;">
+    <input type="button" class="btn btn-default" value="批量操作" id="eidtall" /><div style="position: absolute; top: 0px; left: 86px;" class="hiddenbtn"> <input type="button" class="btn btn-default" value="删除" onclick="deleteall()" /> <input type="button" class="btn btn-default" value="移动到相册" onclick="move()"/></div>
+</div>
+    <div id="divContainer" style="text-align:center;min-height:500px;position:relative;">
+
+            @{
+    List<PhotoDt> list = ViewBag.ListPhotos;
+    if (list == null || list.Count == 0)
+    {
+        <div style=" position: absolute; top: 25%; left: 43%;"><label>暂无图片,<a href="/Upload/Upload">点击这里上传图片</a></label></div>
+    }
+    else
+    {
+        foreach (PhotoDt phtot in list)
+        {
+                <div class="polaroid"><div style="position:absolute;right:0px;border:0px;top:0px;" class="hiddenbtn"><input type="checkbox" class="btn btn-default" style="height:25px;width:25px;color:blue;" name="photos" value="@phtot.PhotoId" /></div>
+                    <a href="/photo/details?photoId=@phtot.PhotoId"><img src="@phtot.ImgUrl" alt="Norway" style="width:100%;" class="img1" /></a>
+                    <div class="pcenter">
+                        <p style="overflow: hidden; text-overflow: ellipsis;height:22px;" title="@phtot.Name ">@phtot.Name</p>
+                    </div>
+                </div>
+            }
+        }
+    }
+    <div class="clear" id="divClear"></div>
+</div>
+
+
+

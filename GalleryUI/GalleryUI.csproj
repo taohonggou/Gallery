@@ -367,7 +367,7 @@
     <Content Include="Views\UserInfo\LostPwd.cshtml" />
     <Content Include="Views\UserInfo\ResetPwd.cshtml" />
     <Content Include="Views\Upload\Upload.cshtml" />
-    <Content Include="Views\UserCenter\UserCenter.cshtml" />
+    <Content Include="Views\UserCenter\Gallerys.cshtml" />
     <Content Include="Views\Photo\Details.cshtml" />
     <Content Include="Views\Shared\AdminLayout.cshtml" />
     <Content Include="Views\AdminHome\Index.cshtml" />
@@ -379,6 +379,10 @@
     <Content Include="Views\PhotoCategory\Index.cshtml" />
     <Content Include="Views\PhotoCategory\ShowCategory.cshtml" />
     <Content Include="Views\UserCenter\PersonalData.cshtml" />
+    <Content Include="Views\Shared\_UserCenterLayout.cshtml" />
+    <Content Include="Views\UserCenter\Photos.cshtml" />
+    <Content Include="Views\UserCenter\Collection.cshtml" />
+    <Content Include="Views\UserCenter\GalleryPhotos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -394,7 +398,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataTrsfer\DataTrsfer.csproj">

@@ -26,9 +26,16 @@ namespace Server
             base.Delete(id);
             return Save() > 0;
         }
-        public PhotoGalleryDt Get(int id)
+        public bool Delete(int[] ids)
         {
-           return TransferObject.ConvertObjectByEntity<PhotoGallery,PhotoGalleryDt>(base.Select(id));
+            base.Delete(ids);
+            return Save() > 0;
+        }
+        public PhotoGalleryDt Get(int id)
+        {//UpdateStatus
+            PhotoGallery pg = base.Select(id);
+            UpdateStatus(pg, System.Data.Entity.EntityState.Detached);
+            return TransferObject.ConvertObjectByEntity<PhotoGallery, PhotoGalleryDt>(pg);
         }
         /// <summary>
         /// 获取某用户下名为name的相册,防止一个用户拥有相同名称的相册

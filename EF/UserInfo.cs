@@ -29,6 +29,10 @@ namespace EF
         public string Name { get; set; }
         public int Status { get; set; }
         public string HeadUrl { get; set; }
+        public bool Gender { get; set; }
+        public int Age { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
         public System.DateTime DateTime { get; set; }
     
         public virtual ICollection<Comment> Comment { get; set; }

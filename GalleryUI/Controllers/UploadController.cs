@@ -13,14 +13,16 @@ namespace GalleryUI.Controllers
         //
         // GET: 
         [HttpGet]
-        public ActionResult Upload()
+        public ActionResult Upload(int? galleryId=null)
         {
             if (!IsLogin())
-                return Redirect("/");
+                return RedirectHome();
             //获取个人的相册
             PhotoGalleryManager galleryManager = new PhotoGalleryManager();
             List<PhotoGalleryDt> list = galleryManager.GetList(user.UserId);
             ViewBag.Gallery = list;
+            if (galleryId != null)
+                ViewBag.galleryId = galleryId;
             ViewBag.Category= new PhotoCategoryManager().GetAll();
             return View();
         }
@@ -32,9 +34,20 @@ namespace GalleryUI.Controllers
                 return ;
             string photoGalleryId = Request.Form["photoGalleryId"];
             string PhotoCategoryId = Request.Form["PhotoCategoryId"];
+            string name=Request.Form["name"];
             HttpFileCollectionBase file = Request.Files;
             UploadManager manager = new UploadManager();
-            manager.UploadImg(file["file"], user.UserId, photoGalleryId, PhotoCategoryId);
+            manager.UploadImg(file["file"], user.UserId, photoGalleryId, PhotoCategoryId,name);
+        }
+
+        [HttpPost]
+        public void UploadHeadImg()
+        {
+            if (!IsLogin())
+                return;
+            HttpFileCollectionBase file = Request.Files;
+            UploadManager manager = new UploadManager();
+            manager.UploadHeadImg(file["file"], user.UserId);
         }
     }
 }

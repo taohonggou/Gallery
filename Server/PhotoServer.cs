@@ -24,11 +24,11 @@ namespace Server
             return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(list);
         }
 
-        internal List<PhotoDt> GetList(string userId, IQueryable<Like> queryLike)
-        {
-            IQueryable<int> photoIds = queryLike.Select(o => o.PhotoId);
-            return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(Select(o => photoIds.Contains(o.PhotoId)).ToList());
-        }
+        //internal List<PhotoDt> GetList(string userId, IQueryable<Like> queryLike)
+        //{
+        //    IQueryable<int> photoIds = queryLike.Select(o => o.PhotoId);
+        //    return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(Select(o => photoIds.Contains(o.PhotoId)).ToList());
+        //}
 
         /// <summary>
         /// 获取某人最近的count张图片
@@ -119,7 +119,11 @@ namespace Server
             base.Delete(id);
             return Save() > 0;
         }
-
+        public bool Delete(int[] ids)
+        {
+            base.Delete(ids);
+            return Save() > 0;
+        }
         /// <summary>
         /// 分页获取最火图片
         /// </summary>
@@ -133,7 +137,7 @@ namespace Server
                                    new SqlParameter("@pageIndex",pageIndex),
                                    new SqlParameter("@pageSize",pageSize)
                                    };
-            return  SqlQuery<PhotoDt>(sql, param);
+            return SqlQuery<PhotoDt>(sql, param);
 
         }
 
@@ -142,9 +146,9 @@ namespace Server
         /// </summary>
         /// <param name="num"></param>
         /// <returns></returns>
-        public List<PhotoDt> GetListByCategoryHottest(int num,int categoryId)
+        public List<PhotoDt> GetListByCategoryHottest(int num, int categoryId)
         {
-            string sql = "select top "+num+" * ,rank=((select count(*) from [like] where photoId=p.photoId)+(select Count(*) from scanorsupport where photoid=p.photoid)+(select count(*) from comment where photoid =p.photoid)) from photo as p where p.photocategoryid=@photocategoryid order by rank desc";
+            string sql = "select top " + num + " * ,rank=((select count(*) from [like] where photoId=p.photoId)+(select Count(*) from scanorsupport where photoid=p.photoid)+(select count(*) from comment where photoid =p.photoid)) from photo as p where p.photocategoryid=@photocategoryid order by rank desc";
             SqlParameter[] param = { 
                                    new SqlParameter("@photocategoryid", categoryId)
                                    };
@@ -157,7 +161,7 @@ namespace Server
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public List<PhotoDt> GetPageByCategoryOrderByHottest(int pageIndex,int pageSize,int categoryId)
+        public List<PhotoDt> GetPageByCategoryOrderByHottest(int pageIndex, int pageSize, int categoryId)
         {
             string sql = "select * from (select * ,row_number() over (order by d.rank desc) AS 'ranking' from (select  * ,rank=((select count(*) from [like] where photoId=c.photoId)+(select Count(*) from scanorsupport where photoid=c.photoid)+(select count(*) from comment where photoid =c.photoid)) from photo  as c where c.photocategoryid=@photocategoryid ) as d  ) as e  where e.ranking between ((@pageIndex-1)*@pageSize+1) and @pageIndex*@pageSize";
             SqlParameter[] param = { 
@@ -166,6 +170,39 @@ namespace Server
                                    new SqlParameter("@photocategoryid",categoryId)
                                    };
             return SqlQuery<PhotoDt>(sql, param);
+        }
+
+        public List<PhotoDt> GetPageByUserIdOrderByDateTime(string userId, int pageIndex, int pageSize)
+        {
+            List<Photo> list = SelectDesc(pageIndex, pageSize, o => o.UserId == userId, o => o.DateTime).ToList();
+            return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(list);
+        }
+
+        /// <summary>
+        /// 分页获取某人收藏的照片
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public List<PhotoDt> GetPageByUserCollection(int pageIndex, int pageSize, string userId)
+        {
+            IQueryable<int> queryPhotoId = new LikeServer().GetQueryable(userId).Select(o => o.PhotoId);
+            List<Photo> list = SelectDesc(pageIndex, pageSize, o => queryPhotoId.Contains(o.PhotoId), o => o.DateTime).ToList();
+            return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(list);
+        }
+        public bool Update(PhotoDt p)
+        {
+            base.Update(TransferObject.ConvertObjectByEntity<PhotoDt, Photo>(p));
+            return Save() > 0;
+        }
+        public bool Update(List<PhotoDt>list)
+        {
+            foreach (PhotoDt item in list)
+            {
+                base.Update(TransferObject.ConvertObjectByEntity<PhotoDt, Photo>(item));
+            }
+            return Save() > 0;
         }
     }
 }

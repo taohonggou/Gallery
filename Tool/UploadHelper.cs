@@ -18,7 +18,7 @@ public static     class UploadHelper
         string extension = Path.GetExtension(img.FileName);
         if (!FormatVerify.CheckImgExtension(extension))
             return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
-        string newImgName = Guid.NewGuid().ToString().Replace("-", "") + extension;
+        string newImgName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + extension; //Guid.NewGuid().ToString().Replace("-", "") + extension;
         string path = System.Web.HttpContext.Current.Server.MapPath(savePath);
         img.SaveAs(path + newImgName);
         newPath = savePath + newImgName;

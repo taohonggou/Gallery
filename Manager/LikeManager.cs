@@ -40,20 +40,33 @@ namespace Manager
                 return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
 
-        /// <summary>
-        /// 获取某人喜欢的图片
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public OutputModel GetLikePhotos(string userId)
-        {
-            if (string.IsNullOrEmpty(userId))
-                return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
+        ///// <summary>
+        ///// 获取某人喜欢的图片
+        ///// </summary>
+        ///// <param name="userId"></param>
+        ///// <returns></returns>
+        //public OutputModel GetLikePhotos(string userId)
+        //{
+        //    if (string.IsNullOrEmpty(userId))
+        //        return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
 
-            List<PhotoDt> listPhotos = server.GetList(userId);
-            if (listPhotos.Count == 0)
-                return OutputHelper.GetOutputResponse(ResultCode.NoData);
-            return OutputHelper.GetOutputResponse(ResultCode.OK, listPhotos);
+        //    List<PhotoDt> listPhotos = server.GetList(userId);
+        //    if (listPhotos.Count == 0)
+        //        return OutputHelper.GetOutputResponse(ResultCode.NoData);
+        //    return OutputHelper.GetOutputResponse(ResultCode.OK, listPhotos);
+        //}
+        public OutputModel DeleteAll(string userid,string[] ids)
+        {
+            int[] id = new int[ids.Length];
+            for (int i = 0; i < ids.Length; i++)
+            {
+                if (!int.TryParse(ids[i], out id[i]))
+                    return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
+            }
+            if (server.Delete(userid, id))
+                return OutputHelper.GetOutputResponse(ResultCode.OK);
+            return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
+
     }
 }

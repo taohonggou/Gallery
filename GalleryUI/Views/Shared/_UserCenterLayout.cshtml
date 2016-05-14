@@ -1,0 +1,157 @@
+﻿﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 美图网</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/layout/style.css" rel="stylesheet" />
+    <script src="~/Scripts/layer9.1/layer.js"></script>
+    <link href="~/Content/usercenter.css" rel="stylesheet" />
+
+
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+    </script>
+    <!-- start-smoth-scrolling -->
+    <script src="~/Scripts/layout/move-top.js"></script>
+    <script src="~/Scripts/layout/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+    </script>
+    <!-- //end-smoth-scrolling -->
+    <!--pop-up-box-->
+    <script src="~/Scripts/layout/modernizr.custom.53451.js"></script>
+    <link href="~/Content/layout/popup-box.css" rel="stylesheet" />
+    <script src="~/Scripts/layout/jquery.magnific-popup.js"></script>
+    <!--pop-up-box-->
+</head>
+<body>
+    <!--header start here-->
+    <div class="header">
+
+        <div class="container">
+            <div class="header_top_right">
+                <div style="float:right;">
+                    <ul>
+                        @if (ViewBag.IsLogin)
+                        {
+                            <li><a href="/Upload/Upload" class="upload">上传</a></li>
+                            <li> |</li>
+                            <li><a href="/UserCenter/Photos">@ViewBag.User.Name</a> </li>
+                            <li> |</li>
+                            <li><a href="/UserInfo/LogOut">退出</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="/UserInfo/Login">登录</a></li>
+                            <li> |</li>
+                            <li><a href="/UserInfo/Register">注册</a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="header-main">
+                <div class="header-left">
+                    <div class="logo">
+                        <a href="/Home/Index"><h1>美图网</h1></a>
+                    </div>
+                    <div class="top-nav">
+                        <ul class="res">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/photo/recent">最新</a></li>
+                            <li><a href="/PhotoCategory/Index">分类</a></li>
+                            <li><a href="contact.html">关于</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="search">
+                        <form style="margin-bottom: 0;">
+                            <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" />
+                            <input type="submit" value="" />
+                        </form>
+                    </div>
+
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <!--header end here-->
+    <!--usercenter -->
+    <div class="container" style="min-height:633px;">
+        <div style="width: 100%; height: 250px; margin: auto; text-align: center;">
+            <div style="position:relative;height:50px; border-bottom:1px solid #d8d8d8;">
+            </div>
+            <div style=" position: relative; top: -49px;">
+                @if (ViewBag.User.HeadUrl == null)
+                {
+                    <img src="/images/touxiang.png" alt="Alternate Text" style="border-radius:50%;width:100px;" />
+                }
+                else
+                {
+                    <img src="@ViewBag.User.HeadUrl" alt="Alternate Text" style="border-radius:50%;width:100px;" />
+                }
+            </div>
+            <div style="position: absolute; left:50%;display:none;" class="touxiang"><input type="button" class="btn btn-default" style="position:absolute;width:80px;height:40px; right:-40px;top:-70px;" value="修改头像" /></div>
+            <div class="clear"></div>
+            <div><span style="font-size: 30px; position: relative; top: -43px;">@ViewBag.User.Name</span></div>
+
+            <div class="profile_nav_wrapper">
+                <div class="tabs_wrapper fix_width_on_modal">
+                    <ul class="profile_nav px_tabs">
+                        <li id="liPhotos">
+                            <a data-nav="photos" href="/Usercenter/photos">
+                                相片
+                            </a>
+                        </li>
+                        <li id="liGallery">
+                            <a data-nav="galleries" href="/usercenter/Gallerys">
+                                <span class="translation_missing" title="translation missing: en.profiles.show.nav.galleries">相册</span>
+                            </a>
+                        </li>
+                        <li id="liLikes">
+                            <a data-nav="groups" href="/usercenter/collection">
+                                收藏
+                            </a>
+                        </li>
+                        <li id="liPersonalData">
+                            <a data-nav="about" href="/usercenter/PersonalData">
+                                个人资料
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="clear"></div>
+
+
+        </div>
+        <!---->
+        @RenderBody()
+    </div>
+    <!--footer start here-->
+    <div class="footer">
+        <div class="container">
+            <div class="footer-main">
+                <p>Copyright &copy; 2015.ChenLiang All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+    <!--footer end here-->
+</body>
+
+
+</html>

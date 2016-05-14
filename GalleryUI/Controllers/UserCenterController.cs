@@ -13,7 +13,7 @@ namespace GalleryUI.Controllers
     {
         //
         // GET: /UserCenter/
-        public ActionResult UserCenter()
+        public ActionResult Gallerys()
         {
             if (!IsLogin())
                 return Redirect("/");
@@ -40,24 +40,47 @@ namespace GalleryUI.Controllers
             return Content(new PhotoManager().GetAllPhotoByUserId(user.UserId));
         }
 
-        public ActionResult GetLikePhotos()
+        //public ActionResult GetLikePhotos()
+        //{
+        //    if (!IsLogin())
+        //        return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
+        //    return Content(new LikeManager().GetLikePhotos(user.UserId));
+        //}
+
+
+        public ActionResult Photos(string pageIndex = "1", string pageSize = "20")
         {
             if (!IsLogin())
-                return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
-            return Content(new LikeManager().GetLikePhotos(user.UserId));
-        }
-
-
-        public ActionResult Photos()
-        {
-            return Content("");
+                return RedirectHome();
+            ViewBag.ListPhotos = new PhotoManager().GetPageByUserIdOrderByDatetime(user.UserId, pageIndex, pageSize);
+            return View();
         }
 
         public ActionResult PersonalData()
         {
-            //if (!IsLogin())
-            //    return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
+            if (!IsLogin())
+                return RedirectHome();
+            return View(user);
+        }
 
+        public ActionResult Collection()
+        {
+            if (!IsLogin())
+                return RedirectHome();
+            //先获取20张照片
+            ViewBag.ListCollections = new PhotoManager().GetPageByCollection(user.UserId, "1", "20");
+            return View();
+        }
+
+        public ActionResult GalleryPhotos(int galleryId)
+        {
+            if (!IsLogin())
+                return RedirectHome();
+            PhotoGalleryDt pg = (PhotoGalleryDt)new PhotoGalleryManager().Get(galleryId).Data;
+            if (pg != null)
+                ViewBag.galleryName = pg.Name;
+            ViewBag.galleryid = galleryId;
+            ViewBag.GalleryPhotos = new PhotoManager().GetListByGallery(user.UserId, galleryId);
             return View();
 
         }
