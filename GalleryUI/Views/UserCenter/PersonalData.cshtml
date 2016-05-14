@@ -26,7 +26,7 @@
     }
 </style>
 <script src="~/Scripts/plupload/plupload.full.min.js"></script>
-
+<script src="~/Scripts/FormatVerify.js"></script>
 <script type="text/javascript">
     function edit(id) {
         layer.open({
@@ -34,9 +34,45 @@
             type: 1,
             shadeClose: true,
             area: ['450px'],
-            content: '<div style="text-align:center;width:450px;margin-top:20px;"><table width="100%"><tr style="line-height: 1.5;"><td>姓名：</td><td><input type="text" value="" /></td></tr><tr style="line-height: 1.5;"><td>性别：</td><td><input type="radio" name="sex" value="" />女    <input type="radio" name="sex" value="" />男</td></tr><tr style="line-height: 1.5;"><td>年龄：</td><td><input type="number"  value="" /></td></tr><tr style="line-height: 1.5;"><td>电话：</td><td><input type="tel" name="name" value=" " /></td></tr><tr style="line-height: 1.5;"><td>所在地：</td><td><input type="text" value="" /></td></tr><tr style="line-height: 1.5;"><td></td><td><input type="button" class="btn btn-default" onclick="editsubmit();" value="提交" /></td></tr></table></div>'
+            content: '<div style="text-align:center;width:450px;margin-top:20px;"><table width="100%"><tr style="line-height: 1.5;"><td>姓名：</td><td><input type="text" id="editName" value="' + $('#spanName').text() + '" /></td></tr><tr style="line-height: 1.5;"><td>性别：</td><td><input type="radio" name="sex" value="0" />女    <input type="radio" name="sex" value="1" />男</td></tr><tr style="line-height: 1.5;"><td>年龄：</td><td><input type="number" id="editAge"  value="' + $('#spanAge').text() + '" /></td></tr><tr style="line-height: 1.5;"><td>电话：</td><td><input type="tel" id="editPhone" name="name" value="' + $('#spanPhone').text() + '" /></td></tr><tr style="line-height: 1.5;"><td>所在地：</td><td><input type="text" id="editAddress" value="' + $('#spanAddress').text() + '" /></td></tr><tr style="line-height: 1.5;"><td></td><td><input type="button" class="btn btn-default" onclick="editSubmit();" value="提交" /></td></tr></table></div>'
+        });
+        if('@Model.Gender'=='True')
+        {
+            $('input[type="radio"][name="sex"][value="1"]').attr("checked","checked");
+        }else
+            $('input[type="radio"][name="sex"][value="0"]').attr("checked");
+    }
+
+    function editSubmit() {
+        var name = $('#editName').val();
+        if (!name)
+            return layer.msg('名称不能为空');
+        var sex = $('input[type="radio"][name="sex"]:checked').val();
+        
+        var age = $('#editAge').val();
+       
+        var phone = $('#editPhone').val();
+        if(!isMobilePhone(phone))
+            return layer.msg('手机号格式不正确');
+        var address = $('#editAddress').val();
+        if (!address)
+            return layer.msg('地址不能为空');
+        $.ajax({
+            type: 'post',
+            url: '/userinfo/Edit',
+            data:{Name:name,Gender:sex,Age:age,Phone:phone,Address:address},
+            success: function (data) {
+                if (data.StatusCode == 1)
+                {
+                    layer.msg("修改成功");
+                    window.location.reload();
+                }
+                else
+                    layer.msg(data.Message);
+            }
         });
     }
+
     $(function () {
         //实例化一个plupload上传对象
         var uploader = new plupload.Uploader({
@@ -125,32 +161,32 @@
             <table style="position:absolute;left:30%;" class="tablepernal">
                 <tr>
                     <td>姓名：</td>
-                    <td>@Model.Name</td>
+                    <td><span id="spanName">@Model.Name</span> </td>
                 </tr>
                 <tr>
                     <td>性别：</td>
                     <td>
                         @if (Model.Gender)
                         {
-                            <p>男</p>
+                            <p id="pGender">男</p>
                         }
                         else
                         {
-                            <p>女</p>
+                            <p id="pGender">女</p>
                         }
                     </td>
                 </tr>
                 <tr>
                     <td>年龄：</td>
-                    <td>@Model.Age</td>
+                    <td><span id="spanAge">@Model.Age</span></td>
                 </tr>
                 <tr>
                     <td>电话：</td>
-                    <td>@Model.Phone</td>
+                    <td><span id="spanPhone">@Model.Phone</span></td>
                 </tr>
                 <tr>
                     <td>所在地：</td>
-                    <td>@Model.Address</td>
+                    <td><span id="spanAddress">@Model.Address</span></td>
                 </tr>
                 <tr>
                     <td></td>

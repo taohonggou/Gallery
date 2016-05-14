@@ -89,5 +89,12 @@ namespace GalleryUI.Controllers
             }
             return Content(o);
         }
+
+        [HttpPost]
+        public ActionResult Edit(UserInfoDt userInfo)
+        {
+            userInfo.UserId = user.UserId;
+            return Content(new UserInfoManager().Edit(userInfo));
+        }
     }
 }
