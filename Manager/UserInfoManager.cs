@@ -127,6 +127,11 @@ namespace Manager
             return OutputHelper.GetOutputResponse(ResultCode.OK, u);
         }
 
+        public UserInfoDt GetByUserId(string userId)
+        {
+            return userServer.GetUserInfo(userId);
+        }
+
         public List<UserInfoDt> GetList()
         {
             return userServer.GetList();

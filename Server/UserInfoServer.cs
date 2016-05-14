@@ -38,6 +38,22 @@ namespace Server
             return Save() > 0;
         }
 
+        /// <summary>
+        /// 更新头像
+        /// </summary>
+        /// <param name="headImgUrl"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public bool Update(string headImgUrl,string userId)
+        {
+            string sql = "update userInfo set headurl=@headurl where userid=@userId";
+            SqlParameter[] param = { 
+                                   new SqlParameter("@headurl",headImgUrl),
+                                   new SqlParameter("@userId",userId)
+                                   };
+            return  ExecuteCUD(sql, param) > 0;
+        }
+
 
         public bool Delete(string id)
         {

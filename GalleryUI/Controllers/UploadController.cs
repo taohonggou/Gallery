@@ -39,5 +39,15 @@ namespace GalleryUI.Controllers
             UploadManager manager = new UploadManager();
             manager.UploadImg(file["file"], user.UserId, photoGalleryId, PhotoCategoryId,name);
         }
+
+        [HttpPost]
+        public void UploadHeadImg()
+        {
+            if (!IsLogin())
+                return;
+            HttpFileCollectionBase file = Request.Files;
+            UploadManager manager = new UploadManager();
+            manager.UploadHeadImg(file["file"], user.UserId);
+        }
     }
 }

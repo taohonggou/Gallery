@@ -60,7 +60,7 @@ namespace GalleryUI.Controllers
         {
             if (!IsLogin())
                 return RedirectHome();
-            return View();
+            return View(user);
         }
 
         public ActionResult Collection()

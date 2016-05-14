@@ -11,7 +11,7 @@
     <link href="~/Content/layout/style.css" rel="stylesheet" />
     <script src="~/Scripts/layer9.1/layer.js"></script>
     <link href="~/Content/usercenter.css" rel="stylesheet" />
-    
+
 
     <script type="application/x-javascript">
         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
@@ -44,11 +44,11 @@
                     <ul>
                         @if (ViewBag.IsLogin)
                         {
-                        <li><a href="/Upload/Upload" class="upload">上传</a></li>
-                        <li> |</li>
-                        <li><a href="/UserCenter/Photos">@ViewBag.User.Name</a> </li>
-                        <li> |</li>
-                        <li><a href="/UserInfo/LogOut">退出</a></li>
+                            <li><a href="/Upload/Upload" class="upload">上传</a></li>
+                            <li> |</li>
+                            <li><a href="/UserCenter/Photos">@ViewBag.User.Name</a> </li>
+                            <li> |</li>
+                            <li><a href="/UserInfo/LogOut">退出</a></li>
                         }
                         else
                         {
@@ -56,45 +56,52 @@
                             <li> |</li>
                             <li><a href="/UserInfo/Register">注册</a></li>
                         }
-                </ul>
-            </div>
-            <div class="clear"></div>
-        </div>
-        <div class="header-main">
-            <div class="header-left">
-                <div class="logo">
-                    <a href="/Home/Index"><h1>美图网</h1></a>
-                </div>
-                <div class="top-nav">
-                    <ul class="res">
-                        <li><a href="/">首页</a></li>
-                        <li><a href="/photo/recent">最新</a></li>
-                        <li><a href="/PhotoCategory/Index">分类</a></li>
-                        <li><a href="contact.html">关于</a></li>
                     </ul>
                 </div>
+                <div class="clear"></div>
             </div>
-            <div class="header-right">
-                <div class="search">
-                    <form style="margin-bottom: 0;">
-                        <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" />
-                        <input type="submit" value="" />
-                    </form>
+            <div class="header-main">
+                <div class="header-left">
+                    <div class="logo">
+                        <a href="/Home/Index"><h1>美图网</h1></a>
+                    </div>
+                    <div class="top-nav">
+                        <ul class="res">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/photo/recent">最新</a></li>
+                            <li><a href="/PhotoCategory/Index">分类</a></li>
+                            <li><a href="contact.html">关于</a></li>
+                        </ul>
+                    </div>
                 </div>
-                
+                <div class="header-right">
+                    <div class="search">
+                        <form style="margin-bottom: 0;">
+                            <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" />
+                            <input type="submit" value="" />
+                        </form>
+                    </div>
+
+                </div>
+                <div class="clearfix"> </div>
             </div>
-            <div class="clearfix"> </div>
         </div>
     </div>
-</div>
-<!--header end here-->
-<!--usercenter -->
+    <!--header end here-->
+    <!--usercenter -->
     <div class="container" style="min-height:633px;">
         <div style="width: 100%; height: 250px; margin: auto; text-align: center;">
             <div style="position:relative;height:50px; border-bottom:1px solid #d8d8d8;">
             </div>
             <div style=" position: relative; top: -49px;">
-                <img src="/images/touxiang.png" alt="Alternate Text" style="border-radius:50%;" width="100px;" />
+                @if (ViewBag.User.HeadUrl == null)
+                {
+                    <img src="/images/touxiang.png" alt="Alternate Text" style="border-radius:50%;width:100px;" />
+                }
+                else
+                {
+                    <img src="@ViewBag.User.HeadUrl" alt="Alternate Text" style="border-radius:50%;width:100px;" />
+                }
             </div>
             <div style="position: absolute; left:50%;display:none;" class="touxiang"><input type="button" class="btn btn-default" style="position:absolute;width:80px;height:40px; right:-40px;top:-70px;" value="修改头像" /></div>
             <div class="clear"></div>
@@ -103,8 +110,8 @@
             <div class="profile_nav_wrapper">
                 <div class="tabs_wrapper fix_width_on_modal">
                     <ul class="profile_nav px_tabs">
-                        <li id="liPhotos" >
-                            <a data-nav="photos" href="/Usercenter/photos" >
+                        <li id="liPhotos">
+                            <a data-nav="photos" href="/Usercenter/photos">
                                 相片
                             </a>
                         </li>
@@ -114,7 +121,7 @@
                             </a>
                         </li>
                         <li id="liLikes">
-                            <a data-nav="groups" href="/usercenter/collection" >
+                            <a data-nav="groups" href="/usercenter/collection">
                                 收藏
                             </a>
                         </li>
@@ -134,16 +141,16 @@
         </div>
         <!---->
         @RenderBody()
-        </div>
-        <!--footer start here-->
-        <div class="footer">
-            <div class="container">
-                <div class="footer-main">
-                    <p>Copyright &copy; 2015.ChenLiang All rights reserved.</p>
-                </div>
+    </div>
+    <!--footer start here-->
+    <div class="footer">
+        <div class="container">
+            <div class="footer-main">
+                <p>Copyright &copy; 2015.ChenLiang All rights reserved.</p>
             </div>
         </div>
-        <!--footer end here-->
+    </div>
+    <!--footer end here-->
 </body>
 
 
