@@ -45,15 +45,12 @@
     .hiddenbtn {
         display: none;
     }
-
-    .polaroid:hover .hiddenbtn {
-        display: block;
-    }
 </style>
 
 <script type="text/javascript">
     var pageIndex = 2, pageSize = 20;
     var flag = true;
+    var hidden = true;
     $(function () {
         $('#liLikes').addClass('active');
 
@@ -64,6 +61,18 @@
             if (100 >= scrollHeight - clientHeight - scrollTop && flag) {
                 pageIndex++;
                 loadPhotos();
+            }
+        });
+        $("#eidtall").click(function () {
+            if (hidden) {
+                $(".hiddenbtn").css("display", "block");
+                $("#eidtall").val("取消操作");
+                hidden = false;
+            } else {
+                $(".hiddenbtn").css("display", "none");
+                $("input[type=checkbox]").removeAttr("checked");
+                $("#eidtall").val("批量操作");
+                hidden = true;
             }
         });
     });
@@ -89,13 +98,41 @@
     function initPhotos(json) {
         var str = '';
         $.each(json, function () {
-            str += '<div class="polaroid" ><a href="/photo/details?photoId=' + this.PhotoId + '"><img src="' + this.ImgUrl + '" alt="Norway" style="width:100%;" class="img1" /></a><div class="pcenter"><p style="overflow: hidden; text-overflow: ellipsis;height: 22px;" title="' + this.Name + '">' + this.Name + '</p></div></div>';
+            str += '<div class="polaroid" ><div style="position:absolute;right:0px;border:0px;top:0px;" class="hiddenbtn"><input type="checkbox" class="btn btn-default" style="height:25px;width:25px;color:blue;" name="photos" value="'+this.PhotoId+'" /></div><a href="/photo/details?photoId=' + this.PhotoId + '"><img src="' + this.ImgUrl + '" alt="Norway" style="width:100%;" class="img1" /></a><div class="pcenter"><p style="overflow: hidden; text-overflow: ellipsis;height: 22px;" title="' + this.Name + '">' + this.Name + '</p></div></div>';
         });
 
         $('#divClear').before(str);
     }
+    function deleteall() {
+        if ($("input[type='checkbox']:checked").length <= 0) {
+            layer.msg("请选择照片", { time: 1000 });
+            return;
+        }
+        var str = '';
+        $("input[type='checkbox']:checked").each(function () {
+            str += $(this).val() + ',';
+        });
+        $.ajax({
+            type: "post",
+            url: "/Like/DeleteLikeAll",
+            data: { pidstr: str },
+            success: function (o) {
+                if (o.StatusCode == 1) {
+                    layer.msg("成功");
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
+                }
+                else {
+                    layer.msg(o.Message);
+                }
+            }
+        });
+    }
 </script>
-
+<div style="position:relative;top:-50px;z-index:999;width:400px;">
+    <input type="button" class="btn btn-default" value="批量操作" id="eidtall" /><div style="position: absolute; top: 0px; left: 86px;" class="hiddenbtn"> <input type="button" class="btn btn-default" value="取消收藏" onclick="deleteall()" /></div>
+</div>
 <div id="divContainer">
 
     @{
@@ -108,7 +145,8 @@
         {
             foreach (PhotoDt phtot in list)
             {
-                <div class="polaroid" >
+                <div class="polaroid">
+                    <div style="position:absolute;right:0px;border:0px;top:0px;" class="hiddenbtn"><input type="checkbox" class="btn btn-default" style="height:25px;width:25px;color:blue;" name="photos" value="@phtot.PhotoId" /></div>
                     <a href="/photo/details?photoId=@phtot.PhotoId"><img src="@phtot.ImgUrl" alt="Norway" style="width:100%;" class="img1" /></a>
                     <div class="pcenter">
                         <p style="overflow: hidden; text-overflow: ellipsis;height:22px;" title="@phtot.Name ">@phtot.Name</p>

@@ -26,6 +26,11 @@ namespace Server
             base.Delete(id);
             return Save() > 0;
         }
+        public bool Delete(int[] ids)
+        {
+            base.Delete(ids);
+            return Save() > 0;
+        }
         public PhotoGalleryDt Get(int id)
         {//UpdateStatus
             PhotoGallery pg = base.Select(id);

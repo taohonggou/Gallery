@@ -72,6 +72,18 @@ namespace Manager
             //    return OutputHelper.GetOutputResponse(ResultCode.NoData);
             //return OutputHelper.GetOutputResponse(ResultCode.OK, list);
         }
+        /// <summary>
+        /// 获取某用户的相册
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
+        public OutputModel GetListOutputModel(string userid)
+        {
+            List<PhotoGalleryDt> list=server.GetList(userid);
+            if (list.Count==0)
+                return OutputHelper.GetOutputResponse(ResultCode.NoData);
+            return OutputHelper.GetOutputResponse(ResultCode.OK, list);
+        }
         public OutputModel GetList()
         {
             List<PhotoGalleryDt> list = server.GetList();
@@ -96,6 +108,20 @@ namespace Manager
             pg.CoverImg = p.ImgUrl;
             if (server.Update(pg))
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
+            return OutputHelper.GetOutputResponse(ResultCode.Error);
+        }
+        public OutputModel DeleteAll(string[] ids)
+        {
+            int[] id = new int[ids.Length];
+            for (int i = 0; i < ids.Length; i++)
+            {
+                if (!int.TryParse(ids[i], out id[i]))
+                    return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
+            }
+            if (server.Delete(id))
+            {
+                return OutputHelper.GetOutputResponse(ResultCode.OK);
+            }
             return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
     }

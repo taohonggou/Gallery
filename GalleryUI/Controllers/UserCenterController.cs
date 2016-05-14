@@ -48,9 +48,9 @@ namespace GalleryUI.Controllers
         //}
 
 
-        public ActionResult Photos(string pageIndex="1",string pageSize="20")
+        public ActionResult Photos(string pageIndex = "1", string pageSize = "20")
         {
-            if(!IsLogin())
+            if (!IsLogin())
                 return RedirectHome();
             ViewBag.ListPhotos = new PhotoManager().GetPageByUserIdOrderByDatetime(user.UserId, pageIndex, pageSize);
             return View();
@@ -65,7 +65,7 @@ namespace GalleryUI.Controllers
 
         public ActionResult Collection()
         {
-            if(!IsLogin())
+            if (!IsLogin())
                 return RedirectHome();
             //先获取20张照片
             ViewBag.ListCollections = new PhotoManager().GetPageByCollection(user.UserId, "1", "20");
@@ -76,6 +76,10 @@ namespace GalleryUI.Controllers
         {
             if (!IsLogin())
                 return RedirectHome();
+            PhotoGalleryDt pg = (PhotoGalleryDt)new PhotoGalleryManager().Get(galleryId).Data;
+            if (pg != null)
+                ViewBag.galleryName = pg.Name;
+            ViewBag.galleryid = galleryId;
             ViewBag.GalleryPhotos = new PhotoManager().GetListByGallery(user.UserId, galleryId);
             return View();
 
