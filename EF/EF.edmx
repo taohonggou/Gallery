@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="GalleryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pwd" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="CommentId" />
@@ -277,6 +285,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="GalleryModelStoreContainer">
+          <EntitySet Name="AdminUser" EntityType="Self.AdminUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Like" EntityType="Self.Like" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
@@ -383,6 +392,7 @@
             <End Role="UserInfo" EntitySet="UserInfo" />
             <End Role="VerifyRegister" EntitySet="VerifyRegister" />
           </AssociationSet>
+          <EntitySet Name="AdminUser" EntityType="GalleryModel.AdminUser" />
           </EntityContainer>
         <EntityType Name="Comment">
           <Key>
@@ -673,6 +683,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AdminUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pwd" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -833,6 +851,15 @@
                 <ScalarProperty Name="HeadUrl" ColumnName="HeadUrl" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminUser">
+            <EntityTypeMapping TypeName="GalleryModel.AdminUser">
+              <MappingFragment StoreEntitySet="AdminUser">
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
                 <ScalarProperty Name="Pwd" ColumnName="Pwd" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>

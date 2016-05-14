@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminUserDt.cs" />
     <Compile Include="CategoryPhotoDt.cs" />
     <Compile Include="CommentDt.cs" />
     <Compile Include="LikeDt.cs" />

@@ -13,13 +13,20 @@
 </head>
 <body>
     <nav class="navbar navbar-default" role="navigation">
-        <div class="navbar-header" style="margin-left:20%;">
+        @*<div class="navbar-header" style="margin-left:20%;">
             <a class="navbar-brand" href="#">相册</a>
-        </div>
+        </div>*@
         <div class="pull -right" style="float: right;margin-right: 20%;">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">登录</a></li>
-                <li><a href="#">退出</a></li>
+                @if (ViewBag.IsLogin)
+                {
+                    <li class="active"><a href="javascript:;">@ViewBag.user.UserId</a></li>
+                }
+                else
+                {
+                    <li class="active"><a href="/adminuserinfo/login">登录</a></li>
+                }
+                <li><a href="/adminuserinfo/LogOut">退出</a></li>
             </ul>
         </div>
     </nav>
