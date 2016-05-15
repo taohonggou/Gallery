@@ -21,9 +21,6 @@
     .list-group-item {
         margin: 0px 1px 2px 1px;
     }
-    .list-group{
-        margin-bottom:0px;
-    }
 </style>
 
 <script type="text/javascript">
@@ -61,7 +58,7 @@
         });
     }
 </script>
-<div class="container" style="min-height:500px;">
+<div class="container">
     <h2>上传图片&nbsp;&nbsp;<a style="font-size:10px;cursor:pointer;text-decoration:none;" onclick="addGallery()">新建相册</a></h2>
     <p>
 
