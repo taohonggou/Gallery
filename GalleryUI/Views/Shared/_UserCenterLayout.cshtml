@@ -96,11 +96,11 @@
             <div style=" position: relative; top: -49px;">
                 @if (ViewBag.User.HeadUrl == null)
                 {
-                    <img src="/images/touxiang.png" alt="Alternate Text" style="border-radius:50%;width:100px;" />
+                    <img src="/images/touxiang.png" alt="Alternate Text" style="border-radius: 50%; width: 100px; height: 100px;" />
                 }
                 else
                 {
-                    <img src="@ViewBag.User.HeadUrl" alt="Alternate Text" style="border-radius:50%;width:100px;" />
+                    <img src="@ViewBag.User.HeadUrl" alt="Alternate Text" style="border-radius: 50%; width: 100px; height:100px;" />
                 }
             </div>
             <div style="position: absolute; left:50%;display:none;" class="touxiang"><input type="button" class="btn btn-default" style="position:absolute;width:80px;height:40px; right:-40px;top:-70px;" value="修改头像" /></div>

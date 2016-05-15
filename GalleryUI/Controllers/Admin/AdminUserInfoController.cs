@@ -13,12 +13,15 @@ namespace GalleryUI.Controllers.Admin
         // GET: /AdminUserInfo/
         public ActionResult Index()
         {
-
+            if (!IsLogin())
+                return RedirectLogin();
             return View(new UserInfoManager().GetList());
         }
 
         public ActionResult Delete(string id)
         {
+            if (!IsLogin())
+                return Content( OutputHelper.GetOutputResponse(ResultCode.NoLogin));
             return Content(new UserInfoManager().Delete(id));
         }
 
