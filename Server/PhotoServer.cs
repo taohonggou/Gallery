@@ -204,5 +204,16 @@ namespace Server
             }
             return Save() > 0;
         }
+
+        /// <summary>
+        /// 根据名称来搜索照片
+        /// </summary>
+        /// <param name="name">%a%b%格式</param>
+        /// <returns></returns>
+        public List<PhotoDt> GetListByLikeName(string name)
+        {
+            string sql = "select * from Photo where Name like '"+name+"'";
+            return SqlQuery<PhotoDt>(sql);
+        }
     }
 }

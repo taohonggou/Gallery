@@ -242,6 +242,31 @@ namespace Manager
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
             return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
+
+        public OutputModel SearchByName(string name)
+        {
+            
+            List<PhotoDt> listPhotos= SearchByNameReturnList(name);
+            if (listPhotos.Count == 0)
+            {
+                return OutputHelper.GetOutputResponse(ResultCode.NoData);
+            }
+            else
+                return OutputHelper.GetOutputResponse(ResultCode.OK, listPhotos);
+        }
+
+        public List<PhotoDt> SearchByNameReturnList(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return new List<PhotoDt>();
+            StringBuilder sbLikeName = new StringBuilder();
+            sbLikeName.Append("%");
+            for (int i = 0; i < name.Length; i++)
+            {
+                sbLikeName.Append(name[i] + "%");
+            }
+            return server.GetListByLikeName(sbLikeName.ToString());
+        }
     }
 }
 

@@ -75,8 +75,8 @@
                 </div>
                 <div class="header-right">
                     <div class="search">
-                        <form style="margin-bottom: 0;">
-                            <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" />
+                        <form style="margin-bottom: 0;" action="/photo/search" method="get" >
+                            <input type="text" name="name" id="inputSearch" placeholder="Search" required />
                             <input type="submit" value="" />
                         </form>
                     </div>

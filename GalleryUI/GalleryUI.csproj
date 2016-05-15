@@ -388,6 +388,7 @@
     <Content Include="Views\UserCenter\Collection.cshtml" />
     <Content Include="Views\UserCenter\GalleryPhotos.cshtml" />
     <Content Include="Views\AdminUserInfo\Login.cshtml" />
+    <Content Include="Views\Photo\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,103 @@
+﻿@using DataTrsfer
+@model List<DataTrsfer.PhotoDt>
+@{
+    ViewBag.Title = "搜索";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    img {
+        border: none;
+    }
+
+    .wrapper {
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+        .wrapper h3 {
+            color: #3366cc;
+            font-size: 16px;
+            height: 35px;
+            line-height: 1.9;
+            text-align: center;
+            border-bottom: 1px solid #E5E5E5;
+            margin: 0 0 10px 0;
+        }
+
+    #con1_1 {
+        position: relative;
+    }
+
+        #con1_1 .product_list {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            padding: 10px;
+            background: #eee;
+            margin: 5px;
+        }
+
+    .product_list img {
+        width: 342px;
+    }
+
+    .product_list p {
+        padding: 5px 0px;
+        font-size: 12px;
+        text-align: center;
+        color: #333;
+        white-space: normal;
+        width: 200px;
+    }
+</style>
+<script src="~/Scripts/Tool.js"></script>
+<script src="~/Scripts/jquery.masonry.min.js"></script>
+<script type="text/javascript">
+    //inputSearch
+    var name = getParamValue("name");
+    name = decodeURI(name);
+    $('#inputSearch').val(name);
+    $(function () {
+        $('#spanSearch').text(name);
+
+        $container = $('#con1_1');
+        $container.imagesLoaded(function () {
+            $container.masonry({
+                itemSelector: '.product_list',
+                columnWidth: 5 //每两列之间的间隙为5像素
+            });
+        });
+        $container.imagesLoaded(function () {
+            $container.masonry();
+        });//加载完图片后，会实现自动重新排列。【这里是重点】
+    });
+</script>
+
+<div class="container">
+    <br />
+    <div>
+        <h3>搜索关于"<span id="spanSearch"></span>"的照片</h3>
+        <hr />
+    </div>
+    <div id="con1_1">
+        
+        @if (Model.Count > 0)
+        {
+            foreach (PhotoDt item in Model)
+            {
+                <div class="product_list">
+                    <a href="/Photo/Details?photoId=@item.PhotoId">
+                        <img src="@item.ImgUrl" alt="@item.Name" layer-pid="@item.PhotoId" />
+                    </a>
+                    <p>@item.Name</p>
+                </div>
+            }
+        }
+        else
+        {
+            <h2>没有数据</h2>
+        }
+        <div class="clear"></div>
+    </div>
+</div>

@@ -89,5 +89,19 @@ namespace GalleryUI.Controllers
             string[] ids = pids.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             return Content(new PhotoManager().UpdateGallery(galleryid, ids));
         }
+
+        public ActionResult Search(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return RedirectHome();
+           // ViewBag.SearchResult = new PhotoManager().SearchByNameReturnList(name);
+            return View(new PhotoManager().SearchByNameReturnList(name));
+        }
+
+        //[HttpPost]
+        //public ActionResult SearchByName(string name)
+        //{
+        //    return Content(new PhotoManager().SearchByName(name));
+        //}
 	}
 }
