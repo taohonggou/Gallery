@@ -63,7 +63,45 @@
                 hidden = true;
             }
         });
+        initClick();
+        
     });
+
+    function initClick() {
+        $('.pcenter p').click(function () {
+            var obj = $(this);
+            var oldValue = obj.text();
+            var parentObj = obj.parent();
+            obj.html("");
+            var inputIns = $('<input type="text" value="' + oldValue + '" style="height: 22px;"/>');
+            parentObj.html(inputIns).focus().select();
+            inputIns.focus().select()
+            inputIns.keyup(function (event) {
+                //1.判断是否回车按下
+                //结局不同浏览器获取时间的差异
+                var myEvent = event || window.event;
+                var key = myEvent.keyCode;
+                if (key == 13) {
+                    editName($(this), parentObj);
+                }
+            });
+            //处理Enter和Esc事件   
+            inputIns.blur(function () {
+                editName($(this), parentObj);
+            });
+
+        });
+    }
+
+    function editName(obj, parentObj) {
+        var inputNode = obj;
+        //1.保存当前文本框的内容
+        var inputText = inputNode.val();
+        //2.清空td里面的内容
+        inputNode.parent().html('<p style="overflow: hidden; text-overflow: ellipsis;height: 22px;" title="' + inputText + '">' + inputText + '</p>');
+        editGallery(inputText, parentObj.attr('data-id'));
+    }
+
     function quanxianall() {
         if ($("input[type='checkbox']:checked").length <= 0) {
             layer.msg("请选择照片", { time: 1000 });
@@ -79,7 +117,7 @@
         });
     }
     function deleteall() {
-        if ($("input[type='checkbox']:checked").length <= 0){
+        if ($("input[type='checkbox']:checked").length <= 0) {
             layer.msg("请选择相册", { time: 1000 });
             return;
         }
@@ -105,10 +143,24 @@
         });
 
     }
+
+    function editGallery(name, galleryId) {
+        if (!name || !galleryId)
+            return layer.msg('参数错误');
+        $.ajax({
+            url: '/PhotoGallery/EditGaleryName',
+            type: 'post',
+            data: { name: name, galleryId: galleryId },
+            success: function (data) {
+                //layer.msg(data.Message);
+                initClick();
+            }
+        });
+    }
 </script>
 
 <div style="position:relative;top:-50px;z-index:999;width:400px;">
-    <input type="button" class="btn btn-default" value="批量操作" id="eidtall" /><div style="position: absolute; top: 0px; left: 86px;" class="hiddenbtn"> <input type="button" class="btn btn-default" value="删除" onclick="deleteall()" /> <input type="button" class="btn btn-default" value="设置权限" onclick="quanxianall()" /></div>
+    <input type="button" class="btn btn-default" value="批量操作" id="eidtall" /><div style="position: absolute; top: 0px; left: 86px;" class="hiddenbtn"> <input type="button" class="btn btn-default" value="删除" onclick="deleteall()" /> @*<input type="button" class="btn btn-default" value="设置权限" onclick="quanxianall()" />*@</div>
 </div>
 <div id="divContainer">
 
@@ -132,7 +184,7 @@
                         }
                         <img src="@phtot.CoverImg" alt="Norway" style="width:100%;" class="img1" />
                     </a>
-                    <div class="pcenter">
+                    <div class="pcenter" data-id="@phtot.PhotoGalleryId">
                         <p style="overflow: hidden; text-overflow: ellipsis;height: 22px;" title="@phtot.Name">@phtot.Name</p>
                     </div>
                 </div>
