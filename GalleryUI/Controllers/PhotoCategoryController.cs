@@ -25,6 +25,7 @@ namespace GalleryUI.Controllers
         {
             if (string.IsNullOrWhiteSpace(categoryId))
                 return RedirectHome();
+            ViewBag.CategoryName = new PhotoCategoryManager().GetPhotoCategory(categoryId);
             return View();
         }
 	}

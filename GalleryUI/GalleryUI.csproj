@@ -392,10 +392,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\AdminBase\" />
-    <Folder Include="Views\Base\" />
-    <Folder Include="Views\Comment\" />
-    <Folder Include="Views\Like\" />
     <Folder Include="Views\PhotoGallery\" />
     <Folder Include="Views\ScanOrSupport\" />
   </ItemGroup>
