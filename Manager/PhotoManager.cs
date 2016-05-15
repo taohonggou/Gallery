@@ -267,6 +267,23 @@ namespace Manager
             }
             return server.GetListByLikeName(sbLikeName.ToString());
         }
+
+        public OutputModel EditPhoto(string name,string photoId,string userId)
+        {
+            if(string.IsNullOrEmpty(name))
+                return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
+            int iPhotoId;
+            if(!int.TryParse(photoId,out iPhotoId))
+                return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
+            PhotoDt photo = server.Get(iPhotoId);
+            if(photo==null||photo.UserId!=userId)
+                return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied);
+            photo.Name = name;
+            if(server.Update(photo))
+                return OutputHelper.GetOutputResponse(ResultCode.OK);
+            else
+                return OutputHelper.GetOutputResponse(ResultCode.Error);
+        }
     }
 }
 

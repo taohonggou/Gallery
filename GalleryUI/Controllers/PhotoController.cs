@@ -98,10 +98,13 @@ namespace GalleryUI.Controllers
             return View(new PhotoManager().SearchByNameReturnList(name));
         }
 
-        //[HttpPost]
-        //public ActionResult SearchByName(string name)
-        //{
-        //    return Content(new PhotoManager().SearchByName(name));
-        //}
+       
+        [HttpPost]
+        public ActionResult Edit(string name,string photoId)
+        {
+            if(!IsLogin())
+                return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
+            return Content(new PhotoManager().EditPhoto(name,photoId,user.UserId));
+        }
 	}
 }
