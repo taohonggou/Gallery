@@ -51,7 +51,7 @@
             data: { id: id },
             success: function (o) {
                 if (o.StatusCode == 1) {
-                    alert(1);
+                  
                     layer.msg("成功");
                     setTimeout(function () {
                         location.reload();
@@ -151,8 +151,8 @@
                     @Html.DisplayFor(modelItem => item.SuppostCount)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    <a href="/photo/details?photoId=@item.PhotoId">Details</a> |
+                    @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
+                    <a href="/photo/details?photoId=@item.PhotoId">Details</a>
                     <a href="javascript:;" onclick="deletePhoto(@item.PhotoId)">Delete</a>
                 </td>
             </tr>

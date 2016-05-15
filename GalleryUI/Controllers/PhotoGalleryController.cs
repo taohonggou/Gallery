@@ -37,5 +37,13 @@ namespace GalleryUI.Controllers
             return Content(new PhotoGalleryManager().DeleteAll(ids));
         }
 
+        public ActionResult EditGaleryName(string name,string  galleryId)
+        {
+            if(!IsLogin())
+                return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
+            return Content(new PhotoGalleryManager().EditGalleryName(name,galleryId,user.UserId));
+            
+        }
+
     }
 }

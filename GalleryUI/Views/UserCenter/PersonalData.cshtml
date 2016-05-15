@@ -40,7 +40,7 @@
         {
             $('input[type="radio"][name="sex"][value="1"]').attr("checked","checked");
         }else
-            $('input[type="radio"][name="sex"][value="0"]').attr("checked");
+            $('input[type="radio"][name="sex"][value="0"]').attr("checked", "checked");
     }
 
     function editSubmit() {
@@ -60,7 +60,7 @@
         $.ajax({
             type: 'post',
             url: '/userinfo/Edit',
-            data:{Name:name,Gender:sex,Age:age,Phone:phone,Address:address},
+            data: { Name: name, Gender: sex==1?"true":"false", Age: age, Phone: phone, Address: address },
             success: function (data) {
                 if (data.StatusCode == 1)
                 {
