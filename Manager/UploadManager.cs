@@ -13,7 +13,7 @@ namespace Manager
 {
     public class UploadManager
     {
-        public OutputModel UploadImg(HttpPostedFileBase img, string userId, string galleryId, string categoryId,string name)
+        public OutputModel UploadImg(HttpPostedFileBase img, string userId, string galleryId, string categoryId, string name)
         {
             string newPath;
             OutputModel model = UploadHelper.UploadImg(img, out newPath);
@@ -32,15 +32,29 @@ namespace Manager
             {
                 DateTime = DateTime.Now,
                 ImgUrl = newPath,
-                Name =name?? img.FileName.Substring(0,img.FileName.LastIndexOf('.')),
+                Name = name ?? img.FileName.Substring(0, img.FileName.LastIndexOf('.')),
                 PhotoCategoryId = iCateGory,
-                PhotoGalleryId = (iGallery == -1? (int?)null:iGallery),
+                PhotoGalleryId = (iGallery == -1 ? (int?)null : iGallery),
                 Status = 1,
                 UserId = userId,
                 LocationId = null
             };
             PhotoServer photoServer = new PhotoServer();
             if (photoServer.Add(photo))
+                return OutputHelper.GetOutputResponse(ResultCode.OK);
+            else
+                return OutputHelper.GetOutputResponse(ResultCode.Error);
+        }
+
+        public OutputModel UploadHeadImg(HttpPostedFileBase img, string userId)
+        {
+            string newPath;
+            OutputModel model = UploadHelper.UploadImg(img, out newPath);
+            if (model.StatusCode != 1)
+            {
+                return model;
+            }
+            if (new UserInfoServer().Update(newPath, userId))
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
             else
                 return OutputHelper.GetOutputResponse(ResultCode.Error);

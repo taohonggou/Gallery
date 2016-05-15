@@ -1,7 +1,7 @@
 ﻿@model DataTrsfer.UserInfoDt
 
 @{
-    ViewBag.Title = "PersonalData";
+    ViewBag.Title = "个人资料";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/usercenter.css" rel="stylesheet" />
@@ -25,30 +25,109 @@
         border:0px;
     }
 </style>
-<script>
+<script src="~/Scripts/plupload/plupload.full.min.js"></script>
+<script src="~/Scripts/FormatVerify.js"></script>
+<script type="text/javascript">
     function edit(id) {
         layer.open({
             title: "添加分类",
             type: 1,
             shadeClose: true,
             area: ['450px'],
-            content: '<div style="text-align:center;width:450px;margin-top:20px;"><table width="100%"><tr style="line-height: 1.5;"><td>姓名：</td><td><input type="text" value="" /></td></tr><tr style="line-height: 1.5;"><td>性别：</td><td><input type="radio" name="sex" value="" />女    <input type="radio" name="sex" value="" />男</td></tr><tr style="line-height: 1.5;"><td>年龄：</td><td><input type="number"  value="" /></td></tr><tr style="line-height: 1.5;"><td>电话：</td><td><input type="tel" name="name" value=" " /></td></tr><tr style="line-height: 1.5;"><td>所在地：</td><td><input type="text" value="" /></td></tr><tr style="line-height: 1.5;"><td></td><td><input type="button" class="btn btn-default" onclick="editsubmit();" value="提交" /></td></tr></table></div>'
+            content: '<div style="text-align:center;width:450px;margin-top:20px;"><table width="100%"><tr style="line-height: 1.5;"><td>姓名：</td><td><input type="text" id="editName" value="' + $('#spanName').text() + '" /></td></tr><tr style="line-height: 1.5;"><td>性别：</td><td><input type="radio" name="sex" value="0" />女    <input type="radio" name="sex" value="1" />男</td></tr><tr style="line-height: 1.5;"><td>年龄：</td><td><input type="number" id="editAge"  value="' + $('#spanAge').text() + '" /></td></tr><tr style="line-height: 1.5;"><td>电话：</td><td><input type="tel" id="editPhone" name="name" value="' + $('#spanPhone').text() + '" /></td></tr><tr style="line-height: 1.5;"><td>所在地：</td><td><input type="text" id="editAddress" value="' + $('#spanAddress').text() + '" /></td></tr><tr style="line-height: 1.5;"><td></td><td><input type="button" class="btn btn-default" onclick="editSubmit();" value="提交" /></td></tr></table></div>'
+        });
+        if('@Model.Gender'=='True')
+        {
+            $('input[type="radio"][name="sex"][value="1"]').attr("checked","checked");
+        }else
+            $('input[type="radio"][name="sex"][value="0"]').attr("checked");
+    }
+
+    function editSubmit() {
+        var name = $('#editName').val();
+        if (!name)
+            return layer.msg('名称不能为空');
+        var sex = $('input[type="radio"][name="sex"]:checked').val();
+        
+        var age = $('#editAge').val();
+       
+        var phone = $('#editPhone').val();
+        if(!isMobilePhone(phone))
+            return layer.msg('手机号格式不正确');
+        var address = $('#editAddress').val();
+        if (!address)
+            return layer.msg('地址不能为空');
+        $.ajax({
+            type: 'post',
+            url: '/userinfo/Edit',
+            data:{Name:name,Gender:sex,Age:age,Phone:phone,Address:address},
+            success: function (data) {
+                if (data.StatusCode == 1)
+                {
+                    layer.msg("修改成功");
+                    window.location.reload();
+                }
+                else
+                    layer.msg(data.Message);
+            }
+        });
+    }
+
+    $(function () {
+        //实例化一个plupload上传对象
+        var uploader = new plupload.Uploader({
+            browse_button: 'editHead', //触发文件选择对话框的按钮，为那个元素id
+            url: '/Upload/UploadHeadImg', //服务器端的上传页面地址
+            flash_swf_url: '~/Scripts/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+            silverlight_xap_url: '~/Scripts/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+            filters: {
+                mime_types: [ //只允许上传图片文件
+                    { title: "图片文件", extensions: "jpg,gif,png" }
+                ]
+            },
+        });
+        //在实例对象上调用init()方法进行初始化
+        uploader.init();
+
+        //绑定文件添加进队列事件
+        uploader.bind('FilesAdded', function (uploader, files) {
+            uploader.start();
         });
 
-    }
+        uploader.bind("UploadComplete", function (uploader, file) {
+            layer.msg('上传成功');
+            setTimeout(function () {
+                window.location.reload();
+            },2000);
+            
+        });
+    });
+
 </script>
+
 <div class="container" style="min-height:633px;">
     <div style="width: 100%; height: 250px; margin: auto; text-align: center;">
         <div style="position:relative;height:50px; border-bottom:1px solid #d8d8d8;">
         </div>
         <div style=" position: relative; top: -49px;" class="imgtouxiang">
             <div>
-                <img src="/images/touxiang.png" alt="Alternate Text" style="border-radius:50%;width:100px;"  />
+                @if (Model.HeadUrl == null)
+                {
+                    <img src="/images/touxiang.png" alt="Alternate Text" style="border-radius:50%;width:100px;" />
+                }
+                else
+                {
+                     <img src="@Model.HeadUrl" alt="Alternate Text" style="border-radius:50%;width:100px;" />
+                }
+
+
             </div>
-            <div style="position: absolute; left:50%;" class="touxiang"><input type="button" class="btn btn-default" style="position:absolute;width:80px;height:40px; right:-40px;top:-70px;" value="修改头像" /></div>
+            <div style="position: absolute; left:50%;" class="touxiang">
+                <button id="editHead" class="btn btn-default" style="position:absolute;width:80px;height:40px; right:-40px;top:-70px;">修改头像</button>
+            </div>
             <div class="clear"></div>
         </div>
-        <div><span style="font-size: 30px; position: relative; top: -43px;">@ViewBag.User.Name</span></div>
+        <div><span style="font-size: 30px; position: relative; top: -43px;">@Model.Name</span></div>
         <div class="profile_nav_wrapper">
             <div class="tabs_wrapper fix_width_on_modal">
                 <ul class="profile_nav px_tabs">
@@ -82,32 +161,32 @@
             <table style="position:absolute;left:30%;" class="tablepernal">
                 <tr>
                     <td>姓名：</td>
-                    <td>@ViewBag.User.Name</td>
+                    <td><span id="spanName">@Model.Name</span> </td>
                 </tr>
                 <tr>
                     <td>性别：</td>
                     <td>
-                        @if (ViewBag.User.Gender)
+                        @if (Model.Gender)
                         {
-                            <p>男</p>
+                            <p id="pGender">男</p>
                         }
                         else
                         {
-                            <p>女</p>
+                            <p id="pGender">女</p>
                         }
                     </td>
                 </tr>
                 <tr>
                     <td>年龄：</td>
-                    <td>@ViewBag.User.Age</td>
+                    <td><span id="spanAge">@Model.Age</span></td>
                 </tr>
                 <tr>
                     <td>电话：</td>
-                    <td>@ViewBag.User.Phone</td>
+                    <td><span id="spanPhone">@Model.Phone</span></td>
                 </tr>
                 <tr>
                     <td>所在地：</td>
-                    <td>@ViewBag.User.Address</td>
+                    <td><span id="spanAddress">@Model.Address</span></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -116,7 +195,7 @@
 
             </table>
         </div>
-        
+
         <div class="clear"></div>
     </div>
     <div class="clear"></div>

@@ -28,6 +28,7 @@
         <AssociationConnector Association="GalleryModel.FK_SCANORSU_REFERENCE_USERINFO" />
         <AssociationConnector Association="GalleryModel.FK_USERROLE_REFERENCE_USERINFO" />
         <AssociationConnector Association="GalleryModel.FK_VERIFYRE_REFERENCE_USERINFO" />
+        <EntityTypeShape EntityType="GalleryModel.AdminUser" Width="1.5" PointX="8.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,0 +1,92 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>后台登录</title>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="login-page">
+        <div class="login-main">
+            <div class="login-head">
+                <h1>登录</h1>
+            </div>
+            <div class="login-block">
+                <form action="/adminuserinfo/login" method="post">
+                    <p style="display:@ViewBag.Display;color:red;">@ViewBag.Message</p>
+                    <input type="text" name="userId" id="userId" placeholder="用户名" required="">
+                    <input type="password" name="pwd" id="password" class="lock" placeholder="密码" required="">
+
+                    @*<button onclick="submit()">登录</button>*@
+                    <input type="submit" id="btnLogin"  value="登录">
+
+                </form>
+                <h5><a href="/">返回首页</a></h5>
+            </div>
+        </div>
+    </div>
+    <!--inner block end here-->
+    <!--copy rights start here-->
+    <div class="copyrights">
+        <p>Copyright &copy; 2015.ChenLiang All rights reserved.</p>
+    </div>
+    <!--COPY rights end here-->
+    <!--scrolling js-->
+    <script src="~/Scripts/jquery.nicescroll.js"></script>
+    <script src="~/Scripts/scripts.js"></script>
+    <!--//scrolling js-->
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/md5.js"></script>
+    <script src="~/Scripts/layer9.1/layer.js"></script>
+    <!-- mother grid end here-->
+    <script type="text/javascript">
+        function submit() {
+            var userId = $('#userId').val();
+            if (!userId)
+            {
+                $('#userId').focus();
+                layer.msg('用户名不能为空');
+                return;
+            }
+            var pwd = $('#password').val();
+            if (!pwd)
+            {
+                layer.msg('密码不能为空');
+                $('#password').focus();
+                return;
+            }
+            $('#btnLogin').val('登录中...');
+            $('#btnLogin').css('disabled');
+            $.ajax({
+                type: 'post',
+                url: '/adminuserinfo/login',
+                data: { userId: userId, pwd: hex_md5(pwd) },
+                success: function (data) {
+                    if (data.StatusCode === 1)
+                        window.location.href = '/AdminHome/Index';
+                    else {
+                        layer.msg(data.Message, {
+                            time: 2000
+                        });
+                        $('#btnLogin').val('登录');
+                        $('#btnLogin').removeAttr('disabled');
+                    }
+                }
+            });
+            
+        }
+    </script>
+</body>
+</html>

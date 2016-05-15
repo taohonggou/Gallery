@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Tool;
 using DataTrsfer;
+using Manager;
 
 namespace GalleryUI.Controllers
 {
@@ -18,8 +19,14 @@ namespace GalleryUI.Controllers
         public BaseController()
         {
             user = System.Web.HttpContext.Current.Session["user"] as UserInfoDt;
-            ViewBag.User = user;
             ViewBag.IsLogin = (user != null);
+            //如果登陆了就每次获取最新数据
+            if(user!=null)
+            {
+                user = new UserInfoManager().GetByUserId(user.UserId);
+            }
+            ViewBag.User = user;
+            
         }
         /// <summary>
         /// 判断此用户是否登录
