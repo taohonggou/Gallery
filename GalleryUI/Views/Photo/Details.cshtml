@@ -31,6 +31,7 @@
         $('#imgRul').attr('src', json.ImgUrl);
         setSupCount(json.SuppostCount);
         $('#userName').text(json.User.Name);
+        $('#userName').attr('href','/OtherCenter/Index?userId='+json.User.UserId);
         initLastImg(json.ListLastPhotos);
         initComment(json.ListComment)
     }
@@ -63,22 +64,22 @@
         $.each(json, function (index, value) {
 
 
-            comment += '<div class="media mainborder"><a class="pull-left" href="#">';
+            comment += '<div class="media mainborder"><a class="pull-left" href="/OtherCenter/Index?userId='+value.User.UserId+'">';
             if (value.User.HeadUrl == null)
                 comment += '<img class="media-object" src="/images/touxiang.png" style="width:50px;height:50px;" alt="作者"/>';
             else
                 comment += '<img class="media-object" src="' + value.User.HeadUrl + '" style="width:50px;height:50px;" alt="作者"/>';
-            comment += '</a><div class="media-body"><h4 class="media-heading"><lable>' + value.User.Name + '</lable><a style="position: relative; float: right; font-size: 10px; cursor: pointer;" onclick="reply(' + value.CommentId + ',' + value.CommentId + ',&quot;' + value.User.Name + '&quot;)">回复</a></h4><p>' + value.Content + '</p> ';
+            comment += '</a><div class="media-body"><h4 class="media-heading"><a href="/OtherCenter/Index?userId=' + value.User.UserId + '"><lable>' + value.User.Name + '</lable></a><a style="position: relative; float: right; font-size: 10px; cursor: pointer;" onclick="reply(' + value.CommentId + ',' + value.CommentId + ',&quot;' + value.User.Name + '&quot;)">回复</a></h4><p>' + value.Content + '</p> ';
             //判断有没有二级评论
             if (value.SonComment.length > 0) {
                 $.each(value.SonComment, function (key, item) {
 
-                    comment += '<div class="media mainborder"><a class="pull-left" href="#">';
+                    comment += '<div class="media mainborder"><a class="pull-left" href="/OtherCenter/Index?userId=' + item.User.UserId + '">';
                     if (item.User.HeadUrl == null)
                         comment += ' <img class="media-object" src="/images/touxiang.png" style="width:50px;height:50px;" alt="作者"/>';
                     else
                         comment += '<img class="media-object" src="' + item.User.HeadUrl + '" style="width:50px;height:50px;" alt="作者"/>';
-                       comment += ' </a><div class="media-body"><h4 class="media-heading"><lable>' + item.User.Name + '</lable><a style="position: relative; float: right; font-size: 10px; cursor: pointer;" onclick="reply(' + value.CommentId + ',' + item.CommentId + ',&quot;' + item.User.Name + '&quot;)" >回复</a></h4><p>' + item.Content + '</p></div></div>';
+                    comment += ' </a><div class="media-body"><h4 class="media-heading"><a href="/OtherCenter/Index?userId=' + item.User.UserId + '"><lable>' + item.User.Name + '</lable></a><a style="position: relative; float: right; font-size: 10px; cursor: pointer;" onclick="reply(' + value.CommentId + ',' + item.CommentId + ',&quot;' + item.User.Name + '&quot;)" >回复</a></h4><p>' + item.Content + '</p></div></div>';
                 })
             }
             comment += '<div class="detial mainborder showhidden" id="' + value.CommentId + '" style="display:none" ><textarea id="' + value.CommentId + '1" class="mainborder"  style="margin:auto;width:100%;"></textarea><input type="button" onclick="submit(' + value.CommentId + '1,' + value.CommentId + ')" value="评论" class="btn-default" style="position:relative;float:right;" /><div class="clear"></div></div></div></div>';
@@ -254,7 +255,7 @@
         </div>
     </div>
     <div class="col-lg-3" style="padding: 4px; border: 1px solid #ddd; border-radius: 4px;">
-        <div style="margin-bottom:1em;margin-top:1em;"><span id="userName"></span></div>
+        <div style="margin-bottom:1em;margin-top:1em;"><a href="javascript:;" id="userName"></a></div>
         <div class="imgs polaroid" id="lastPhotos">
 
         </div>
