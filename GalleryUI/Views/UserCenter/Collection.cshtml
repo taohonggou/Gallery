@@ -133,13 +133,13 @@
 <div style="position:relative;top:-50px;z-index:999;width:400px;">
     <input type="button" class="btn btn-default" value="批量操作" id="eidtall" /><div style="position: absolute; top: 0px; left: 86px;" class="hiddenbtn"> <input type="button" class="btn btn-default" value="取消收藏" onclick="deleteall()" /></div>
 </div>
-<div id="divContainer">
+<div id="divContainer" style="text-align:center;">
 
     @{
         List<PhotoDt> list = ViewBag.ListCollections;
         if (list == null || list.Count == 0)
         {
-            <label>暂无图片,<a href="/Upload/Upload">点击这里上传图片</a></label>
+            <label>暂无图片</label>
         }
         else
         {
