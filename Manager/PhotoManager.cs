@@ -70,6 +70,11 @@ namespace Manager
             return server.GetListByGallery(userId, galleryId);
         }
 
+        public List<PhotoDt> GetListByGallery(int galleryId)
+        {
+            return server.GetListByGallery(galleryId);
+        }
+
         public OutputModel GetPageOrderByDateTime(string pageIndex, string pageSize)
         {
             int index, size, rowCount, pageCount;
@@ -178,6 +183,9 @@ namespace Manager
         {
             int index, size;
             FormatVerify.PageCheck(pageIndex, pageSize, out index, out size);
+            UserInfoDt user = new UserInfoServer().GetUserInfo(userId);
+            if(user==null)
+                return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied);
             List<PhotoDt> list = server.GetPageByUserIdOrderByDateTime(userId, index, size);
             if (list.Count == 0)
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);

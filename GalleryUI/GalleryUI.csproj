@@ -169,6 +169,7 @@
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LikeController.cs" />
+    <Compile Include="Controllers\OtherCenterController.cs" />
     <Compile Include="Controllers\PhotoCategoryController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\PhotoGalleryController.cs" />
@@ -389,13 +390,14 @@
     <Content Include="Views\UserCenter\GalleryPhotos.cshtml" />
     <Content Include="Views\AdminUserInfo\Login.cshtml" />
     <Content Include="Views\Photo\Search.cshtml" />
+    <Content Include="Views\Shared\_OtherCenterLayout.cshtml" />
+    <Content Include="Views\OtherCenter\Index.cshtml" />
+    <Content Include="Views\OtherCenter\Gallery.cshtml" />
+    <Content Include="Views\OtherCenter\GalleryPhoto.cshtml" />
+    <Content Include="Views\OtherCenter\PersonalData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\AdminBase\" />
-    <Folder Include="Views\Base\" />
-    <Folder Include="Views\Comment\" />
-    <Folder Include="Views\Like\" />
     <Folder Include="Views\PhotoGallery\" />
     <Folder Include="Views\ScanOrSupport\" />
   </ItemGroup>

@@ -1,10 +1,18 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "分类";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <style type="text/css">
+    .title {
+        /*float: left;*/
+        margin: 35px 0 22px 0;
+    }
+
+        .title img {
+            margin-right: 15px;
+            margin-bottom: 7px;
+        }
     img {
         border: none;
     }
@@ -56,6 +64,15 @@
 <script src="~/Scripts/photoCategory/showCategory.js"></script>
 
 <div class="container" style="min-height:500px;">
+    <div class="title" style="display: inline-flex;">
+        @if (ViewBag.CategoryName != null)
+        {
+            <img src="/images/jian.png" width="11" height="18">
+            <h3 style="margin-top: -3px;">@ViewBag.CategoryName.Name</h3>
+
+        }
+
+    </div>
     <div id="con1_1">
 
         <div class="clear"></div>

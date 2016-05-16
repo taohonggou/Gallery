@@ -1,0 +1,114 @@
+﻿@using DataTrsfer
+@{
+    ViewBag.Title = "他人照片";
+    Layout = "~/Views/Shared/_OtherCenterLayout.cshtml";
+}
+
+<style>
+    .list-group-item:first-child {
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+    }
+
+    .list-group-item:last-child {
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+
+    .list-group-item {
+        margin: 0px 1px 2px 1px;
+    }
+
+
+
+    div.polaroid {
+        position: relative;
+        width: 22.8%;
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin: 0px 12.5px 25px 12.5px;
+        float: left;
+    }
+
+    div.pcenter {
+        text-align: center;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    .img1 {
+        display: inline-block;
+        width: 180px;
+        height: 180px;
+        cursor: pointer;
+    }
+
+    .hiddenbtn {
+        display: none;
+    }
+
+    .polaroid:hover .hiddenbtn {
+        display: block;
+    }
+
+    .hiddenbtncheck {
+        display: none;
+    }
+
+    /*.title {
+        margin: -25px 0 22px 0;
+    }
+
+        .title img {
+            margin-right: 15px;
+            margin-bottom: 7px;
+        }
+
+        .title a {
+            color: #666;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        .title:hover a {
+            color: #26a2fb;
+            font-size: 24px;
+        }*/
+</style>
+
+<script type="text/javascript">
+    $(function () {
+        $('#liGallery').addClass('active');
+       
+    });
+</script>
+
+<div class="title">
+    <img src="/images/jian.png" width="11" height="18"><a href="javascript:;">@ViewBag.galleryName</a>
+
+</div>
+<div id="divContainer" style="text-align:center;min-height:500px;position:relative;">
+
+    @{
+        List<PhotoDt> list = ViewBag.GalleryPhotos;
+        if (list == null || list.Count == 0)
+        {
+            <div style=" position: absolute; top: 25%; left: 43%;"><label>暂无图片</label></div>
+        }
+        else
+        {
+            foreach (PhotoDt photo in list)
+            {
+                <div class="polaroid">
+                    
+                    <a href="/photo/details?photoId=@photo.PhotoId"><img src="@photo.ImgUrl" alt="Norway" style="width:100%;" class="img1" /></a>
+                    <div class="pcenter" data-id="@photo.PhotoId">
+                        <p style="overflow: hidden; text-overflow: ellipsis;height:22px;" title="@photo.Name ">@photo.Name</p>
+                    </div>
+                </div>
+            }
+        }
+    }
+    <div class="clear" id="divClear"></div>
+</div>
+
