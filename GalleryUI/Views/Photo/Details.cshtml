@@ -82,7 +82,7 @@
                     comment += ' </a><div class="media-body"><h4 class="media-heading"><a href="/OtherCenter/Index?userId=' + item.User.UserId + '"><lable>' + item.User.Name + '</lable></a><a style="position: relative; float: right; font-size: 10px; cursor: pointer;" onclick="reply(' + value.CommentId + ',' + item.CommentId + ',&quot;' + item.User.Name + '&quot;)" >回复</a></h4><p>' + item.Content + '</p></div></div>';
                 })
             }
-            comment += '<div class="detial mainborder showhidden" id="' + value.CommentId + '" style="display:none" ><textarea id="' + value.CommentId + '1" class="mainborder"  style="margin:auto;width:100%;"></textarea><input type="button" onclick="submit(' + value.CommentId + '1,' + value.CommentId + ')" value="评论" class="btn-default" style="position:relative;float:right;" /><div class="clear"></div></div></div></div>';
+            comment += '<div class="detial mainborder showhidden" id="' + value.CommentId + '" style="display:none" ><textarea id="' + value.CommentId + '1" class="mainborder"  style="margin:auto;width:100%;"></textarea><input type="button" onclick="submit(' + value.CommentId + '1,' + value.CommentId + ')" value="评论" class="btn btn-default" style="position:relative;float:right;" /><div class="clear"></div></div></div></div>';
         });
         $('#comment').html(comment);
     }

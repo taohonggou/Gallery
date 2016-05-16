@@ -249,16 +249,16 @@
 <div style="position:relative;top:-50px;z-index:999;width:400px;">
     <input type="button" class="btn btn-default" value="批量操作" id="eidtall" /><div style="position: absolute; top: 0px; left: 86px;" class="hiddenbtncheck"> <input type="button" class="btn btn-default" value="删除" onclick="deleteall()" /> <input type="button" class="btn btn-default" value="移动到相册" onclick="move()" /></div>
 </div>
-<div class="title">
-    <img src="/images/jian.png" width="11" height="18"><a href="javascript:;">@ViewBag.galleryName</a>
-
+<div class="title" style="display: inline-flex;">
+    <img src="/images/jian.png" width="11" height="18"><h3 style="margin-top: -3px;">@ViewBag.galleryName</h3>
+    
 </div>
 @{
     List<PhotoDt> list = ViewBag.GalleryPhotos;
     if (list != null && list.Count > 0)
     {
-        <div>
-            <a href="/Upload/Upload?galleryId=@ViewBag.galleryid">上传图片</a>
+        <div style="display:inline-block;">
+            <label><a href="/Upload/Upload?galleryId=@ViewBag.galleryid">上传图片</a></label>
         </div>
     }
 }
@@ -269,7 +269,7 @@
 
         if (list == null || list.Count == 0)
         {
-            <div style=" position: absolute; top: 25%; left: 43%;"><label>暂无图片,<a href="/Upload/Upload?galleryId=@ViewBag.galleryid">点击这里上传图片</a></label></div>
+            <div><label>暂无图片,<a href="/Upload/Upload?galleryId=@ViewBag.galleryid">点击这里上传图片</a></label></div>
         }
         else
         {

@@ -55,7 +55,7 @@
         display: none;
     }
 
-    /*.title {
+    .title {
         margin: -25px 0 22px 0;
     }
 
@@ -63,17 +63,6 @@
             margin-right: 15px;
             margin-bottom: 7px;
         }
-
-        .title a {
-            color: #666;
-            font-size: 24px;
-            text-decoration: none;
-        }
-
-        .title:hover a {
-            color: #26a2fb;
-            font-size: 24px;
-        }*/
 </style>
 
 <script type="text/javascript">
@@ -83,8 +72,8 @@
     });
 </script>
 
-<div class="title">
-    <img src="/images/jian.png" width="11" height="18"><a href="javascript:;">@ViewBag.galleryName</a>
+<div class="title" style="display: inline-flex;position:relative;top:10px;">
+    <img src="/images/jian.png" width="11" height="18"><h3 style="margin-top: -3px;">@ViewBag.galleryName</h3>
 
 </div>
 <div id="divContainer" style="text-align:center;position:relative;">
@@ -93,7 +82,7 @@
         List<PhotoDt> list = ViewBag.GalleryPhotos;
         if (list == null || list.Count == 0)
         {
-            <div style=" position: absolute; top: 25%; left: 43%;"><label>暂无图片</label></div>
+            <div><label>暂无图片</label></div>
         }
         else
         {
