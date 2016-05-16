@@ -7,11 +7,13 @@ using Server;
 using DataTrsfer;
 using Tool;
 using System.Web;
+using System.Configuration;
 
 namespace Manager
 {
     public class UserInfoManager
     {
+        private static string IPAddress = ConfigurationManager.AppSettings["IPAddress"];
         private UserInfoServer server = ObjectContainer.GetInstance<UserInfoServer>();
         private VerifyRegisterServer vServer = ObjectContainer.GetInstance<VerifyRegisterServer>();
         public OutputModel Add(string email, string md5Pwd)
@@ -40,7 +42,7 @@ namespace Manager
             };
             if (server.Add(user, verifyDt))
             {
-                EmailHelper.SendEmail("[Gallery]感谢注册Gallery,请验证邮箱" + email, email.Substring(0, email.IndexOf('@')) + "：您好，感谢您注册Gallery，请点击下面的链接验证您的邮箱：<a href='http://121.42.58.78/UserInfo/VerifyEmail?guid=" + verifyDt.GUID + "'>http://121.42.58.78/UserInfo/VerifyEmail?guid=" + verifyDt.GUID + "</a>该链接7天后失效。", email);
+                EmailHelper.SendEmail("[Gallery]感谢注册Gallery,请验证邮箱" + email, email.Substring(0, email.IndexOf('@')) + "：您好，感谢您注册Gallery，请点击下面的链接验证您的邮箱：<a href='" + IPAddress + "/UserInfo/VerifyEmail?guid=" + verifyDt.GUID + "'>" + IPAddress + "/UserInfo/VerifyEmail?guid=" + verifyDt.GUID + "</a>该链接7天后失效。", email);
                 //设置登录状态
                 System.Web.HttpContext.Current.Session["user"] = user;
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
@@ -86,7 +88,7 @@ namespace Manager
             };
             if (vServer.Add(verifyDt))
             {
-                EmailHelper.SendEmail("[Gallery]欢迎来到Gallery,点击重置密码" + email, email.Substring(0, email.IndexOf('@')) + "：您好，请点击下面的链接验证您的邮箱：<a href='http://121.42.58.78/UserInfo/LostPwdVerifyEmail?guid=" + verifyDt.GUID + "'>http://121.42.58.78/UserInfo/LostPwdVerifyEmail?guid=" + verifyDt.GUID + "</a>该链接7天后失效。", email);
+                EmailHelper.SendEmail("[Gallery]欢迎来到Gallery,点击重置密码" + email, email.Substring(0, email.IndexOf('@')) + "：您好，请点击下面的链接验证您的邮箱：<a href='" + IPAddress + "/UserInfo/LostPwdVerifyEmail?guid=" + verifyDt.GUID + "'>" + IPAddress + "/UserInfo/LostPwdVerifyEmail?guid=" + verifyDt.GUID + "</a>该链接7天后失效。", email);
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
             }
             else
