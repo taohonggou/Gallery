@@ -30,7 +30,7 @@
                     $('div.go-top').show();
                 else
                     $('div.go-top').hide();
-            });
+        });
             $('div.go-top').click(function () {
                 $('html, body').animate({ scrollTop: 0 }, 1000);
             });
@@ -90,6 +90,7 @@
             }
     </style>
 </head>
+
 <body>
     <!--header start here-->
     <div class="header">
@@ -97,8 +98,10 @@
         <div class="container">
             <div class="header_top_right">
                 <div style="float:right;">
-                    <ul>@if (ViewBag.IsLogin)
-                        {<li><a href="/Upload/Upload" class="upload">上传</a></li>
+                        <ul>
+                            @if (ViewBag.IsLogin)
+                        {
+                            <li><a href="/Upload/Upload" class="upload">上传</a></li>
                             <li> |</li>
                             <li><a href="/UserCenter/Photos">@ViewBag.User.Name</a> </li>
                             <li> |</li>
@@ -110,7 +113,6 @@
                             <li> |</li>
                             <li><a href="/UserInfo/Register">注册</a></li>
                         }
-
                     </ul>
                 </div>
                 <div class="clear"></div>
@@ -125,13 +127,13 @@
                             <li><a href="/">首页</a></li>
                             <li><a href="/photo/recent">最新</a></li>
                             <li><a href="/PhotoCategory/Index">分类</a></li>
-                            <li><a href="contact.html">关于</a></li>
+                            <li><a href="/Home/About">关于</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="header-right">
                     <div class="search">
-                        <form style="margin-bottom: 0;" action="/photo/search" method="get" >
+                        <form style="margin-bottom: 0;" action="/photo/search" method="get">
                             <input type="text" name="name" id="inputSearch" placeholder="Search" required />
                             <input type="submit" value="" />
                         </form>
