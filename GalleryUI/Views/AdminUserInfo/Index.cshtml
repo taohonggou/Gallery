@@ -62,13 +62,20 @@
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.HeadUrl)
+                    @if (!string.IsNullOrEmpty(item.HeadUrl))
+                    {
+                        <img src="@Html.DisplayFor(modelItem => item.HeadUrl)" width="70px" />
+                    }
+                    else {
+                    <img src="~/images/touxiang.png" width="70px"/>
+                    }
+                    
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DateTime)
                 </td>
                 <td>
-                    <a href="javascript:;" onclick="deleteUser('@item.UserId')">Delete</a>
+                    <a href="javascript:;" class="btn btn-danger" onclick="deleteUser('@item.UserId')">Delete</a>
                 </td>
             </tr>
         }

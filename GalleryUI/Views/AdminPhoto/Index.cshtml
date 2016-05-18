@@ -85,9 +85,6 @@
 <table class="table table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.LocationId)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.PhotoCategoryName)
         </th>
         <th>
@@ -121,9 +118,6 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LocationId)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.PhotoCategoryName)
                 </td>
                 <td>
@@ -136,7 +130,7 @@
                     <img src="@item.ImgUrl" alt="Alternate Text" width="100px;" />
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    <p style="width:100px;overflow-wrap:break-word;">@Html.DisplayFor(modelItem => item.Name)</p>
                 </td>
                 <td>
                     @if (item.Status == 1)
@@ -152,8 +146,8 @@
                 </td>
                 <td>
                     @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
-                    <a href="/photo/details?photoId=@item.PhotoId">Details</a>
-                    <a href="javascript:;" onclick="deletePhoto(@item.PhotoId)">Delete</a>
+                    <a class="btn btn-success" href="/photo/details?photoId=@item.PhotoId">Details</a>
+                    <a class="btn btn-danger" href="javascript:;" onclick="deletePhoto(@item.PhotoId)">Delete</a>
                 </td>
             </tr>
         }
