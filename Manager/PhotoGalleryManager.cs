@@ -124,5 +124,30 @@ namespace Manager
             }
             return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
+
+        /// <summary>
+        /// 修改相册名称
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="galleryId"></param>
+        /// <returns></returns>
+        public OutputModel EditGalleryName(string name,string galleryId,string userId)
+        {
+            if (FormatVerify.IsNullOrEmpty(name))
+                return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
+            int iGalleryId;
+            if (!int.TryParse(galleryId, out iGalleryId))
+                return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
+            PhotoGalleryDt photoGallery = server.Get(iGalleryId);
+            if (photoGallery == null)
+                return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
+            if(photoGallery.UserId!=userId)
+                return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied,"请修改本人相册");
+            photoGallery.Name = name;
+            if (server.Update(photoGallery))
+                return OutputHelper.GetOutputResponse(ResultCode.OK);
+            else
+                return OutputHelper.GetOutputResponse(ResultCode.Error);
+        }
     }
 }

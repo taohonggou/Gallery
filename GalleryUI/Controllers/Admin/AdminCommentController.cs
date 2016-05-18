@@ -14,6 +14,8 @@ namespace GalleryUI.Controllers.Admin
         // GET: /AdminComment/
         public ActionResult Index(string pageindex)
         {
+            if (!IsLogin())
+                return RedirectLogin();
             int pagesize = 10;
             int pagecount;
             List<CommentDt> list = new CommentManager().GetPage(pageindex, pagesize, out pagecount);
@@ -23,6 +25,8 @@ namespace GalleryUI.Controllers.Admin
         }
         public ActionResult Delete(string id)
         {
+            if (!IsLogin())
+                return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
             int i;
             if(!int.TryParse(id, out i))
             {

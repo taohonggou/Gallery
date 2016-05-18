@@ -24,6 +24,16 @@
                 event.preventDefault();
                 $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
             });
+            //回到顶部的js
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > 1000)
+                    $('div.go-top').show();
+                else
+                    $('div.go-top').hide();
+        });
+            $('div.go-top').click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 1000);
+            });
         });
     </script>
     <!-- //end-smoth-scrolling -->
@@ -33,7 +43,54 @@
     <link href="~/Content/layout/popup-box.css" rel="stylesheet" />
     <script src="~/Scripts/layout/jquery.magnific-popup.js"></script>
     <!--pop-up-box-->
+    <!--回到顶部样式-->
+    <style type="text/css">
+        div.go-top {
+            display: none;
+            opacity: 0.6;
+            z-index: 999999;
+            position: fixed;
+            bottom: 16px;
+            right:16px;
+            margin-left: 40px;
+            /*border: 1px solid #a38a54;*/
+            width: 50px;
+            height: 50px;
+            background-color: #ddd;
+            /*border-radius: 3px;*/
+            cursor: pointer;
+        }
+
+            div.go-top:hover {
+                opacity: 1;
+                filter: alpha(opacity=100);
+            }
+
+            div.go-top div.arrow {
+                position: absolute;
+                left: 10px;
+                top: -7px;
+                width: 0px;
+                height: 0px;
+                border: 15.5px solid transparent;
+                border-bottom-color: #428bca;
+            }
+
+            div.go-top div.stick {
+                position: absolute;
+                left: 18.5px;
+                top: 23px;
+                width: 13px;
+                height: 17px;
+                display: block;
+                background-color: #428bca;
+                -webkit-border-radius: 1px;
+                -moz-border-radius: 1px;
+                border-radius: 1px;
+            }
+    </style>
 </head>
+
 <body>
     <!--header start here-->
     <div class="header">
@@ -41,20 +98,21 @@
         <div class="container">
             <div class="header_top_right">
                 <div style="float:right;">
-                    <ul>@if (ViewBag.IsLogin)
-                        {<li><a href="/Upload/Upload" class="upload">上传</a></li>
-                            <li> |</li>
+                        <ul>
+                            @if (ViewBag.IsLogin)
+                        {
+                            <li><a href="/Upload/Upload" class="upload">上传</a></li>
+                            <li>|</li>
                             <li><a href="/UserCenter/Photos">@ViewBag.User.Name</a> </li>
-                            <li> |</li>
+                            <li>|</li>
                             <li><a href="/UserInfo/LogOut">退出</a></li>
                         }
                         else
                         {
                             <li><a href="/UserInfo/Login">登录</a></li>
-                            <li> |</li>
+                            <li>|</li>
                             <li><a href="/UserInfo/Register">注册</a></li>
                         }
-
                     </ul>
                 </div>
                 <div class="clear"></div>
@@ -69,14 +127,14 @@
                             <li><a href="/">首页</a></li>
                             <li><a href="/photo/recent">最新</a></li>
                             <li><a href="/PhotoCategory/Index">分类</a></li>
-                            <li><a href="contact.html">关于</a></li>
+                            <li><a href="/Home/About">关于</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="header-right">
                     <div class="search">
-                        <form style="margin-bottom: 0;">
-                            <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" />
+                        <form style="margin-bottom: 0;" action="/photo/search" method="get">
+                            <input type="text" name="name" id="inputSearch" placeholder="Search" required />
                             <input type="submit" value="" />
                         </form>
                     </div>
@@ -116,6 +174,11 @@
         </div>
     </div>
     <!--footer end here-->
+    <!--回到顶端-->
+    <div class="go-top">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+    </div>
 </body>
 </html>
 

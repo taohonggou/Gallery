@@ -30,7 +30,7 @@ uploader.bind('FilesAdded', function (uploader, files) {
         var file_name = files[i].name; //文件名
         file_name = file_name.substring(0,file_name.indexOf('.'));
         //构造html来更新UI
-        var html = '<li id="file-' + files[i].id + '" class="list-group-item" style="float:left;width:33%;height:300px;"><input type="text" class="file-name" id="name_' + files[i].id + '" value="' + file_name + '" /><a href="javascript:;" onclick="removeFile(&quot;' + files[i].id + '&quot;)" style="position:relative;float:right;">删除</a><p style="width:100%;height:10px;margin:2px 0;"  class="progress"></p></li>';
+        var html = '<li id="file-' + files[i].id + '" class="list-group-item" style="float:left;width:33%;height:300px;"><input type="text" class="file-name" id="name_' + files[i].id + '" value="' + file_name + '" /><a href="javascript:;" onclick="removeFile(&quot;' + files[i].id + '&quot;)" style="position:relative;float:right;">删除</a><p style="width:0;height:10px;margin:2px 0;"  class="progress"></p></li>';
         $(html).appendTo('#file-list');
         !function (i) {
             previewImage(files[i], function (imgsrc) {

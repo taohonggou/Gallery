@@ -70,6 +70,11 @@ namespace Manager
             return server.GetListByGallery(userId, galleryId);
         }
 
+        public List<PhotoDt> GetListByGallery(int galleryId)
+        {
+            return server.GetListByGallery(galleryId);
+        }
+
         public OutputModel GetPageOrderByDateTime(string pageIndex, string pageSize)
         {
             int index, size, rowCount, pageCount;
@@ -178,6 +183,9 @@ namespace Manager
         {
             int index, size;
             FormatVerify.PageCheck(pageIndex, pageSize, out index, out size);
+            UserInfoDt user = new UserInfoServer().GetUserInfo(userId);
+            if(user==null)
+                return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied);
             List<PhotoDt> list = server.GetPageByUserIdOrderByDateTime(userId, index, size);
             if (list.Count == 0)
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
@@ -241,6 +249,48 @@ namespace Manager
             if (server.Update(list))
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
             return OutputHelper.GetOutputResponse(ResultCode.Error);
+        }
+
+        public OutputModel SearchByName(string name)
+        {
+            
+            List<PhotoDt> listPhotos= SearchByNameReturnList(name);
+            if (listPhotos.Count == 0)
+            {
+                return OutputHelper.GetOutputResponse(ResultCode.NoData);
+            }
+            else
+                return OutputHelper.GetOutputResponse(ResultCode.OK, listPhotos);
+        }
+
+        public List<PhotoDt> SearchByNameReturnList(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return new List<PhotoDt>();
+            StringBuilder sbLikeName = new StringBuilder();
+            sbLikeName.Append("%");
+            for (int i = 0; i < name.Length; i++)
+            {
+                sbLikeName.Append(name[i] + "%");
+            }
+            return server.GetListByLikeName(sbLikeName.ToString());
+        }
+
+        public OutputModel EditPhoto(string name,string photoId,string userId)
+        {
+            if(string.IsNullOrEmpty(name))
+                return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
+            int iPhotoId;
+            if(!int.TryParse(photoId,out iPhotoId))
+                return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
+            PhotoDt photo = server.Get(iPhotoId);
+            if(photo==null||photo.UserId!=userId)
+                return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied);
+            photo.Name = name;
+            if(server.Update(photo))
+                return OutputHelper.GetOutputResponse(ResultCode.OK);
+            else
+                return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
     }
 }

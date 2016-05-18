@@ -7,7 +7,7 @@ $(document).ready(function () {
         var scrollTop = document.body.scrollTop;
         var clientHeight = document.documentElement.clientHeight;
         var scrollHeight = document.body.scrollHeight;
-        if (100 >= scrollHeight - clientHeight - scrollTop && flag) {
+        if (300 >= scrollHeight - clientHeight - scrollTop && flag) {
             pageIndex++;
             loadPhotos(pageIndex, pageSize);
         }
@@ -71,7 +71,7 @@ function loadPhotosFirst(index, size) {
             }
             else {
                 flag = false;
-                return layer.msg(data.Message);
+                //return layer.msg(data.Message);
             }
                 
         }

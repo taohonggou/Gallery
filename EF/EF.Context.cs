@@ -25,6 +25,7 @@ namespace EF
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AdminUser> AdminUser { get; set; }
         public virtual DbSet<Comment> Comment { get; set; }
         public virtual DbSet<Like> Like { get; set; }
         public virtual DbSet<Location> Location { get; set; }
@@ -36,8 +37,8 @@ namespace EF
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<ScanOrSupport> ScanOrSupport { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<UserInfo> UserInfo { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<VerifyRegister> VerifyRegister { get; set; }
-        public virtual DbSet<UserInfo> UserInfo { get; set; }
     }
 }

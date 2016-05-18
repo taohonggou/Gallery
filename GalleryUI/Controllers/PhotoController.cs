@@ -71,6 +71,13 @@ namespace GalleryUI.Controllers
             return Content(new PhotoManager().GetPageByUserId(user.UserId,pageIndex, pageSize));
         }
 
+        public ActionResult GetPageByOtherUserId(string pageIndex, string pageSize,string userId)
+        {
+            //if (!IsLogin())
+                //return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
+            return Content(new PhotoManager().GetPageByUserId(userId, pageIndex, pageSize));
+        }
+
         public ActionResult GetPageByUserCollection(string pageIndex,string pageSize)
         {
             if(!IsLogin())
@@ -88,6 +95,23 @@ namespace GalleryUI.Controllers
         {
             string[] ids = pids.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             return Content(new PhotoManager().UpdateGallery(galleryid, ids));
+        }
+
+        public ActionResult Search(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return RedirectHome();
+           // ViewBag.SearchResult = new PhotoManager().SearchByNameReturnList(name);
+            return View(new PhotoManager().SearchByNameReturnList(name));
+        }
+
+       
+        [HttpPost]
+        public ActionResult Edit(string name,string photoId)
+        {
+            if(!IsLogin())
+                return Content(OutputHelper.GetOutputResponse(ResultCode.NoLogin));
+            return Content(new PhotoManager().EditPhoto(name,photoId,user.UserId));
         }
 	}
 }

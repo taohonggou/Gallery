@@ -1,0 +1,126 @@
+﻿@using DataTrsfer
+@{
+    ViewBag.Title = "他人主页";
+    Layout = "~/Views/Shared/_OtherCenterLayout.cshtml";
+}
+
+<style>
+    .list-group-item:first-child {
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+    }
+
+    .list-group-item:last-child {
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+
+    .list-group-item {
+        margin: 0px 1px 2px 1px;
+    }
+
+
+
+    div.polaroid {
+        position: relative;
+        width: 22.8%;
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin: 0px 12.5px 25px 12.5px;
+        float: left;
+    }
+
+    div.pcenter {
+        text-align: center;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    .img1 {
+        display: inline-block;
+        width: 180px;
+        height: 180px;
+        cursor: pointer;
+    }
+
+    .hiddenbtn {
+        display: none;
+    }
+</style>
+
+
+<script type="text/javascript">
+    var pageIndex = 1, pageSize = 20;
+    var flag = true;
+    var hidden = true;
+    var userId= '@ViewBag.OtherUser.UserId';
+    $(function () {
+        
+        $('#liPhotos').addClass('active');
+
+        $(window).scroll(function () {
+            var scrollTop = document.body.scrollTop;
+            var clientHeight = document.documentElement.clientHeight;
+            var scrollHeight = document.body.scrollHeight;
+            if (100 >= scrollHeight - clientHeight - scrollTop && flag) {
+                pageIndex++;
+                loadPhotos();
+            }
+        });
+       
+    });
+
+    function loadPhotos() {
+        $.ajax({
+            url: '/Photo/GetPageByOtherUserId',
+            type: 'get',
+            data: { pageIndex: pageIndex, pageSize: pageSize, userId: userId },
+            async: false,
+            success: function (data) {
+                if (data.StatusCode == 1) {
+                    initPhotos(data.Data);
+                }
+                else {
+                    flag = false;
+                    layer.msg(data.Message);
+                }
+            }
+        });
+    }
+
+    function initPhotos(json) {
+        var str = '';
+        $.each(json, function () {
+            str += '<div class="polaroid" ><div style="position:absolute;right:0px;border:0px;top:0px;" class="hiddenbtn"><input type="checkbox" class="btn btn-default" style="height:25px;width:25px;color:blue;" name="photos" value="' + this.PhotoId + '" /></div><a href="/photo/details?photoId=' + this.PhotoId + '"><img src="' + this.ImgUrl + '" alt="Norway" style="width:100%;" class="img1" /></a><div class="pcenter"  data-id="' + this.PhotoId + '"><p style="overflow: hidden; text-overflow: ellipsis;height: 22px;" title="' + this.Name + '">' + this.Name + '</p></div></div>';
+        });
+        $('#divClear').before(str);
+    }
+</script>
+
+<div id="divContainer" style="text-align:center;position:relative;">
+
+    @{
+        List<PhotoDt> list = ViewBag.ListPhotos;
+        if (list == null || list.Count == 0)
+        {
+            <div style=" position: absolute; top: 25%; left: 43%;"><label>暂无图片</label></div>
+        }
+        else
+        {
+            foreach (PhotoDt phtot in list)
+            {
+                <div class="polaroid">
+                    <div style="position:absolute;right:0px;border:0px;top:0px;" class="hiddenbtn"><input type="checkbox" class="btn btn-default" style="height:25px;width:25px;color:blue;" name="photos" value="@phtot.PhotoId" /></div>
+                    <a href="/photo/details?photoId=@phtot.PhotoId"><img src="@phtot.ImgUrl" alt="Norway" style="width:100%;" class="img1" /></a>
+                    <div class="pcenter" data-id="@phtot.PhotoId">
+                        <p style="overflow: hidden; text-overflow: ellipsis;height:22px;" title="@phtot.Name ">@phtot.Name</p>
+                    </div>
+                </div>
+            }
+        }
+    }
+    <div class="clear" id="divClear"></div>
+</div>
+
+
+

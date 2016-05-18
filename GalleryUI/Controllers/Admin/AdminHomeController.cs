@@ -12,7 +12,12 @@ namespace GalleryUI.Controllers.Admin
         // GET: /AdminHome/
         public ActionResult Index()
         {
+            if (!IsLogin())
+                return RedirectLogin();
             return View();
         }
+
+
+        
 	}
 }

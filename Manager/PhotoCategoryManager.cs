@@ -55,6 +55,15 @@ namespace Manager
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
             return OutputHelper.GetOutputResponse(ResultCode.OK, p);
         }
+
+        public PhotoCategoryDt GetPhotoCategory(string  photoCategoryId)
+        {
+            int iPhotoCategoryId;
+            if (!int.TryParse(photoCategoryId, out iPhotoCategoryId))
+                return new PhotoCategoryDt();
+            return Server.Get(iPhotoCategoryId);
+        }
+
         public OutputModel Get(string name)
         {
             PhotoCategoryDt p = Server.Get(name);

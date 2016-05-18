@@ -1,0 +1,75 @@
+﻿@model DataTrsfer.UserInfoDt
+@{
+    ViewBag.Title = "Perso他人资料";
+    Layout = "~/Views/Shared/_OtherCenterLayout.cshtml";
+}
+<link href="~/Content/usercenter.css" rel="stylesheet" />
+<style>
+    .touxiang {
+        display: none;
+    }
+
+    .imgtouxiang:hover .touxiang {
+        display: block;
+    }
+
+    .tablepernal {
+        width: 40%;
+        margin-top: 20px;
+    }
+
+    tr {
+        line-height: 3;
+        border-bottom: 1px solid #eeeff2;
+    }
+
+        tr:last-child {
+            border: 0px;
+        }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $('#liPersonalData').addClass('active');
+    });
+</script>
+<div class="container">
+    <div id="divContainer" style="margin: auto; text-align: center;">
+        <div style="position:relative;">
+            <table style="position:absolute;left:30%;" class="tablepernal">
+                <tr>
+                    <td>姓名：</td>
+                    <td><span id="spanName">@Model.Name</span> </td>
+                </tr>
+                <tr>
+                    <td>性别：</td>
+                    <td>
+                        @if (Model.Gender)
+                        {
+                            <p id="pGender">男</p>
+                        }
+                        else
+                        {
+                            <p id="pGender">女</p>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>年龄：</td>
+                    <td><span id="spanAge">@Model.Age</span></td>
+                </tr>
+                <tr>
+                    <td>电话：</td>
+                    <td><span id="spanPhone">@Model.Phone</span></td>
+                </tr>
+                <tr>
+                    <td>所在地：</td>
+                    <td><span id="spanAddress">@Model.Address</span></td>
+                </tr>
+                
+            </table>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>

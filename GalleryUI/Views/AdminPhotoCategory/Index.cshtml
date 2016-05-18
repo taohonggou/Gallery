@@ -143,8 +143,8 @@
                     @Html.DisplayFor(modelItem => item.Priority)
                 </td>
                 <td>
-                    <a href="javascript:;" onclick="edit(@item.PhotoCategoryId,'@item.Name',@item.Priority);">Edit</a> |
-                    <a href="javascript:;" onclick="deletethis(@item.PhotoCategoryId)">Delete</a>
+                    <a href="javascript:;" class="btn btn-primary" onclick="edit(@item.PhotoCategoryId,'@item.Name',@item.Priority);">Edit</a>
+                    <a href="javascript:;" class="btn btn-danger" onclick="deletethis(@item.PhotoCategoryId)">Delete</a>
                 </td>
             </tr>
         }

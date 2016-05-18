@@ -21,9 +21,6 @@
     .list-group-item {
         margin: 0px 1px 2px 1px;
     }
-    .list-group{
-        margin-bottom:0px;
-    }
 </style>
 
 <script type="text/javascript">
@@ -60,10 +57,8 @@
             }
         });
     }
-
-    
 </script>
-<div class="container" style="min-height:500px;">
+<div class="container">
     <h2>上传图片&nbsp;&nbsp;<a style="font-size:10px;cursor:pointer;text-decoration:none;" onclick="addGallery()">新建相册</a></h2>
     <p>
 
@@ -78,7 +73,7 @@
                 {
                     foreach (PhotoGalleryDt gallery in list)
                     {
-                        if (ViewBag.galleryId == gallery.PhotoGalleryId)
+                        if (ViewBag.galleryId == @gallery.PhotoGalleryId)
                         {
                             <option value="@gallery.PhotoGalleryId" selected="selected">@gallery.Name</option>
                         }
@@ -93,7 +88,7 @@
         分类: <select id="category" onchange="change()" class="btn btn-default dropdown-toggle">
             @{
                 List<PhotoCategoryDt> listCate = ViewBag.Category;
-                if (listCate == null || listCate.Count == 0)//
+                if (listCate == null || list.Count == 0)
                 {
                     <option value="4">默认</option>
                 }

@@ -1,0 +1,91 @@
+﻿@using DataTrsfer
+@{
+    ViewBag.Title = "他人相册";
+    Layout = "~/Views/Shared/_OtherCenterLayout.cshtml";
+}
+
+<link href="~/Content/usercenter.css" rel="stylesheet" />
+<style>
+    .list-group-item:first-child {
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+    }
+
+    .list-group-item:last-child {
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+
+    .list-group-item {
+        margin: 0px 1px 2px 1px;
+    }
+
+
+
+    div.polaroid {
+        position: relative;
+        width: 22.8%;
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin: 0px 12.5px 25px 12.5px;
+        float: left;
+    }
+
+    div.pcenter {
+        text-align: center;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    .img1 {
+        display: inline-block;
+        width: 180px;
+        height: 180px;
+        cursor: pointer;
+    }
+
+    .hiddenbtn {
+        display: none;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $('#liGallery').addClass('active');
+    });
+</script>
+
+
+<div id="divContainer">
+    @{
+        List<PhotoGalleryDt> list = ViewBag.ListGallery;
+        if (list == null || list.Count == 0)
+        {
+            <label>没有图片</label>
+        }
+        else
+        {
+            foreach (PhotoGalleryDt phtot in list)
+            {
+
+                <div class="polaroid">
+                    <div style="position:absolute;right:0px;border:0px;top:0px;" class="hiddenbtn"><input type="checkbox" class="btn btn-default" style="height:25px;width:25px;color:blue;" name="photos" value="@phtot.PhotoGalleryId" /></div>
+                    <a href="/OtherCenter/GalleryPhoto?galleryId=@phtot.PhotoGalleryId&userId=@phtot.UserId">
+                        @if (phtot.CoverImg == null)
+                        {
+                            phtot.CoverImg = "/images/cover.png";
+                        }
+                        <img src="@phtot.CoverImg" alt="Norway" style="width:100%;" class="img1" />
+                    </a>
+                    <div class="pcenter" data-id="@phtot.PhotoGalleryId">
+                        <p style="overflow: hidden; text-overflow: ellipsis;height: 22px;" title="@phtot.Name">@phtot.Name</p>
+                    </div>
+                </div>
+            }
+
+        }
+
+    }
+    <div class="clear"></div>
+</div>
+<div class="clear"></div>
+

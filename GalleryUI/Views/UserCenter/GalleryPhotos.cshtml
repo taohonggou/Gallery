@@ -80,6 +80,7 @@
 <script type="text/javascript">
     var hidden = true;
     $(function () {
+        initClick();
         $('#liGallery').addClass('active');
         $("#eidtall").click(function () {
             if (hidden) {
@@ -193,20 +194,82 @@
             }
         });
     }
+
+    //注册修改名称事件
+    function initClick() {
+
+        $('.pcenter p').click(function () {
+            var obj = $(this);
+            var oldValue = obj.text();
+            var parentObj = obj.parent();
+            obj.html("");
+            var inputIns = $('<input type="text" value="' + oldValue + '" style="height: 22px;"/>');
+            parentObj.html(inputIns).focus().select();
+            inputIns.focus().select();
+            inputIns.keyup(function (event) {
+                //1.判断是否回车按下
+                //结局不同浏览器获取时间的差异
+                var myEvent = event || window.event;
+                var key = myEvent.keyCode;
+                if (key == 13) {
+                    editName($(this), parentObj);
+                }
+            });
+            //处理Enter和Esc事件
+            inputIns.blur(function () {
+                editName($(this), parentObj);
+            });
+        });
+    }
+
+    function editName(obj, parentObj) {
+        var inputNode = obj;
+        //1.保存当前文本框的内容
+        var inputText = inputNode.val();
+        //2.清空td里面的内容
+        inputNode.parent().html('<p style="overflow: hidden; text-overflow: ellipsis;height: 22px;" title="' + inputText + '">' + inputText + '</p>');
+        editPhoto(inputText, parentObj.attr('data-id'));
+    }
+
+    function editPhoto(name, photoId) {
+        if (!name || !photoId)
+            return layer.msg('参数错误');
+        $.ajax({
+            url: '/Photo/Edit',
+            type: 'post',
+            data: { name: name, photoId: photoId },
+            success: function (data) {
+                initClick();
+            }
+        });
+    }
 </script>
 
 
 <div style="position:relative;top:-50px;z-index:999;width:400px;">
     <input type="button" class="btn btn-default" value="批量操作" id="eidtall" /><div style="position: absolute; top: 0px; left: 86px;" class="hiddenbtncheck"> <input type="button" class="btn btn-default" value="删除" onclick="deleteall()" /> <input type="button" class="btn btn-default" value="移动到相册" onclick="move()" /></div>
 </div>
-<div class="title"><img src="/images/jian.png" width="11" height="18"><a href="javascript:;">@ViewBag.galleryName</a></div>
-<div id="divContainer" style="text-align:center;min-height:500px;position:relative;">
+<div class="title" style="display: inline-flex;">
+    <img src="/images/jian.png" width="11" height="18"><h3 style="margin-top: -3px;">@ViewBag.galleryName</h3>
+    
+</div>
+@{
+    List<PhotoDt> list = ViewBag.GalleryPhotos;
+    if (list != null && list.Count > 0)
+    {
+        <div style="display:inline-block;">
+            <label><a href="/Upload/Upload?galleryId=@ViewBag.galleryid">上传图片</a></label>
+        </div>
+    }
+}
+
+<div id="divContainer" style="text-align:center;position:relative;">
 
     @{
-        List<PhotoDt> list = ViewBag.GalleryPhotos;
+
         if (list == null || list.Count == 0)
         {
-            <div style=" position: absolute; top: 25%; left: 43%;"><label>暂无图片,<a href="/Upload/Upload?galleryId=@ViewBag.galleryid">点击这里上传图片</a></label></div>
+            <div><label>暂无图片,<a href="/Upload/Upload?galleryId=@ViewBag.galleryid">点击这里上传图片</a></label></div>
         }
         else
         {
@@ -215,7 +278,7 @@
                 <div class="polaroid">
                     <div style="position:absolute;left:0px;border:0px;top:0px;" class="hiddenbtncheck"><input type="checkbox" class="btn btn-default" style="height:25px;width:25px;color:blue;" name="photos" value="@photo.PhotoId" /></div><div style="position:absolute;right:0px;border:0px" class="hiddenbtn"><input type="button" class="btn btn-default" style="background-color:red;color:white;border-radius:0;" value="设为封面" onclick="fengmian(@photo.PhotoId,@photo.PhotoGalleryId)" /></div>
                     <a href="/photo/details?photoId=@photo.PhotoId"><img src="@photo.ImgUrl" alt="Norway" style="width:100%;" class="img1" /></a>
-                    <div class="pcenter">
+                    <div class="pcenter" data-id="@photo.PhotoId">
                         <p style="overflow: hidden; text-overflow: ellipsis;height:22px;" title="@photo.Name ">@photo.Name</p>
                     </div>
                 </div>
