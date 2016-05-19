@@ -59,8 +59,13 @@ namespace Manager
             if (!FormatVerify.VerifyEmail(email))
                 return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
             UserInfoDt user = server.GetUserInfo(email);
+            
             if (user == null)
                 return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied, "邮箱或密码错误");
+            if (user.Status != 1)
+            {
+                return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied, "邮箱没有验证");
+            }
             string pwd = MD5Helper.GeneratePwd(md5Pwd);
             if (!user.Pwd.Equals(pwd, StringComparison.OrdinalIgnoreCase))
                 return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied, "邮箱或密码错误");

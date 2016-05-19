@@ -23,6 +23,11 @@ namespace Server
             return TransferObject.ConvertObjectByEntity<UserInfo, UserInfoDt>(Select(o => o.UserId == userId).FirstOrDefault());
         }
 
+        public UserInfoDt Login(string userId)
+        {
+            return TransferObject.ConvertObjectByEntity<UserInfo, UserInfoDt>(Select(o => o.UserId == userId&&o.Status==1).FirstOrDefault());
+        }
+
 
         public bool Update(UserInfoDt userDt)
         {
