@@ -9,7 +9,12 @@ var uploader = new plupload.Uploader({
             { title: "图片文件", extensions: "jpg,gif,png" }
         ]
     },
+    resize: {
+        crop: true,
+        
+        quality: 10,
 
+    },
     multipart_params: {
         photoGalleryId: $('#gallery').val(),
         PhotoCategoryId: $('#category').val()
