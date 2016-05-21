@@ -11,7 +11,6 @@ var uploader = new plupload.Uploader({
     },
     resize: {
         crop: true,
-        
         quality: 10,
 
     },
@@ -20,7 +19,7 @@ var uploader = new plupload.Uploader({
         PhotoCategoryId: $('#category').val()
 
     },
-    unique_names: true,
+    //unique_names: true,
 });
 
 //在实例对象上调用init()方法进行初始化
