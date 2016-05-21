@@ -15,13 +15,18 @@ namespace Manager
     {
         public OutputModel UploadImg(HttpPostedFileBase img, string userId, string galleryId, string categoryId, string name)
         {
-            string newPath;
-            OutputModel model = UploadHelper.UploadImg(img, out newPath);
+            string bigImgPath;
+            OutputModel model = UploadHelper.UploadImg(img, out bigImgPath);
             if (model.StatusCode != 1)
             {
                 return model;
             }
-
+            //生成缩略图
+            string ThumbnailImgPath;//缩略图的路径
+            if(!UploadHelper.SaveThumbnail(img,out ThumbnailImgPath))
+            {
+                return OutputHelper.GetOutputResponse(ResultCode.Error);
+            }
             //向数据库中插入
             int iGallery, iCateGory;
             if (!int.TryParse(galleryId, out iGallery) || !int.TryParse(categoryId, out iCateGory))
@@ -31,7 +36,7 @@ namespace Manager
             PhotoDt photo = new PhotoDt
             {
                 DateTime = DateTime.Now,
-                ImgUrl = newPath,
+                ImgUrl = ThumbnailImgPath,
                 Name = name ?? img.FileName.Substring(0, img.FileName.LastIndexOf('.')),
                 PhotoCategoryId = iCateGory,
                 PhotoGalleryId = (iGallery == -1 ? (int?)null : iGallery),
