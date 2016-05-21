@@ -35,6 +35,11 @@ namespace Manager
             PhotoDt photo = server.Get(iPhotoId);
             if (photo == null)
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
+            OriginalPhotoServer originalServer = new OriginalPhotoServer();
+            OriginalPhotoDt original = originalServer.GetByPhotoId(photo.PhotoId);
+            if (original != null)
+                photo.ImgUrl = original.ImgUrl;
+
             //喜欢点赞数量
             photo.SuppostCount = new ScanOrSupportServer().GetCount(2, iPhotoId);
             //用户信息
@@ -184,7 +189,7 @@ namespace Manager
             int index, size;
             FormatVerify.PageCheck(pageIndex, pageSize, out index, out size);
             UserInfoDt user = new UserInfoServer().GetUserInfo(userId);
-            if(user==null)
+            if (user == null)
                 return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied);
             List<PhotoDt> list = server.GetPageByUserIdOrderByDateTime(userId, index, size);
             if (list.Count == 0)
@@ -253,8 +258,8 @@ namespace Manager
 
         public OutputModel SearchByName(string name)
         {
-            
-            List<PhotoDt> listPhotos= SearchByNameReturnList(name);
+
+            List<PhotoDt> listPhotos = SearchByNameReturnList(name);
             if (listPhotos.Count == 0)
             {
                 return OutputHelper.GetOutputResponse(ResultCode.NoData);
@@ -276,18 +281,18 @@ namespace Manager
             return server.GetListByLikeName(sbLikeName.ToString());
         }
 
-        public OutputModel EditPhoto(string name,string photoId,string userId)
+        public OutputModel EditPhoto(string name, string photoId, string userId)
         {
-            if(string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name))
                 return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
             int iPhotoId;
-            if(!int.TryParse(photoId,out iPhotoId))
+            if (!int.TryParse(photoId, out iPhotoId))
                 return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
             PhotoDt photo = server.Get(iPhotoId);
-            if(photo==null||photo.UserId!=userId)
+            if (photo == null || photo.UserId != userId)
                 return OutputHelper.GetOutputResponse(ResultCode.ConditionNotSatisfied);
             photo.Name = name;
-            if(server.Update(photo))
+            if (server.Update(photo))
                 return OutputHelper.GetOutputResponse(ResultCode.OK);
             else
                 return OutputHelper.GetOutputResponse(ResultCode.Error);

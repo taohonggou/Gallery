@@ -14,6 +14,11 @@ namespace EF
     
     public partial class Photo
     {
+        public Photo()
+        {
+            this.OriginalPhoto = new HashSet<OriginalPhoto>();
+        }
+    
         public int PhotoId { get; set; }
         public Nullable<int> LocationId { get; set; }
         public int PhotoCategoryId { get; set; }
@@ -27,5 +32,6 @@ namespace EF
         public virtual Location Location { get; set; }
         public virtual PhotoCategory PhotoCategory { get; set; }
         public virtual UserInfo UserInfo { get; set; }
+        public virtual ICollection<OriginalPhoto> OriginalPhoto { get; set; }
     }
 }

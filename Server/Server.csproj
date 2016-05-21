@@ -48,6 +48,7 @@
     <Compile Include="LikeServer.cs" />
     <Compile Include="LocationServer.cs" />
     <Compile Include="MenuServer.cs" />
+    <Compile Include="OriginalPhotoServer.cs" />
     <Compile Include="PhotoCategoryServer.cs" />
     <Compile Include="PhotoGalleryServer.cs" />
     <Compile Include="PhotoServer.cs" />

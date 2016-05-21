@@ -18,6 +18,15 @@ namespace Server
             return Save() > 0;
         }
 
+        public bool AddAndReturnPhotoId(PhotoDt photo)
+        {
+            Photo p = TransferObject.ConvertObjectByEntity<PhotoDt, Photo>(photo);
+            Add(p);
+            int result = Save();
+            photo.PhotoId = p.PhotoId;
+            return result > 0;
+        }
+
         public List<PhotoDt> GetList(string userId)
         {
             List<Photo> list = Select(o => o.UserId == userId).OrderByDescending(o => o.DateTime).ToList();
@@ -50,7 +59,7 @@ namespace Server
 
         public List<PhotoDt> GetListByGallery(int galleryId)
         {
-            List<Photo> list = Select(o =>  o.PhotoGalleryId == galleryId).ToList();
+            List<Photo> list = Select(o => o.PhotoGalleryId == galleryId).ToList();
             return TransferObject.ConvertObjectByEntity<Photo, PhotoDt>(list);
         }
 
@@ -202,7 +211,7 @@ namespace Server
             base.Update(TransferObject.ConvertObjectByEntity<PhotoDt, Photo>(p));
             return Save() > 0;
         }
-        public bool Update(List<PhotoDt>list)
+        public bool Update(List<PhotoDt> list)
         {
             foreach (PhotoDt item in list)
             {
@@ -218,7 +227,7 @@ namespace Server
         /// <returns></returns>
         public List<PhotoDt> GetListByLikeName(string name)
         {
-            string sql = "select * from Photo where Name like '"+name+"'";
+            string sql = "select * from Photo where Name like '" + name + "'";
             return SqlQuery<PhotoDt>(sql);
         }
     }

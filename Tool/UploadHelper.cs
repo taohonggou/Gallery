@@ -19,10 +19,7 @@ namespace Tool
             newPath = "";
             if (img == null || img.ContentLength == 0)
                 return OutputHelper.GetOutputResponse(ResultCode.NoParameter);
-            //string extension = Path.GetExtension(img.FileName);
-            //if (!FormatVerify.CheckImgExtension(extension))
-            //    return OutputHelper.GetOutputResponse(ResultCode.ErrorParameter);
-            //string newImgName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + extension; //Guid.NewGuid().ToString().Replace("-", "") + extension;
+           
             string newImgName;
            if(  !GenerateNewFileName(img.FileName,out newImgName ))
            {
@@ -30,8 +27,6 @@ namespace Tool
            }
             string path = System.Web.HttpContext.Current.Server.MapPath(savePath);
             img.SaveAs(path + newImgName);
-            //生成缩略图
-
             newPath = savePath + newImgName;
             return OutputHelper.GetOutputResponse(ResultCode.OK);
         }

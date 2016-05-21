@@ -23,7 +23,7 @@ namespace Manager
             }
             //生成缩略图
             string ThumbnailImgPath;//缩略图的路径
-            if(!UploadHelper.SaveThumbnail(img,out ThumbnailImgPath))
+            if (!UploadHelper.SaveThumbnail(img, out ThumbnailImgPath))
             {
                 return OutputHelper.GetOutputResponse(ResultCode.Error);
             }
@@ -45,10 +45,20 @@ namespace Manager
                 LocationId = null
             };
             PhotoServer photoServer = new PhotoServer();
-            if (photoServer.Add(photo))
-                return OutputHelper.GetOutputResponse(ResultCode.OK);
-            else
-                return OutputHelper.GetOutputResponse(ResultCode.Error);
+            if (photoServer.AddAndReturnPhotoId(photo))
+            {
+                    OriginalPhotoDt original = new OriginalPhotoDt
+                    {
+                        DataTime = DateTime.Now,
+                        ImgUrl = bigImgPath,
+                        Status = 1,
+                        PhotoId = photo.PhotoId
+                    };
+                OriginalPhotoServer originServer=new OriginalPhotoServer();
+                if(originServer.Add(original))
+                    return OutputHelper.GetOutputResponse(ResultCode.OK);
+            }
+            return OutputHelper.GetOutputResponse(ResultCode.Error);
         }
 
         public OutputModel UploadHeadImg(HttpPostedFileBase img, string userId)

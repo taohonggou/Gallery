@@ -79,6 +79,9 @@
     <Compile Include="Menu.cs">
       <DependentUpon>EF.tt</DependentUpon>
     </Compile>
+    <Compile Include="OriginalPhoto.cs">
+      <DependentUpon>EF.tt</DependentUpon>
+    </Compile>
     <Compile Include="Photo.cs">
       <DependentUpon>EF.tt</DependentUpon>
     </Compile>

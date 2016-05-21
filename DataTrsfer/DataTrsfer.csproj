@@ -50,6 +50,7 @@
     <Compile Include="LikeDt.cs" />
     <Compile Include="LocationDt.cs" />
     <Compile Include="MenuDt.cs" />
+    <Compile Include="OriginalPhotoDt.cs" />
     <Compile Include="PhotoCategoryDt.cs" />
     <Compile Include="PhotoDt.cs" />
     <Compile Include="PhotoGalleryDt.cs" />
