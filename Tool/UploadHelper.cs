@@ -41,7 +41,7 @@ namespace Tool
         public static bool SaveThumbnail(HttpPostedFileBase bigImg, out string newPath, string savePath = "/Upload/Images/Thumbnail/")
         {
             newPath = "";
-            int thumbWidth = 300;
+            int thumbWidth = 150;
             Stream stream = bigImg.InputStream;
             System.Drawing.Image image = System.Drawing.Image.FromStream(stream);
             int srcWidth = image.Width;

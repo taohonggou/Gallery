@@ -18,8 +18,8 @@ namespace GalleryUI.Controllers
         protected UserInfoDt user { get; set; }
         public BaseController()
         {
-            //user = System.Web.HttpContext.Current.Session["user"] as UserInfoDt;
-            user = new UserInfoDt { UserId = "1084727879@qq.com"};
+            user = System.Web.HttpContext.Current.Session["user"] as UserInfoDt;
+            //user = new UserInfoDt { UserId = "1084727879@qq.com"};
             ViewBag.IsLogin = (user != null);
             //如果登陆了就每次获取最新数据
             if(user!=null)
